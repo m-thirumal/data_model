@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="4"
+<dbmodel pgmodeler-ver="0.9.2" last-position="6,196" last-zoom="1" max-obj-count="8"
 	 default-schema="public" default-owner="postgres">
 <database name="authorized_server" is-template="false" allow-conns="true">
 </database>
@@ -18,7 +18,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="8">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="840" y="40"/>
+	<position x="1131" y="25"/>
 	<column name="party_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -57,11 +57,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 </schema>
 
-<table name="party_type_cd" layer="0" collapse-mode="2" max-obj-count="8">
+<table name="generic_cd" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<position x="400" y="520"/>
-	<column name="party_type_cd" not-null="true">
+	<position x="420" y="620"/>
+	<column name="generic_cd" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
 	<column name="code">
@@ -76,43 +76,49 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="row_creation_time" not-null="true" default-value="CURRENT_TIMESTAMP">
 		<type name="timestamptz" length="0"/>
 	</column>
-	<column name="row_created_by">
+	<column name="row_created_by" not-null="true" default-value="'திருமால்'">
 		<type name="text" length="0"/>
 	</column>
-	<constraint name="party_type_pk" type="pk-constr" table="look_up.party_type_cd">
-		<columns names="party_type_cd" ref-type="src-columns"/>
+	<column name="row_updated_by" not-null="true" default-value="'திருமால்'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="row_update_info" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="party_type_pk" type="pk-constr" table="look_up.generic_cd">
+		<columns names="generic_cd" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="parent_party_type_cd" index="6"/>
+		<object name="parent_generic_cd" index="8"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="party_type_cd_fk" index="1"/>
+		<object name="generic_cd_fk" index="1"/>
 	</customidxs>
 </table>
 
-<relationship name="party_type_has_many_party_type" type="rel1n" layer="0"
+<relationship name="generic_cd_has_many_generic_cd" type="rel1n" layer="0"
 	 src-col-pattern="parent_{sc}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#579f46"
-	 src-table="look_up.party_type_cd"
-	 dst-table="look_up.party_type_cd"
+	 src-table="look_up.generic_cd"
+	 dst-table="look_up.generic_cd"
 	 src-required="false" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE">
 	<line>
-		<position x="706.582" y="585.217"/>
-	<position x="706.582" y="509"/>
-	<position x="597.055" y="509"/>
+		<position x="711.788" y="704.283"/>
+	<position x="711.788" y="609"/>
+	<position x="607.192" y="609"/>
 	</line>
 </relationship>
 
 <table name="party_type" layer="0" collapse-mode="2" max-obj-count="9">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="300" y="100"/>
+	<position x="591" y="85"/>
 	<column name="party_type_id" alias="party_type_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -136,13 +142,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
+		<object name="generic_cd" index="7"/>
 		<object name="party_id" index="1"/>
-		<object name="party_type_cd" index="2"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
+		<object name="generic_cd_fk" index="2"/>
 		<object name="party_fk" index="1"/>
-		<object name="party_type_cd_fk" index="2"/>
 		<object name="party_type_uq" index="3"/>
 	</customidxs>
 </table>
@@ -158,21 +164,25 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
-<relationship name="party_type_has_one_party_type_cd" type="rel11" layer="0"
+<relationship name="party_type_has_one_generic_cd" type="rel11" layer="0"
 	 src-col-pattern="{sc}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#146b46"
-	 src-table="look_up.party_type_cd"
+	 src-table="look_up.generic_cd"
 	 dst-table="party.party_type"
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
-	del-action="RESTRICT"/>
+	del-action="RESTRICT">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
-<table name="party_name" layer="0" collapse-mode="2" max-obj-count="10">
+<table name="party_name" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="920" y="300"/>
+	<position x="1211" y="285"/>
 	<column name="party_name_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -189,6 +199,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="end_time">
 		<type name="timestamptz" length="0"/>
 	</column>
+	<column name="preferred" not-null="true" default-value="false">
+		<type name="bool" length="0"/>
+	</column>
 	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
@@ -203,11 +216,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
+		<object name="generic_cd" index="2"/>
 		<object name="party_id" index="1"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
+		<object name="generic_cd_fk" index="2"/>
 		<object name="party_fk" index="1"/>
+		<object name="party_name_uq" index="3"/>
 	</customidxs>
 </table>
 
@@ -219,6 +235,126 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-table="party.party"
 	 dst-table="party.party_name"
 	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="locale_cd" layer="0" collapse-mode="2" max-obj-count="10">
+	<schema name="look_up"/>
+	<role name="postgres"/>
+	<position x="164" y="1042"/>
+	<column name="locale_cd" alias="locale_cd" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="start_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="end_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_created_by" not-null="true" default-value="'திருமால்'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="row_updated_by" not-null="true" default-value="'திருமால்'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="row_update_info">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="locale_cd_pk" type="pk-constr" table="look_up.locale_cd">
+		<columns names="locale_cd" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="generic_locales" layer="0" collapse-mode="2" max-obj-count="12">
+	<schema name="look_up"/>
+	<role name="postgres"/>
+	<position x="0" y="624"/>
+	<column name="generic_locales" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="start_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="end_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_created_by" not-null="true" default-value="'திருமால்'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="row_updated_by" not-null="true" default-value="'திருமால்'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="row_update_info">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="party_type_locales_pk" type="pk-constr" table="look_up.generic_locales">
+		<columns names="generic_locales" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="generic_cd" index="1"/>
+		<object name="locale_cd" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="generic_cd_fk" index="1"/>
+		<object name="locale_cd_fk" index="2"/>
+	</customidxs>
+</table>
+
+<relationship name="party_type_cd_has_many_party_type_locales" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e27f9a"
+	 src-table="look_up.generic_cd"
+	 dst-table="look_up.generic_locales"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="locale_cd_has_many_generic_locales" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b9631c"
+	 src-table="look_up.locale_cd"
+	 dst-table="look_up.generic_locales"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="RESTRICT">
+	<line>
+		<position x="386.463" y="1076"/>
+	<position x="386.463" y="695.2"/>
+	</line>
+	<label ref-type="src-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="party_name_has_one_generic_cd" type="rel11" layer="0" alias="party_name_has_one_name_cd"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#deeebb"
+	 src-table="look_up.generic_cd"
+	 dst-table="party.party_name"
+	 src-required="false" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
