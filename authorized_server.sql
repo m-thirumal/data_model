@@ -255,4 +255,145 @@ ON DELETE RESTRICT ON UPDATE NO ACTION;
 ALTER TABLE party.party_identifier ADD CONSTRAINT party_identifier_uq UNIQUE (generic_cd);
 -- ddl-end --
 
+-- object: party.login | type: TABLE --
+-- DROP TABLE IF EXISTS party.login CASCADE;
+CREATE TABLE party.login (
+	login_id bigserial NOT NULL,
+	party_id bigint NOT NULL,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_info text,
+	CONSTRAINT login_pk PRIMARY KEY (login_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE party.login OWNER TO postgres;
+-- ddl-end --
+
+-- object: party_fk | type: CONSTRAINT --
+-- ALTER TABLE party.login DROP CONSTRAINT IF EXISTS party_fk CASCADE;
+ALTER TABLE party.login ADD CONSTRAINT party_fk FOREIGN KEY (party_id)
+REFERENCES party.party (party_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: login_uq | type: CONSTRAINT --
+-- ALTER TABLE party.login DROP CONSTRAINT IF EXISTS login_uq CASCADE;
+ALTER TABLE party.login ADD CONSTRAINT login_uq UNIQUE (party_id);
+-- ddl-end --
+
+-- object: party.login_identifier | type: TABLE --
+-- DROP TABLE IF EXISTS party.login_identifier CASCADE;
+CREATE TABLE party.login_identifier (
+	login_identifier_id bigserial NOT NULL,
+	login_id bigint NOT NULL,
+	identifier text NOT NULL,
+	start_time timestamptz NOT NULL DEFAULT current_timestamp,
+	end_time timestamptz,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_info text,
+	CONSTRAINT login_identifier_pk PRIMARY KEY (login_identifier_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE party.login_identifier OWNER TO postgres;
+-- ddl-end --
+
+-- object: login_fk | type: CONSTRAINT --
+-- ALTER TABLE party.login_identifier DROP CONSTRAINT IF EXISTS login_fk CASCADE;
+ALTER TABLE party.login_identifier ADD CONSTRAINT login_fk FOREIGN KEY (login_id)
+REFERENCES party.login (login_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: party.password | type: TABLE --
+-- DROP TABLE IF EXISTS party.password CASCADE;
+CREATE TABLE party.password (
+	password_id bigserial NOT NULL,
+	login_id bigint NOT NULL,
+	secret text NOT NULL,
+	start_time timestamptz NOT NULL DEFAULT current_timestamp,
+	end_time timestamptz DEFAULT current_timestamp,
+	CONSTRAINT password_pk PRIMARY KEY (password_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE party.password OWNER TO postgres;
+-- ddl-end --
+
+-- object: login_fk | type: CONSTRAINT --
+-- ALTER TABLE party.password DROP CONSTRAINT IF EXISTS login_fk CASCADE;
+ALTER TABLE party.password ADD CONSTRAINT login_fk FOREIGN KEY (login_id)
+REFERENCES party.login (login_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: password_uq | type: CONSTRAINT --
+-- ALTER TABLE party.password DROP CONSTRAINT IF EXISTS password_uq CASCADE;
+ALTER TABLE party.password ADD CONSTRAINT password_uq UNIQUE (login_id);
+-- ddl-end --
+
+-- object: party.login_question | type: TABLE --
+-- DROP TABLE IF EXISTS party.login_question CASCADE;
+CREATE TABLE party.login_question (
+	login_question_id bigserial NOT NULL,
+	login_id bigint NOT NULL,
+	generic_cd bigint NOT NULL,
+	answer text NOT NULL,
+	start_time timestamptz NOT NULL DEFAULT current_timestamp,
+	end_time timestamptz,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz DEFAULT current_timestamp,
+	row_update_info text,
+	CONSTRAINT login_question_pk PRIMARY KEY (login_question_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE party.login_question OWNER TO postgres;
+-- ddl-end --
+
+-- object: login_fk | type: CONSTRAINT --
+-- ALTER TABLE party.login_question DROP CONSTRAINT IF EXISTS login_fk CASCADE;
+ALTER TABLE party.login_question ADD CONSTRAINT login_fk FOREIGN KEY (login_id)
+REFERENCES party.login (login_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: party.party_picture | type: TABLE --
+-- DROP TABLE IF EXISTS party.party_picture CASCADE;
+CREATE TABLE party.party_picture (
+	party_picture_id bigserial NOT NULL,
+	party_id bigint NOT NULL,
+	picture bytea NOT NULL,
+	preferred bool NOT NULL DEFAULT false,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz,
+	row_update_info text,
+	CONSTRAINT party_picture_pk PRIMARY KEY (party_picture_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE party.party_picture OWNER TO postgres;
+-- ddl-end --
+
+-- object: party_fk | type: CONSTRAINT --
+-- ALTER TABLE party.party_picture DROP CONSTRAINT IF EXISTS party_fk CASCADE;
+ALTER TABLE party.party_picture ADD CONSTRAINT party_fk FOREIGN KEY (party_id)
+REFERENCES party.party (party_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: generic_cd_fk | type: CONSTRAINT --
+-- ALTER TABLE party.login_question DROP CONSTRAINT IF EXISTS generic_cd_fk CASCADE;
+ALTER TABLE party.login_question ADD CONSTRAINT generic_cd_fk FOREIGN KEY (generic_cd)
+REFERENCES look_up.generic_cd (generic_cd) MATCH FULL
+ON DELETE RESTRICT ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: login_question_uq | type: CONSTRAINT --
+-- ALTER TABLE party.login_question DROP CONSTRAINT IF EXISTS login_question_uq CASCADE;
+ALTER TABLE party.login_question ADD CONSTRAINT login_question_uq UNIQUE (generic_cd);
+-- ddl-end --
+
 

@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="182,60" last-zoom="1" max-obj-count="10"
+<dbmodel pgmodeler-ver="0.9.2" last-position="517,20" last-zoom="1" max-obj-count="18"
 	 default-schema="public" default-owner="postgres">
 <database name="authorized_server" is-template="false" allow-conns="true">
 </database>
@@ -18,7 +18,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="8">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="1131" y="25"/>
+	<position x="1140" y="20"/>
 	<column name="party_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -60,7 +60,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="generic_cd" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<position x="825" y="668"/>
+	<position x="960" y="820"/>
 	<column name="generic_cd" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -109,16 +109,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE">
 	<line>
-		<position x="1116.79" y="752.283"/>
-	<position x="1116.79" y="657"/>
-	<position x="1012.19" y="657"/>
+		<position x="1263.79" y="904.283"/>
+	<position x="1263.79" y="797"/>
+	<position x="1147.19" y="797"/>
 	</line>
 </relationship>
 
 <table name="party_type" layer="0" collapse-mode="2" max-obj-count="9">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="591" y="85"/>
+	<position x="380" y="280"/>
 	<column name="party_type_id" alias="party_type_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -182,7 +182,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party_name" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="922" y="255"/>
+	<position x="920" y="260"/>
 	<column name="party_name_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -241,7 +241,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="locale_cd" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<position x="164" y="1042"/>
+	<position x="300" y="1200"/>
 	<column name="locale_cd" alias="locale_cd" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -277,7 +277,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="generic_locales" layer="0" collapse-mode="2" max-obj-count="12">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<position x="382" y="651"/>
+	<position x="520" y="820"/>
 	<column name="generic_locales" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -339,8 +339,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="RESTRICT">
 	<line>
-		<position x="386.463" y="1076"/>
-	<position x="386.463" y="695.2"/>
+		<position x="520" y="1240"/>
+	<position x="520" y="860"/>
 	</line>
 	<label ref-type="src-label">
 		<position x="0" y="0"/>
@@ -361,7 +361,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party_identifier" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="1445" y="324"/>
+	<position x="1320" y="340"/>
 	<column name="party_identifier_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -417,6 +417,246 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#f7b6ff"
 	 src-table="look_up.generic_cd"
 	 dst-table="party.party_identifier"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="RESTRICT"/>
+
+<table name="login" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="party"/>
+	<role name="postgres"/>
+	<position x="1640" y="0"/>
+	<column name="login_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_info">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="login_pk" type="pk-constr" table="party.login">
+		<columns names="login_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="party_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="login_uq" index="2"/>
+		<object name="party_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="party_has_one_login" type="rel11" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#565146"
+	 src-table="party.login"
+	 dst-table="party.party"
+	 src-required="false" dst-required="true"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="login_identifier" layer="0" collapse-mode="2" max-obj-count="9">
+	<schema name="party"/>
+	<role name="postgres"/>
+	<position x="1960" y="300"/>
+	<column name="login_identifier_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="identifier" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="start_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="end_time">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_info">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="login_identifier_pk" type="pk-constr" table="party.login_identifier">
+		<columns names="login_identifier_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="login_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="login_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="login_has_many_login_identifier" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d6fcdc"
+	 src-table="party.login"
+	 dst-table="party.login_identifier"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="password" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="party"/>
+	<role name="postgres"/>
+	<position x="2040" y="40"/>
+	<column name="password_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="secret" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="start_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="end_time" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="password_pk" type="pk-constr" table="party.password">
+		<columns names="password_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="login_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="login_fk" index="1"/>
+		<object name="password_uq" index="2"/>
+	</customidxs>
+</table>
+
+<relationship name="login_has_one_password" type="rel11" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#608706"
+	 src-table="party.password"
+	 dst-table="party.login"
+	 src-required="false" dst-required="true"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="login_question" layer="0" collapse-mode="2" max-obj-count="10">
+	<schema name="party"/>
+	<role name="postgres"/>
+	<position x="1640" y="500"/>
+	<column name="login_question_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="answer" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="start_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="end_time">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_time" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_info">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="login_question_pk" type="pk-constr" table="party.login_question">
+		<columns names="login_question_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="generic_cd" index="2"/>
+		<object name="login_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="generic_cd_fk" index="2"/>
+		<object name="login_fk" index="1"/>
+		<object name="login_question_uq" index="3"/>
+	</customidxs>
+</table>
+
+<relationship name="login_has_many_login_question" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#251d14"
+	 src-table="party.login"
+	 dst-table="party.login_question"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="party_picture" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="party"/>
+	<role name="postgres"/>
+	<position x="380" y="0"/>
+	<column name="party_picture_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="picture" not-null="true">
+		<type name="bytea" length="0"/>
+	</column>
+	<column name="preferred" not-null="true" default-value="false">
+		<type name="bool" length="0"/>
+	</column>
+	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_time">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_info">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="party_picture_pk" type="pk-constr" table="party.party_picture">
+		<columns names="party_picture_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="party_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="party_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="party_has_many_party_picture" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#37bf0f"
+	 src-table="party.party"
+	 dst-table="party.party_picture"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="login_question_has_one_generic_cd" type="rel11" layer="0" alias="login_question_has_one_login_question_cd"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#70ed48"
+	 src-table="look_up.generic_cd"
+	 dst-table="party.login_question"
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="RESTRICT"/>
