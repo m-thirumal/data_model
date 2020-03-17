@@ -217,4 +217,42 @@ ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE party.party_name ADD CONSTRAINT party_name_uq UNIQUE (generic_cd);
 -- ddl-end --
 
+-- object: party.party_identifier | type: TABLE --
+-- DROP TABLE IF EXISTS party.party_identifier CASCADE;
+CREATE TABLE party.party_identifier (
+	party_identifier_id bigserial NOT NULL,
+	party_id bigint NOT NULL,
+	generic_cd bigint NOT NULL,
+	identification text NOT NULL,
+	start_time timestamptz NOT NULL,
+	end_time timestamptz,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_info text,
+	CONSTRAINT party_identifier_pk PRIMARY KEY (party_identifier_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE party.party_identifier OWNER TO postgres;
+-- ddl-end --
+
+-- object: party_fk | type: CONSTRAINT --
+-- ALTER TABLE party.party_identifier DROP CONSTRAINT IF EXISTS party_fk CASCADE;
+ALTER TABLE party.party_identifier ADD CONSTRAINT party_fk FOREIGN KEY (party_id)
+REFERENCES party.party (party_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: generic_cd_fk | type: CONSTRAINT --
+-- ALTER TABLE party.party_identifier DROP CONSTRAINT IF EXISTS generic_cd_fk CASCADE;
+ALTER TABLE party.party_identifier ADD CONSTRAINT generic_cd_fk FOREIGN KEY (generic_cd)
+REFERENCES look_up.generic_cd (generic_cd) MATCH FULL
+ON DELETE RESTRICT ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: party_identifier_uq | type: CONSTRAINT --
+-- ALTER TABLE party.party_identifier DROP CONSTRAINT IF EXISTS party_identifier_uq CASCADE;
+ALTER TABLE party.party_identifier ADD CONSTRAINT party_identifier_uq UNIQUE (generic_cd);
+-- ddl-end --
+
 

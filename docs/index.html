@@ -232,6 +232,7 @@ td, th, caption, .title {
 				<li><a href="#look_up.generic_locales">look_up.generic_locales</a></li>
 				<li><a href="#look_up.locale_cd">look_up.locale_cd</a></li>
 				<li><a href="#party.party">party.party</a></li>
+				<li><a href="#party.party_identifier">party.party_identifier</a></li>
 				<li><a href="#party.party_name">party.party_name</a></li>
 				<li><a href="#party.party_type">party.party_type</a></li>
 			</ul>
@@ -784,6 +785,164 @@ td, th, caption, .title {
 					<td>party_pk</td>
 					<td class="value constr-type">PRIMARY KEY</td>
 					<td>party_id</td>
+					<td></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+<div>
+	<a href="#index" class="nav-link">&uarr; Index</a>
+</div>
+<table id="party.party_identifier" class="table">
+	<caption class="tab-name">
+		<em>party</em>.<strong>party_identifier</strong>
+		<span class="type-label">Table</span>
+	</caption>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Data type</th>
+			<th>PK</th>
+			<th>FK</th>
+			<th>UQ</th>
+			<th>Not null</th>
+			<th>Default value</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>party_identifier_id</td>
+		<td class="data-type">bigserial</td>
+		<td class="bool-field">&#10003;</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>party_id</td>
+		<td class="data-type">bigint</td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>generic_cd</td>
+		<td class="data-type">bigint</td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="bool-field">&#10003;</td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>identification</td>
+		<td class="data-type">text</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>start_time</td>
+		<td class="data-type">timestamptz</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>end_time</td>
+		<td class="data-type">timestamptz</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>row_creation_time</td>
+		<td class="data-type">timestamptz</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value">current_timestamp</td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>row_update_time</td>
+		<td class="data-type">timestamptz</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value">current_timestamp</td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>row_update_info</td>
+		<td class="data-type">text</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td colspan="8" class="nested-tab-parent">
+			<table class="nested-tab">
+				<tr>
+					<td class="title" colspan="5">Constraints</td>
+				</tr>
+				<tr>
+					<td class="title">Name</td>
+					<td class="title">Type</td>
+					<td class="title">Column(s)</td>
+					<td class="title">References</td>
+					<td class="title">Description</td>
+				</tr>
+				<tr>
+					<td>party_identifier_pk</td>
+					<td class="value constr-type">PRIMARY KEY</td>
+					<td>party_identifier_id</td>
+					<td></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+				<tr>
+					<td>party_fk</td>
+					<td class="value constr-type">FOREIGN KEY</td>
+					<td>party_id</td>
+					<td><a href="#party.party">party.party</a></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+				<tr>
+					<td>generic_cd_fk</td>
+					<td class="value constr-type">FOREIGN KEY</td>
+					<td>generic_cd</td>
+					<td><a href="#look_up.generic_cd">look_up.generic_cd</a></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+				<tr>
+					<td>party_identifier_uq</td>
+					<td class="value constr-type">UNIQUE</td>
+					<td>generic_cd</td>
 					<td></td>
 					<td colspan="4"><em></em></td>
 				</tr>

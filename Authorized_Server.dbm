@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="6,196" last-zoom="1" max-obj-count="8"
+<dbmodel pgmodeler-ver="0.9.2" last-position="182,60" last-zoom="1" max-obj-count="10"
 	 default-schema="public" default-owner="postgres">
 <database name="authorized_server" is-template="false" allow-conns="true">
 </database>
@@ -60,7 +60,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="generic_cd" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<position x="420" y="620"/>
+	<position x="825" y="668"/>
 	<column name="generic_cd" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -109,9 +109,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE">
 	<line>
-		<position x="711.788" y="704.283"/>
-	<position x="711.788" y="609"/>
-	<position x="607.192" y="609"/>
+		<position x="1116.79" y="752.283"/>
+	<position x="1116.79" y="657"/>
+	<position x="1012.19" y="657"/>
 	</line>
 </relationship>
 
@@ -182,7 +182,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party_name" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="1211" y="285"/>
+	<position x="922" y="255"/>
 	<column name="party_name_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -277,7 +277,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="generic_locales" layer="0" collapse-mode="2" max-obj-count="12">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<position x="0" y="624"/>
+	<position x="382" y="651"/>
 	<column name="generic_locales" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -357,5 +357,68 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-required="false" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
+
+<table name="party_identifier" layer="0" collapse-mode="2" max-obj-count="10">
+	<schema name="party"/>
+	<role name="postgres"/>
+	<position x="1445" y="324"/>
+	<column name="party_identifier_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="identification" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="start_time" not-null="true">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="end_time">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_info">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="party_identifier_pk" type="pk-constr" table="party.party_identifier">
+		<columns names="party_identifier_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="generic_cd" index="2"/>
+		<object name="party_id" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="generic_cd_fk" index="2"/>
+		<object name="party_fk" index="1"/>
+		<object name="party_identifier_uq" index="3"/>
+	</customidxs>
+</table>
+
+<relationship name="party_has_many_party_identifier" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#fb90a4"
+	 src-table="party.party"
+	 dst-table="party.party_identifier"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="party_identifier_has_one_generic_cd" type="rel11" layer="0" alias="party_identifier_has_one_identifier_cd"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f7b6ff"
+	 src-table="look_up.generic_cd"
+	 dst-table="party.party_identifier"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="RESTRICT"/>
 
 </dbmodel>
