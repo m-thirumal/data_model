@@ -263,7 +263,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>generic_cd</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
@@ -303,7 +303,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -407,7 +407,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>generic_locales</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -467,12 +467,12 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -568,7 +568,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>locale_cd</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -618,12 +618,12 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -705,7 +705,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>login_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -725,22 +725,22 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>row_update_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -816,7 +816,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>login_identifier_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -835,6 +835,16 @@ td, th, caption, .title {
 		<td><em></em></td>
 	</tr>
 	<tr>
+		<td>generic_cd</td>
+		<td class="data-type">bigint</td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="bool-field">&#10003;</td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
 		<td>identifier</td>
 		<td class="data-type">text</td>
 		<td class="bool-field"></td>
@@ -846,17 +856,17 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>start_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>end_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -866,22 +876,22 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>row_update_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -921,6 +931,20 @@ td, th, caption, .title {
 					<td><a href="#party.login">party.login</a></td>
 					<td colspan="4"><em></em></td>
 				</tr>
+				<tr>
+					<td>generic_cd_fk</td>
+					<td class="value constr-type">FOREIGN KEY</td>
+					<td>generic_cd</td>
+					<td><a href="#look_up.generic_cd">look_up.generic_cd</a></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+				<tr>
+					<td>login_identifier_uq</td>
+					<td class="value constr-type">UNIQUE</td>
+					<td>generic_cd</td>
+					<td></td>
+					<td colspan="4"><em></em></td>
+				</tr>
 			</table>
 		</td>
 	</tr>
@@ -950,7 +974,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>login_question_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -990,17 +1014,17 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>start_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>end_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1010,22 +1034,22 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>row_update_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -1108,7 +1132,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>party_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1128,7 +1152,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>birth_date</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1148,7 +1172,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1158,7 +1182,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_update_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1225,7 +1249,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>party_identifier_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1265,7 +1289,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>start_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1275,7 +1299,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>end_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1285,22 +1309,22 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>row_update_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -1354,6 +1378,13 @@ td, th, caption, .title {
 					<td></td>
 					<td colspan="4"><em></em></td>
 				</tr>
+				<tr>
+					<td>ex_party_identifier_end_date</td>
+					<td class="value constr-type">EXCLUDE</td>
+					<td></td>
+					<td></td>
+					<td colspan="4"><em></em></td>
+				</tr>
 			</table>
 		</td>
 	</tr>
@@ -1383,7 +1414,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>party_name_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1433,17 +1464,17 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>start_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value"></td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>end_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1453,7 +1484,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>preferred</td>
-		<td class="data-type">bool</td>
+		<td class="data-type">boolean</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1463,22 +1494,22 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>row_update_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -1561,7 +1592,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>party_picture_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1591,7 +1622,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>preferred</td>
-		<td class="data-type">bool</td>
+		<td class="data-type">boolean</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1601,17 +1632,17 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>row_update_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1671,6 +1702,10 @@ td, th, caption, .title {
 		<span class="type-label">Table</span>
 	</caption>
 	<thead>
+	<tr>
+		<td colspan="8" class="tab-description">Created by Thirumal
+		</td>
+	</tr>
 		<tr>
 			<th>Name</th>
 			<th>Data type</th>
@@ -1685,7 +1720,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>party_type_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1704,8 +1739,18 @@ td, th, caption, .title {
 		<td><em></em></td>
 	</tr>
 	<tr>
+		<td>generic_cd</td>
+		<td class="data-type">bigint</td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="bool-field">&#10003;</td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
 		<td>start_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1715,7 +1760,7 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>end_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1725,22 +1770,22 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>row_creation_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>row_update_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -1750,16 +1795,6 @@ td, th, caption, .title {
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
-		<td class="value"></td>
-		<td><em></em></td>
-	</tr>
-	<tr>
-		<td>generic_cd</td>
-		<td class="data-type">bigint</td>
-		<td class="bool-field"></td>
-		<td class="bool-field">&#10003;</td>
-		<td class="bool-field">&#10003;</td>
-		<td class="bool-field">&#10003;</td>
 		<td class="value"></td>
 		<td><em></em></td>
 	</tr>
@@ -1833,7 +1868,7 @@ td, th, caption, .title {
 	<tbody>
 	<tr>
 		<td>password_id</td>
-		<td class="data-type">bigserial</td>
+		<td class="data-type">bigint</td>
 		<td class="bool-field">&#10003;</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
@@ -1863,22 +1898,22 @@ td, th, caption, .title {
 	</tr>
 	<tr>
 		<td>start_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
 		<td>end_time</td>
-		<td class="data-type">timestamptz</td>
+		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
-		<td class="value">current_timestamp</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
