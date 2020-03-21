@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="505"
+<dbmodel pgmodeler-ver="0.9.2" last-position="1603,0" last-zoom="1" max-obj-count="505"
 	 default-schema="public" default-owner="postgres">
 <database name="authorized_server" encoding="UTF8" lc-collate="en_IN" lc-ctype="en_IN" is-template="false" allow-conns="true">
 	<role name="postgres"/>
@@ -13,11 +13,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layer="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<schema name="party" layer="0" rect-visible="true" fill-color="#b12ee8">
+<schema name="party" layer="0" rect-visible="true" fill-color="#224c75">
 	<role name="postgres"/>
 </schema>
 
-<schema name="look_up" layer="0" rect-visible="true" fill-color="#32ed6d">
+<schema name="look_up" layer="0" rect-visible="true" fill-color="#e84216">
 	<role name="postgres"/>
 </schema>
 
@@ -11912,7 +11912,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="row_updated_by" not-null="true" default-value="'திருமால்'">
 		<type name="text" length="0"/>
 	</column>
-	<column name="row_update_info" not-null="true">
+	<column name="row_update_info">
 		<type name="text" length="0"/>
 	</column>
 	<column name="parent_generic_cd">
@@ -11959,9 +11959,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="party_type_pk" type="pk-constr" table="party.party_type">
 		<columns names="party_type_id" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="party_type_uq" type="uq-constr" table="party.party_type">
-		<columns names="generic_cd" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -12010,9 +12007,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="party_name_pk" type="pk-constr" table="party.party_name">
 		<columns names="party_name_id" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="party_name_uq" type="uq-constr" table="party.party_name">
-		<columns names="generic_cd" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -12140,27 +12134,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="party_identifier_pk" type="pk-constr" table="party.party_identifier">
 		<columns names="party_identifier_id" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="party_identifier_uq" type="uq-constr" table="party.party_identifier">
-		<columns names="generic_cd" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="ex_party_identifier_end_date" type="ex-constr" index-type="gist" table="party.party_identifier">
-			<excelement use-sorting="false">
-			<column name="party_id"/>
-			<opclass  signature="public.gist_int8_ops USING gist"/>
-				<operator ref-type="negator-op" signature="pg_catalog.=(bigint,bigint)"/>
-		</excelement>
-		<excelement use-sorting="false">
-			<column name="generic_cd"/>
-			<opclass  signature="public.gist_int8_ops USING gist"/>
-				<operator ref-type="negator-op" signature="pg_catalog.=(bigint,bigint)"/>
-		</excelement>
-		<excelement use-sorting="false">
-			<column name="identification"/>
-			<opclass  signature="public.gist_text_ops USING gist"/>
-				<operator ref-type="negator-op" signature="pg_catalog.=(text,text)"/>
-		</excelement>
-		<expression><![CDATA[end_time IS NULL]]></expression>
-	</constraint>
 </table>
 
 <sequence name="login_login_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
@@ -12190,7 +12163,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="login_pk" type="pk-constr" table="party.login">
 		<columns names="login_id" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="login_uq" type="uq-constr" table="party.login">
+	<constraint name="uq_login_party_id" type="uq-constr" table="party.login">
 		<columns names="party_id" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -12203,7 +12176,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="login_identifier" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="60" y="500"/>
+	<position x="60" y="480"/>
 	<column name="login_identifier_id" not-null="true" sequence="party.login_identifier_login_identifier_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -12247,7 +12220,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="password" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="500" y="500"/>
+	<position x="500" y="480"/>
 	<column name="password_id" not-null="true" sequence="party.password_password_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -12279,7 +12252,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="login_question" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="900" y="500"/>
+	<position x="900" y="480"/>
 	<column name="login_question_id" not-null="true" sequence="party.login_question_login_question_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -12323,7 +12296,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party_picture" layer="0" collapse-mode="2" max-obj-count="8">
 	<schema name="party"/>
 	<role name="postgres"/>
-	<position x="1340" y="500"/>
+	<position x="1340" y="480"/>
 	<column name="party_picture_id" not-null="true" sequence="party.party_picture_party_picture_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -14398,18 +14371,23 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</element>
 </opclass>
 
-<index name="ix_party_type_end_time" table="party.party_type"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="90">
+<index name="ix_uq_party_type_end_time" table="party.party_type"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
-			<expression><![CDATA[(end_time IS NULL)]]></expression>
-			<opclass  signature="pg_catalog.bool_ops USING btree"/>
+			<column name="party_id"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
 		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+	<predicate><![CDATA[end_time IS NULL]]></predicate>
 </index>
 
 <index name="ix_fk_party_identifier_party_id" table="party.party_identifier"
 	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="90">
+	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="party_id"/>
 			<opclass  signature="pg_catalog.int8_ops USING btree"/>
@@ -14418,7 +14396,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <index name="ix_fk_party_identifier_generic_cd" table="party.party_identifier"
 	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="90">
+	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="generic_cd"/>
 			<opclass  signature="pg_catalog.int8_ops USING btree"/>
@@ -15203,11 +15181,251 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <index name="ix_party_identifier_end_time" table="party.party_identifier"
 	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="90">
+	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<expression><![CDATA[(end_time IS NULL)]]></expression>
 			<opclass  signature="pg_catalog.bool_ops USING btree"/>
 		</idxelement>
+</index>
+
+<index name="ix_uq_party_identifier_end_date" table="party.party_identifier"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="party_id"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="identification"/>
+			<opclass  signature="pg_catalog.text_ops USING btree"/>
+		</idxelement>
+	<predicate><![CDATA[end_time IS NULL]]></predicate>
+</index>
+
+<index name="ix_fk_login_party_id" table="party.login"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="party_id"/>
+		</idxelement>
+</index>
+
+<index name="ix_fk_generic_cd_parent_generic_Cd" table="look_up.generic_cd"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="parent_generic_cd"/>
+		</idxelement>
+</index>
+
+<index name="ix_generic_cd_code" table="look_up.generic_cd"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="code"/>
+		</idxelement>
+</index>
+
+<index name="ix_fk_party_picture_party_id" table="party.party_picture"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="party_id"/>
+		</idxelement>
+</index>
+
+<index name="ix_party_picture_preferred" table="party.party_picture"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="preferred"/>
+			<opclass  signature="pg_catalog.bool_ops USING btree"/>
+		</idxelement>
+	<predicate><![CDATA[preferred is true]]></predicate>
+</index>
+
+<index name="ix_fk_login_question_login_id" table="party.login_question"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="login_id"/>
+		</idxelement>
+</index>
+
+<index name="ix_fk_login_question_generic_cd" table="party.login_question"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+		</idxelement>
+</index>
+
+<index name="ix_uq_login_question_end_time" table="party.login_question"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="login_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="answer"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="end_time"/>
+		</idxelement>
+</index>
+
+<index name="ix_password_login_id" table="party.password"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="login_id"/>
+		</idxelement>
+</index>
+
+<index name="ix_password_secret" table="party.password"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="secret"/>
+		</idxelement>
+</index>
+
+<index name="ix_uq_password_end_time" table="party.password"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="login_id"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="secret"/>
+			<opclass  signature="pg_catalog.text_ops USING btree"/>
+		</idxelement>
+	<predicate><![CDATA[end_time is null]]></predicate>
+</index>
+
+<index name="ix_fk_login_identifier_login_id" table="party.login_identifier"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="login_id"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+</index>
+
+<index name="ix_fk_login_identifier_generic_cd" table="party.login_identifier"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+</index>
+
+<index name="ix_uq_login_identifier_end_time" table="party.login_identifier"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="login_id"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="identifier"/>
+			<opclass  signature="pg_catalog.text_ops USING btree"/>
+		</idxelement>
+	<predicate><![CDATA[end_time IS NULL]]></predicate>
+</index>
+
+<index name="ix_fk_party_name_party_id" table="party.party_name"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="party_id"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+</index>
+
+<index name="ix_fk_party_name_generic_cd" table="party.party_name"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+</index>
+
+<index name="ix_uq_party_name_end_time" table="party.party_name"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="party_id"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="preferred"/>
+			<opclass  signature="pg_catalog.bool_ops USING btree"/>
+		</idxelement>
+	<predicate><![CDATA[end_time is null]]></predicate>
+</index>
+
+<index name="ix_locale_cd_code" table="look_up.locale_cd"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="code"/>
+			<opclass  signature="pg_catalog.text_ops USING btree"/>
+		</idxelement>
+</index>
+
+<index name="ix_locale_cd_end_date" table="look_up.locale_cd"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="end_date"/>
+		</idxelement>
+	<predicate><![CDATA[end_date is null]]></predicate>
+</index>
+
+<index name="ix_fk_generic_locales_generic_cd" table="look_up.generic_locales"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="generic_cd"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+</index>
+
+<index name="ix_fk_generic_locales_locale_cd" table="look_up.generic_locales"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="locale_cd"/>
+			<opclass  signature="pg_catalog.int8_ops USING btree"/>
+		</idxelement>
+</index>
+
+<index name="ix_generic_locales_end_date" table="look_up.generic_locales"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="end_date"/>
+		</idxelement>
+	<predicate><![CDATA[end_date is null]]></predicate>
 </index>
 
 <constraint name="generic_cd_fk" type="fk-constr" comparison-type="MATCH FULL"
@@ -15307,105 +15525,99 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <relationship name="rel_generic_cd_generic_cd" type="relfk" layer="0"
-	 custom-color="#e3a3a8"
+	 custom-color="#135038"
 	 src-table="look_up.generic_cd"
 	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="2597.09" y="144.283"/>
-	<position x="2597.09" y="37"/>
-	<position x="2449.39" y="37"/>
+		<position x="2604.26" y="156.683"/>
+	<position x="2604.26" y="37"/>
+	<position x="2454.17" y="37"/>
 	</line>
 </relationship>
 
 <relationship name="rel_party_type_party" type="relfk" layer="0"
-	 custom-color="#3238de"
+	 custom-color="#92f80e"
 	 src-table="party.party_type"
 	 dst-table="party.party" reference-fk="party_fk"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_party_type_generic_cd" type="relfk" layer="0"
-	 custom-color="#3110bf"
-	 src-table="party.party_type"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_party_name_party" type="relfk" layer="0"
-	 custom-color="#bf6105"
+	 custom-color="#08d035"
 	 src-table="party.party_name"
 	 dst-table="party.party" reference-fk="party_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_party_name_generic_cd" type="relfk" layer="0"
-	 custom-color="#f841eb"
-	 src-table="party.party_name"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_generic_locales_generic_cd" type="relfk" layer="0"
-	 custom-color="#1aa035"
-	 src-table="look_up.generic_locales"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_generic_locales_locale_cd" type="relfk" layer="0"
-	 custom-color="#92395e"
+	 custom-color="#34b21a"
 	 src-table="look_up.generic_locales"
 	 dst-table="look_up.locale_cd" reference-fk="locale_cd_fk"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_party_identifier_party" type="relfk" layer="0"
-	 custom-color="#72d715"
+	 custom-color="#aac443"
 	 src-table="party.party_identifier"
 	 dst-table="party.party" reference-fk="party_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_party_identifier_generic_cd" type="relfk" layer="0"
-	 custom-color="#5e95ba"
-	 src-table="party.party_identifier"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_login_party" type="relfk" layer="0"
-	 custom-color="#5188a8"
+	 custom-color="#c590da"
 	 src-table="party.login"
 	 dst-table="party.party" reference-fk="party_fk"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_login_identifier_login" type="relfk" layer="0"
-	 custom-color="#1f5244"
+	 custom-color="#744d5c"
 	 src-table="party.login_identifier"
 	 dst-table="party.login" reference-fk="login_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_login_identifier_generic_cd" type="relfk" layer="0"
-	 custom-color="#30c1b7"
-	 src-table="party.login_identifier"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_password_login" type="relfk" layer="0"
-	 custom-color="#53c422"
+	 custom-color="#57be89"
 	 src-table="party.password"
 	 dst-table="party.login" reference-fk="login_fk"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_login_question_login" type="relfk" layer="0"
-	 custom-color="#06fedb"
+	 custom-color="#c75ffd"
 	 src-table="party.login_question"
 	 dst-table="party.login" reference-fk="login_fk"
 	 src-required="false" dst-required="false"/>
 
+<relationship name="rel_party_picture_party" type="relfk" layer="0"
+	 custom-color="#5133a5"
+	 src-table="party.party_picture"
+	 dst-table="party.party" reference-fk="party_fk"
+	 src-required="false" dst-required="false"/>
+
 <relationship name="rel_login_question_generic_cd" type="relfk" layer="0"
-	 custom-color="#d8e002"
 	 src-table="party.login_question"
 	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_party_picture_party" type="relfk" layer="0"
-	 custom-color="#5b18a4"
-	 src-table="party.party_picture"
-	 dst-table="party.party" reference-fk="party_fk"
+<relationship name="rel_login_identifier_generic_cd" type="relfk" layer="0"
+	 src-table="party.login_identifier"
+	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_party_type_generic_cd" type="relfk" layer="0"
+	 src-table="party.party_type"
+	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_party_name_generic_cd" type="relfk" layer="0"
+	 src-table="party.party_name"
+	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_party_identifier_generic_cd" type="relfk" layer="0"
+	 src-table="party.party_identifier"
+	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_generic_locales_generic_cd" type="relfk" layer="0"
+	 src-table="look_up.generic_locales"
+	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
