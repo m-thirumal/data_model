@@ -30,6 +30,18 @@ CREATE SCHEMA look_up;
 SET search_path TO pg_catalog,public,party,look_up;
 -- ddl-end --
 
+-- object: btree_gist | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS btree_gist CASCADE;
+CREATE EXTENSION btree_gist
+WITH SCHEMA public;
+-- ddl-end --
+
+-- object: "uuid-ossp" | type: EXTENSION --
+-- DROP EXTENSION IF EXISTS "uuid-ossp" CASCADE;
+CREATE EXTENSION "uuid-ossp"
+WITH SCHEMA public;
+-- ddl-end --
+
 -- object: party.party | type: TABLE --
 -- DROP TABLE IF EXISTS party.party CASCADE;
 CREATE TABLE party.party (
@@ -45,18 +57,6 @@ CREATE TABLE party.party (
 );
 -- ddl-end --
 -- ALTER TABLE party.party OWNER TO postgres;
--- ddl-end --
-
--- object: "uuid-ossp" | type: EXTENSION --
--- DROP EXTENSION IF EXISTS "uuid-ossp" CASCADE;
-CREATE EXTENSION "uuid-ossp"
-WITH SCHEMA public;
--- ddl-end --
-
--- object: btree_gist | type: EXTENSION --
--- DROP EXTENSION IF EXISTS btree_gist CASCADE;
-CREATE EXTENSION btree_gist
-WITH SCHEMA public;
 -- ddl-end --
 
 -- object: look_up.generic_cd | type: TABLE --
@@ -90,15 +90,17 @@ ON DELETE CASCADE ON UPDATE NO ACTION;
 CREATE TABLE party.party_type (
 	party_type_id bigserial NOT NULL,
 	party_id bigint NOT NULL,
+	generic_cd bigint NOT NULL,
 	start_time timestamptz NOT NULL,
 	end_time timestamptz,
 	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
 	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
 	row_update_info text,
-	generic_cd bigint NOT NULL,
 	CONSTRAINT party_type_pk PRIMARY KEY (party_type_id)
 
 );
+-- ddl-end --
+COMMENT ON TABLE party.party_type IS E'Created by Thirumal';
 -- ddl-end --
 -- ALTER TABLE party.party_type OWNER TO postgres;
 -- ddl-end --
@@ -130,11 +132,11 @@ CREATE TABLE party.party_name (
 	generic_cd bigint,
 	first_name text NOT NULL,
 	rest_of_name text,
-	start_time timestamptz NOT NULL,
+	start_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	end_time timestamptz,
 	preferred bool NOT NULL DEFAULT false,
-	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
-	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_creation_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	row_update_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_info text,
 	CONSTRAINT party_name_pk PRIMARY KEY (party_name_id)
 
@@ -287,6 +289,7 @@ ALTER TABLE party.login ADD CONSTRAINT login_uq UNIQUE (party_id);
 CREATE TABLE party.login_identifier (
 	login_identifier_id bigserial NOT NULL,
 	login_id bigint NOT NULL,
+	generic_cd bigint NOT NULL,
 	identifier text NOT NULL,
 	start_time timestamptz NOT NULL DEFAULT current_timestamp,
 	end_time timestamptz,
@@ -394,6 +397,46 @@ ON DELETE RESTRICT ON UPDATE NO ACTION;
 -- object: login_question_uq | type: CONSTRAINT --
 -- ALTER TABLE party.login_question DROP CONSTRAINT IF EXISTS login_question_uq CASCADE;
 ALTER TABLE party.login_question ADD CONSTRAINT login_question_uq UNIQUE (generic_cd);
+-- ddl-end --
+
+-- object: generic_cd_fk | type: CONSTRAINT --
+-- ALTER TABLE party.login_identifier DROP CONSTRAINT IF EXISTS generic_cd_fk CASCADE;
+ALTER TABLE party.login_identifier ADD CONSTRAINT generic_cd_fk FOREIGN KEY (generic_cd)
+REFERENCES look_up.generic_cd (generic_cd) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: login_identifier_uq | type: CONSTRAINT --
+-- ALTER TABLE party.login_identifier DROP CONSTRAINT IF EXISTS login_identifier_uq CASCADE;
+ALTER TABLE party.login_identifier ADD CONSTRAINT login_identifier_uq UNIQUE (generic_cd);
+-- ddl-end --
+
+-- object: ix_fk_party_type_party_id | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_party_type_party_id;
+CREATE INDEX ix_fk_party_type_party_id ON party.party_type
+	USING btree
+	(
+	  party_id
+	)
+	TABLESPACE pg_default;
+-- ddl-end --
+
+-- object: ix_fk_party_type_generic_cd | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_party_type_generic_cd CASCADE;
+CREATE INDEX ix_fk_party_type_generic_cd ON party.party_type
+	USING btree
+	(
+	  generic_cd
+	);
+-- ddl-end --
+
+-- object: ix_party_type_end_time | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_party_type_end_time CASCADE;
+CREATE INDEX ix_party_type_end_time ON party.party_type
+	USING btree
+	(
+	  (end_time IS NULL) ASC NULLS FIRST
+	);
 -- ddl-end --
 
 
