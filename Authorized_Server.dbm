@@ -3,9 +3,9 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="1603,0" last-zoom="1" max-obj-count="505"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="505"
 	 default-schema="public" default-owner="postgres">
-<database name="authorized_server" encoding="UTF8" lc-collate="en_IN" lc-ctype="en_IN" is-template="false" allow-conns="true">
+<database name="authorize-server" encoding="UTF8" lc-collate="en_IN" lc-ctype="en_IN" is-template="false" allow-conns="true">
 	<role name="postgres"/>
 	<tablespace name="pg_default"/>
 </database>
@@ -15590,16 +15590,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="party.party" reference-fk="party_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_login_question_generic_cd" type="relfk" layer="0"
-	 src-table="party.login_question"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_login_identifier_generic_cd" type="relfk" layer="0"
-	 src-table="party.login_identifier"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_party_type_generic_cd" type="relfk" layer="0"
 	 src-table="party.party_type"
 	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
@@ -15610,13 +15600,23 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false"/>
 
+<relationship name="rel_generic_locales_generic_cd" type="relfk" layer="0"
+	 src-table="look_up.generic_locales"
+	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
+	 src-required="false" dst-required="false"/>
+
 <relationship name="rel_party_identifier_generic_cd" type="relfk" layer="0"
 	 src-table="party.party_identifier"
 	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_generic_locales_generic_cd" type="relfk" layer="0"
-	 src-table="look_up.generic_locales"
+<relationship name="rel_login_identifier_generic_cd" type="relfk" layer="0"
+	 src-table="party.login_identifier"
+	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_login_question_generic_cd" type="relfk" layer="0"
+	 src-table="party.login_question"
 	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false"/>
 
