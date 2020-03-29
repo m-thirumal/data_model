@@ -10,9 +10,9 @@ SET check_function_bodies = false;
 
 -- Database creation must be done outside a multicommand file.
 -- These commands were put in this file only as a convenience.
--- -- object: authorized_server | type: DATABASE --
--- -- DROP DATABASE IF EXISTS authorized_server;
--- CREATE DATABASE authorized_server
+-- -- object: authorizer | type: DATABASE --
+-- -- DROP DATABASE IF EXISTS authorizer;
+-- CREATE DATABASE authorizer
 -- 	ENCODING = 'UTF8'
 -- 	LC_COLLATE = 'en_IN'
 -- 	LC_CTYPE = 'en_IN'
@@ -68,6 +68,8 @@ SET search_path TO pg_catalog,public,party,look_up;
 CREATE EXTENSION btree_gist
 WITH SCHEMA public
 VERSION '1.5';
+-- ddl-end --
+COMMENT ON EXTENSION btree_gist IS E'Created by Thirumal';
 -- ddl-end --
 
 -- -- object: public.gbtreekey4_in | type: FUNCTION --
@@ -8356,6 +8358,8 @@ CREATE EXTENSION "uuid-ossp"
 WITH SCHEMA public
 VERSION '1.1';
 -- ddl-end --
+COMMENT ON EXTENSION "uuid-ossp" IS E'Created by Thirumal';
+-- ddl-end --
 
 -- -- object: public.uuid_nil | type: FUNCTION --
 -- -- DROP FUNCTION IF EXISTS public.uuid_nil() CASCADE;
@@ -8552,13 +8556,42 @@ CREATE TABLE look_up.generic_cd (
 	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_created_by text NOT NULL DEFAULT 'திருமால்',
 	row_updated_by text NOT NULL DEFAULT 'திருமால்',
-	row_update_info text NOT NULL,
+	row_update_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	row_update_info text,
 	parent_generic_cd bigint,
 	CONSTRAINT party_type_pk PRIMARY KEY (generic_cd)
 
 );
 -- ddl-end --
 -- ALTER TABLE look_up.generic_cd OWNER TO postgres;
+-- ddl-end --
+
+-- Appended SQL commands --
+INSERT INTO look_up.generic_cd(generic_cd, code, start_date, parent_generic_cd)
+values
+--Table Name (parent is always NULL)
+(1, 'login_identifier', current_date, null),
+(2, 'party_type', current_date, null),
+(3, 'party_name', current_date, null),
+(4, 'login_question', current_date, null),
+--
+(500, 'Individual', current_date, 2),
+--1st iterate values
+--Login_identifier
+(1000, 'Email', current_date, 1),
+(1001, 'Mobile', current_date, 1),
+--Party_type
+(1500, 'Male', current_date, 500),
+(1501, 'Female', current_date, 500),
+--Party_name
+(2000, 'Legal_Birth', current_date, 3),
+--login_question
+(2500, 'color', current_date,  4),
+(2501, 'place', current_date, 4),
+(2502, 'number', current_date, 4),
+(2503, 'first school', current_date, 4),
+(2504, 'first employer', current_date, 4);
+--
 -- ddl-end --
 
 -- object: party.party_type_party_type_id_seq | type: SEQUENCE --
@@ -8586,8 +8619,7 @@ CREATE TABLE party.party_type (
 	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_info text,
-	CONSTRAINT party_type_pk PRIMARY KEY (party_type_id),
-	CONSTRAINT party_type_uq UNIQUE (generic_cd)
+	CONSTRAINT party_type_pk PRIMARY KEY (party_type_id)
 
 );
 -- ddl-end --
@@ -8624,8 +8656,7 @@ CREATE TABLE party.party_name (
 	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_info text,
-	CONSTRAINT party_name_pk PRIMARY KEY (party_name_id),
-	CONSTRAINT party_name_uq UNIQUE (generic_cd)
+	CONSTRAINT party_name_pk PRIMARY KEY (party_name_id)
 
 );
 -- ddl-end --
@@ -8659,12 +8690,21 @@ CREATE TABLE look_up.locale_cd (
 	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_created_by text NOT NULL DEFAULT 'திருமால்',
 	row_updated_by text NOT NULL DEFAULT 'திருமால்',
+	row_update_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_info text,
 	CONSTRAINT locale_cd_pk PRIMARY KEY (locale_cd)
 
 );
 -- ddl-end --
 -- ALTER TABLE look_up.locale_cd OWNER TO postgres;
+-- ddl-end --
+
+-- Appended SQL commands --
+INSERT INTO look_up.locale_cd (locale_cd, code, description,start_date) values
+(1, 'ta', 'Tamil', current_date),
+(2, 'ta_IN', 'Tamil (India)', current_date),
+(3, 'en_IN', 'English (India)', current_date);
+
 -- ddl-end --
 
 -- object: look_up.generic_locales_generic_locales_seq | type: SEQUENCE --
@@ -8690,15 +8730,45 @@ CREATE TABLE look_up.generic_locales (
 	description text NOT NULL,
 	start_date date NOT NULL,
 	end_date date,
+	sequence integer NOT NULL,
 	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_created_by text NOT NULL DEFAULT 'திருமால்',
 	row_updated_by text NOT NULL DEFAULT 'திருமால்',
+	row_update_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_info text,
 	CONSTRAINT party_type_locales_pk PRIMARY KEY (generic_locales)
 
 );
 -- ddl-end --
 -- ALTER TABLE look_up.generic_locales OWNER TO postgres;
+-- ddl-end --
+
+-- Appended SQL commands --
+INSERT INTO generic_locales(generic_locales, generic_cd, locale_cd, description, start_date, sequence) values
+--Table Name (parent is always NULL)
+(1, 1,  3, 'login_identifier', current_date, 1),
+(2, 2, 3, 'party_type', current_date, 2),
+(3, 3, 3, 'party_name', current_date, 3),
+
+--
+(500, 500, 3, 'Individual', current_date, 500),
+--1st iterate values
+--Login_identifier
+(1000, 1000, 3, 'Email', current_date, 1000),
+(1001, 1001, 3, 'Mobile', current_date, 1001),
+--Party_type
+(1500, 1500, 3, 'Male', current_date, 1500),
+(1501, 1501, 3, 'Female', current_date, 1501),
+--Party_name
+(2000, 2000, 3, 'Legal_Birth', current_date, 2000),
+--
+--login_question
+(2500, 2500, 3, 'color', current_date, 2500),
+(2501, 2501, 3, 'place', current_date, 2501),
+(2502, 2502, 3, 'number', current_date, 2502),
+(2503, 2503, 3, 'first school', current_date, 2503),
+(2504, 2504, 3, 'first employer', current_date, 2504);
+--
 -- ddl-end --
 
 -- object: party.party_identifier_party_identifier_id_seq | type: SEQUENCE --
@@ -8727,14 +8797,7 @@ CREATE TABLE party.party_identifier (
 	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_info text,
-	CONSTRAINT party_identifier_pk PRIMARY KEY (party_identifier_id),
-	CONSTRAINT party_identifier_uq UNIQUE (generic_cd),
-	CONSTRAINT ex_party_identifier_end_date EXCLUDE 
-	USING gist(
-	  party_id public.gist_int8_ops WITH pg_catalog.=,
-	  generic_cd public.gist_int8_ops WITH pg_catalog.=,
-	  identification public.gist_text_ops WITH pg_catalog.=
-	) WHERE (end_time IS NULL)
+	CONSTRAINT party_identifier_pk PRIMARY KEY (party_identifier_id)
 
 );
 -- ddl-end --
@@ -8764,7 +8827,7 @@ CREATE TABLE party.login (
 	row_update_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_info text,
 	CONSTRAINT login_pk PRIMARY KEY (login_id),
-	CONSTRAINT login_uq UNIQUE (party_id)
+	CONSTRAINT uq_login_party_id UNIQUE (party_id)
 
 );
 -- ddl-end --
@@ -10279,22 +10342,20 @@ CREATE TABLE party.party_picture (
 -- 
 -- object: ix_fk_party_type_party_id | type: INDEX --
 -- DROP INDEX IF EXISTS party.ix_fk_party_type_party_id CASCADE;
-CREATE INDEX ix_fk_party_type_party_id ON party.party_type
+CREATE INDEX  CONCURRENTLY ix_fk_party_type_party_id ON party.party_type
 	USING btree
 	(
 	  party_id pg_catalog.int8_ops
-	)
-	WITH (FILLFACTOR = 90);
+	);
 -- ddl-end --
 
 -- object: ix_fk_party_type_generic_cd | type: INDEX --
 -- DROP INDEX IF EXISTS party.ix_fk_party_type_generic_cd CASCADE;
-CREATE INDEX ix_fk_party_type_generic_cd ON party.party_type
+CREATE INDEX  CONCURRENTLY ix_fk_party_type_generic_cd ON party.party_type
 	USING btree
 	(
 	  generic_cd pg_catalog.int8_ops
-	)
-	WITH (FILLFACTOR = 90);
+	);
 -- ddl-end --
 
 -- -- object: pg_catalog.btboolcmp | type: FUNCTION --
@@ -10489,34 +10550,33 @@ CREATE INDEX ix_fk_party_type_generic_cd ON party.party_type
 -- -- ALTER OPERATOR CLASS pg_catalog.bool_ops USING btree OWNER TO postgres;
 -- -- ddl-end --
 -- 
--- object: ix_party_type_end_time | type: INDEX --
--- DROP INDEX IF EXISTS party.ix_party_type_end_time CASCADE;
-CREATE INDEX ix_party_type_end_time ON party.party_type
+-- object: ix_uq_party_type_end_time | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_uq_party_type_end_time CASCADE;
+CREATE UNIQUE INDEX  CONCURRENTLY ix_uq_party_type_end_time ON party.party_type
 	USING btree
 	(
-	  ((end_time IS NULL)) pg_catalog.bool_ops
+	  party_id pg_catalog.int8_ops,
+	  generic_cd pg_catalog.int8_ops
 	)
-	WITH (FILLFACTOR = 90);
+	WHERE (end_time IS NULL);
 -- ddl-end --
 
 -- object: ix_fk_party_identifier_party_id | type: INDEX --
 -- DROP INDEX IF EXISTS party.ix_fk_party_identifier_party_id CASCADE;
-CREATE INDEX ix_fk_party_identifier_party_id ON party.party_identifier
+CREATE INDEX  CONCURRENTLY ix_fk_party_identifier_party_id ON party.party_identifier
 	USING btree
 	(
 	  party_id pg_catalog.int8_ops
-	)
-	WITH (FILLFACTOR = 90);
+	);
 -- ddl-end --
 
 -- object: ix_fk_party_identifier_generic_cd | type: INDEX --
 -- DROP INDEX IF EXISTS party.ix_fk_party_identifier_generic_cd CASCADE;
-CREATE INDEX ix_fk_party_identifier_generic_cd ON party.party_identifier
+CREATE INDEX  CONCURRENTLY ix_fk_party_identifier_generic_cd ON party.party_identifier
 	USING btree
 	(
 	  generic_cd pg_catalog.int8_ops
-	)
-	WITH (FILLFACTOR = 90);
+	);
 -- ddl-end --
 
 -- -- object: pg_catalog.bttextcmp | type: FUNCTION --
@@ -11154,12 +11214,362 @@ CREATE INDEX ix_party_identifier_identification ON party.party_identifier
 
 -- object: ix_party_identifier_end_time | type: INDEX --
 -- DROP INDEX IF EXISTS party.ix_party_identifier_end_time CASCADE;
-CREATE INDEX ix_party_identifier_end_time ON party.party_identifier
+CREATE INDEX  CONCURRENTLY ix_party_identifier_end_time ON party.party_identifier
 	USING btree
 	(
 	  ((end_time IS NULL)) pg_catalog.bool_ops
+	);
+-- ddl-end --
+
+-- object: ix_uq_party_identifier_end_date | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_uq_party_identifier_end_date CASCADE;
+CREATE UNIQUE INDEX  CONCURRENTLY ix_uq_party_identifier_end_date ON party.party_identifier
+	USING btree
+	(
+	  party_id pg_catalog.int8_ops,
+	  generic_cd pg_catalog.int8_ops,
+	  identification pg_catalog.text_ops
 	)
-	WITH (FILLFACTOR = 90);
+	WHERE (end_time IS NULL);
+-- ddl-end --
+
+-- object: ix_fk_login_party_id | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_login_party_id CASCADE;
+CREATE INDEX  CONCURRENTLY ix_fk_login_party_id ON party.login
+	USING btree
+	(
+	  party_id
+	);
+-- ddl-end --
+
+-- object: "ix_fk_generic_cd_parent_generic_Cd" | type: INDEX --
+-- DROP INDEX IF EXISTS look_up."ix_fk_generic_cd_parent_generic_Cd" CASCADE;
+CREATE INDEX "ix_fk_generic_cd_parent_generic_Cd" ON look_up.generic_cd
+	USING btree
+	(
+	  parent_generic_cd
+	);
+-- ddl-end --
+
+-- object: ix_generic_cd_code | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_generic_cd_code CASCADE;
+CREATE INDEX ix_generic_cd_code ON look_up.generic_cd
+	USING btree
+	(
+	  code
+	);
+-- ddl-end --
+
+-- object: ix_fk_party_picture_party_id | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_party_picture_party_id CASCADE;
+CREATE INDEX ix_fk_party_picture_party_id ON party.party_picture
+	USING btree
+	(
+	  party_id
+	);
+-- ddl-end --
+
+-- object: ix_party_picture_preferred | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_party_picture_preferred CASCADE;
+CREATE INDEX ix_party_picture_preferred ON party.party_picture
+	USING btree
+	(
+	  preferred pg_catalog.bool_ops
+	)
+	WHERE (preferred is true);
+-- ddl-end --
+
+-- object: ix_fk_login_question_login_id | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_login_question_login_id CASCADE;
+CREATE INDEX  CONCURRENTLY ix_fk_login_question_login_id ON party.login_question
+	USING btree
+	(
+	  login_id
+	);
+-- ddl-end --
+
+-- object: ix_fk_login_question_generic_cd | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_login_question_generic_cd CASCADE;
+CREATE INDEX  CONCURRENTLY ix_fk_login_question_generic_cd ON party.login_question
+	USING btree
+	(
+	  generic_cd
+	);
+-- ddl-end --
+
+-- object: ix_uq_login_question_end_time | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_uq_login_question_end_time CASCADE;
+CREATE UNIQUE INDEX  CONCURRENTLY ix_uq_login_question_end_time ON party.login_question
+	USING btree
+	(
+	  login_id,
+	  generic_cd,
+	  answer,
+	  end_time
+	);
+-- ddl-end --
+
+-- object: ix_password_login_id | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_password_login_id CASCADE;
+CREATE INDEX ix_password_login_id ON party.password
+	USING btree
+	(
+	  login_id
+	);
+-- ddl-end --
+
+-- object: ix_password_secret | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_password_secret CASCADE;
+CREATE INDEX ix_password_secret ON party.password
+	USING btree
+	(
+	  secret
+	);
+-- ddl-end --
+
+-- object: ix_uq_password_end_time | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_uq_password_end_time CASCADE;
+CREATE UNIQUE INDEX ix_uq_password_end_time ON party.password
+	USING btree
+	(
+	  login_id pg_catalog.int8_ops,
+	  secret pg_catalog.text_ops
+	)
+	WHERE (end_time is null);
+-- ddl-end --
+
+-- object: ix_fk_login_identifier_login_id | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_login_identifier_login_id CASCADE;
+CREATE INDEX  CONCURRENTLY ix_fk_login_identifier_login_id ON party.login_identifier
+	USING btree
+	(
+	  login_id pg_catalog.int8_ops
+	);
+-- ddl-end --
+
+-- object: ix_fk_login_identifier_generic_cd | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_login_identifier_generic_cd CASCADE;
+CREATE INDEX  CONCURRENTLY ix_fk_login_identifier_generic_cd ON party.login_identifier
+	USING btree
+	(
+	  generic_cd pg_catalog.int8_ops
+	);
+-- ddl-end --
+
+-- object: ix_uq_login_identifier_end_time | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_uq_login_identifier_end_time CASCADE;
+CREATE UNIQUE INDEX  CONCURRENTLY ix_uq_login_identifier_end_time ON party.login_identifier
+	USING btree
+	(
+	  login_id pg_catalog.int8_ops,
+	  generic_cd pg_catalog.int8_ops,
+	  identifier pg_catalog.text_ops
+	)
+	WHERE (end_time IS NULL);
+-- ddl-end --
+
+-- object: ix_fk_party_name_party_id | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_party_name_party_id CASCADE;
+CREATE INDEX  CONCURRENTLY ix_fk_party_name_party_id ON party.party_name
+	USING btree
+	(
+	  party_id pg_catalog.int8_ops
+	);
+-- ddl-end --
+
+-- object: ix_fk_party_name_generic_cd | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_fk_party_name_generic_cd CASCADE;
+CREATE INDEX  CONCURRENTLY ix_fk_party_name_generic_cd ON party.party_name
+	USING btree
+	(
+	  generic_cd pg_catalog.int8_ops
+	);
+-- ddl-end --
+
+-- object: ix_uq_party_name_end_time | type: INDEX --
+-- DROP INDEX IF EXISTS party.ix_uq_party_name_end_time CASCADE;
+CREATE UNIQUE INDEX  CONCURRENTLY ix_uq_party_name_end_time ON party.party_name
+	USING btree
+	(
+	  party_id pg_catalog.int8_ops,
+	  generic_cd pg_catalog.int8_ops,
+	  preferred pg_catalog.bool_ops
+	)
+	WHERE (end_time is null);
+-- ddl-end --
+
+-- object: ix_locale_cd_code | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_locale_cd_code CASCADE;
+CREATE INDEX ix_locale_cd_code ON look_up.locale_cd
+	USING btree
+	(
+	  code pg_catalog.text_ops
+	);
+-- ddl-end --
+
+-- object: ix_locale_cd_end_date | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_locale_cd_end_date CASCADE;
+CREATE INDEX ix_locale_cd_end_date ON look_up.locale_cd
+	USING btree
+	(
+	  end_date
+	)
+	WHERE (end_date is null);
+-- ddl-end --
+
+-- object: ix_fk_generic_locales_generic_cd | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_fk_generic_locales_generic_cd CASCADE;
+CREATE INDEX ix_fk_generic_locales_generic_cd ON look_up.generic_locales
+	USING btree
+	(
+	  generic_cd pg_catalog.int8_ops
+	);
+-- ddl-end --
+
+-- object: ix_fk_generic_locales_locale_cd | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_fk_generic_locales_locale_cd CASCADE;
+CREATE INDEX ix_fk_generic_locales_locale_cd ON look_up.generic_locales
+	USING btree
+	(
+	  locale_cd pg_catalog.int8_ops
+	);
+-- ddl-end --
+
+-- object: ix_generic_locales_end_date | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_generic_locales_end_date CASCADE;
+CREATE INDEX ix_generic_locales_end_date ON look_up.generic_locales
+	USING btree
+	(
+	  end_date
+	)
+	WHERE (end_date is null);
+-- ddl-end --
+
+-- object: public.row_update_time | type: FUNCTION --
+-- DROP FUNCTION IF EXISTS public.row_update_time() CASCADE;
+CREATE FUNCTION public.row_update_time ()
+	RETURNS trigger
+	LANGUAGE plpgsql
+	VOLATILE 
+	CALLED ON NULL INPUT
+	SECURITY INVOKER
+	COST 1
+	AS $$
+BEGIN
+		NEW.row_updated_date = now();
+		RETURN NEW; 
+END;
+$$;
+-- ddl-end --
+-- ALTER FUNCTION public.row_update_time() OWNER TO postgres;
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.locale_cd CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON look_up.locale_cd
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.generic_locales CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON look_up.generic_locales
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.generic_cd CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON look_up.generic_cd
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.party
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party_type CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.party_type
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.login_identifier CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.login_identifier
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.password CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.password
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.login_question CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.login_question
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party_name CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.party_name
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party_picture CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.party_picture
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.login CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.login
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party_identifier CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	AFTER UPDATE
+	ON party.party_identifier
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
 -- ddl-end --
 
 -- object: generic_cd_fk | type: CONSTRAINT --
