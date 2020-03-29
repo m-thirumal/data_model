@@ -3,9 +3,9 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="1878,0" last-zoom="1" max-obj-count="505"
+<dbmodel pgmodeler-ver="0.9.2" last-position="1878,36" last-zoom="1" max-obj-count="505"
 	 default-schema="public" default-owner="postgres">
-<database name="authorize-server" encoding="UTF8" lc-collate="en_IN" lc-ctype="en_IN" is-template="false" allow-conns="true">
+<database name="authorizer" encoding="UTF8" lc-collate="en_IN" lc-ctype="en_IN" is-template="false" allow-conns="true">
 	<role name="postgres"/>
 	<tablespace name="pg_default"/>
 </database>
@@ -23,6 +23,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <extension name="btree_gist" cur-version="1.5">
 	<schema name="public"/>
+	<comment><![CDATA[Created by Thirumal]]></comment>
 </extension>
 
 <usertype name="gbtreekey4" configuration="base"
@@ -11663,6 +11664,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <extension name="uuid-ossp" cur-version="1.1">
 	<schema name="public"/>
+	<comment><![CDATA[Created by Thirumal]]></comment>
 </extension>
 
 <function name="uuid_nil" sql-disabled="true"
@@ -11890,6 +11892,31 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="generic_cd" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="look_up"/>
 	<role name="postgres"/>
+	<appended-sql><![CDATA[INSERT INTO look_up.generic_cd(generic_cd, code, start_date, parent_generic_cd)
+values
+--Table Name (parent is always NULL)
+(1, 'login_identifier', current_date, null),
+(2, 'party_type', current_date, null),
+(3, 'party_name', current_date, null),
+(4, 'login_question', current_date, null),
+--
+(500, 'Individual', current_date, 2),
+--1st iterate values
+--Login_identifier
+(1000, 'Email', current_date, 1),
+(1001, 'Mobile', current_date, 1),
+--Party_type
+(1500, 'Male', current_date, 500),
+(1501, 'Female', current_date, 500),
+--Party_name
+(2000, 'Legal_Birth', current_date, 3),
+--login_question
+(2500, 'color', current_date,  4),
+(2501, 'place', current_date, 4),
+(2502, 'number', current_date, 4),
+(2503, 'first school', current_date, 4),
+(2504, 'first employer', current_date, 4);
+--]]></appended-sql>
 	<position x="2200" y="60"/>
 	<column name="generic_cd" not-null="true" sequence="look_up.generic_cd_generic_cd_seq">
 		<type name="bigint" length="0"/>
@@ -12018,6 +12045,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="locale_cd" layer="0" collapse-mode="2" max-obj-count="10">
 	<schema name="look_up"/>
 	<role name="postgres"/>
+	<appended-sql><![CDATA[INSERT INTO look_up.locale_cd (locale_cd, code, description,start_date) values
+(1, 'ta', 'Tamil', current_date),
+(2, 'ta_IN', 'Tamil (India)', current_date),
+(3, 'en_IN', 'English (India)', current_date);
+]]></appended-sql>
 	<position x="2620" y="60"/>
 	<column name="locale_cd" not-null="true" sequence="look_up.locale_cd_locale_cd_seq">
 		<type name="bigint" length="0"/>
@@ -12056,9 +12088,34 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 </sequence>
 
-<table name="generic_locales" layer="0" collapse-mode="2" max-obj-count="12">
+<table name="generic_locales" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="look_up"/>
 	<role name="postgres"/>
+	<appended-sql><![CDATA[INSERT INTO generic_locales(generic_locales, generic_cd, locale_cd, description, start_date, sequence) values
+--Table Name (parent is always NULL)
+(1, 1,  3, 'login_identifier', current_date, 1),
+(2, 2, 3, 'party_type', current_date, 2),
+(3, 3, 3, 'party_name', current_date, 3),
+
+--
+(500, 500, 3, 'Individual', current_date, 500),
+--1st iterate values
+--Login_identifier
+(1000, 1000, 3, 'Email', current_date, 1000),
+(1001, 1001, 3, 'Mobile', current_date, 1001),
+--Party_type
+(1500, 1500, 3, 'Male', current_date, 1500),
+(1501, 1501, 3, 'Female', current_date, 1501),
+--Party_name
+(2000, 2000, 3, 'Legal_Birth', current_date, 2000),
+--
+--login_question
+(2500, 2500, 3, 'color', current_date, 2500),
+(2501, 2501, 3, 'place', current_date, 2501),
+(2502, 2502, 3, 'number', current_date, 2502),
+(2503, 2503, 3, 'first school', current_date, 2503),
+(2504, 2504, 3, 'first employer', current_date, 2504);
+--]]></appended-sql>
 	<position x="3040" y="60"/>
 	<column name="generic_locales" not-null="true" sequence="look_up.generic_locales_generic_locales_seq">
 		<type name="bigint" length="0"/>
@@ -12077,6 +12134,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="end_date">
 		<type name="date" length="0"/>
+	</column>
+	<column name="sequence" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
 	<column name="row_creation_time" not-null="true" default-value="CURRENT_TIMESTAMP">
 		<type name="timestamp with time zone" length="0" with-timezone="true"/>
@@ -14125,8 +14185,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </opclass>
 
 <index name="ix_fk_party_type_party_id" table="party.party_type"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="90">
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="party_id"/>
 			<opclass  signature="pg_catalog.int8_ops USING btree"/>
@@ -14134,8 +14194,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_party_type_generic_cd" table="party.party_type"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="90">
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="generic_cd"/>
 			<opclass  signature="pg_catalog.int8_ops USING btree"/>
@@ -14372,7 +14432,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </opclass>
 
 <index name="ix_uq_party_type_end_time" table="party.party_type"
-	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 concurrent="true" unique="true" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="party_id"/>
@@ -14386,7 +14446,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_party_identifier_party_id" table="party.party_identifier"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="party_id"/>
@@ -14395,7 +14455,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_party_identifier_generic_cd" table="party.party_identifier"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="generic_cd"/>
@@ -15180,7 +15240,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_party_identifier_end_time" table="party.party_identifier"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<expression><![CDATA[(end_time IS NULL)]]></expression>
@@ -15189,7 +15249,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_uq_party_identifier_end_date" table="party.party_identifier"
-	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 concurrent="true" unique="true" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="party_id"/>
@@ -15207,7 +15267,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_login_party_id" table="party.login"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="party_id"/>
@@ -15249,7 +15309,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_login_question_login_id" table="party.login_question"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="login_id"/>
@@ -15257,7 +15317,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_login_question_generic_cd" table="party.login_question"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="generic_cd"/>
@@ -15265,7 +15325,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_uq_login_question_end_time" table="party.login_question"
-	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 concurrent="true" unique="true" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="login_id"/>
@@ -15312,7 +15372,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_login_identifier_login_id" table="party.login_identifier"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="login_id"/>
@@ -15321,7 +15381,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_login_identifier_generic_cd" table="party.login_identifier"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="generic_cd"/>
@@ -15330,7 +15390,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_uq_login_identifier_end_time" table="party.login_identifier"
-	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 concurrent="true" unique="true" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="login_id"/>
@@ -15348,7 +15408,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_party_name_party_id" table="party.party_name"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="party_id"/>
@@ -15357,7 +15417,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_fk_party_name_generic_cd" table="party.party_name"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 concurrent="true" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="generic_cd"/>
@@ -15366,7 +15426,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </index>
 
 <index name="ix_uq_party_name_end_time" table="party.party_name"
-	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 concurrent="true" unique="true" fast-update="false" buffering="false"
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="party_id"/>
@@ -15427,35 +15487,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		</idxelement>
 	<predicate><![CDATA[end_date is null]]></predicate>
 </index>
-
-<genericsql name="generic_cd">
-	<definition><![CDATA[INSERT INTO look_up.generic_cd(generic_cd, code, start_date, parent_generic_cd)
-values
---Table Name (parent is always NULL)
-(1, 'login_identifier', current_date, null),
-(2, 'party_type', current_date, null),
-
---1st iterate values
---Login_identifier
-(1000, 'Email', current_date, 1),
-(1001, 'Mobile', current_date, 1);
-
---]]></definition>
-</genericsql>
-
-<genericsql name="locale_cd">
-	<definition><![CDATA[INSERT INTO look_up.locale_cd (locale_cd, code, description,start_date) values
-(1, 'ta', 'Tamil', current_date),
-(2, 'ta_IN', 'Tamil (India)', current_date),
-(3, 'en_IN', 'English (India)', current_date);
-]]></definition>
-</genericsql>
-
-<genericsql name="generic_locale">
-	<definition><![CDATA[INSERT INTO generic_locales(generic_locales, generic_cd, locale_cd, description, start_date) values
-
-(1, 1, 3, 'login_identifier', current_date); ]]></definition>
-</genericsql>
 
 <constraint name="generic_cd_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="look_up.generic_cd" table="look_up.generic_cd">
