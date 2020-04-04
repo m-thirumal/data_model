@@ -5,7 +5,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 -->
 <dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="8"
 	 default-schema="public" default-owner="postgres">
-<database name="new_database" is-template="false" allow-conns="true">
+<database name="oauth" is-template="false" allow-conns="true">
 </database>
 
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
@@ -14,6 +14,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="oauth_client_details" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="public"/>
 	<role name="postgres"/>
+	<appended-sql><![CDATA[INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types,
+web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity,   additional_information, autoapprove) VALUES
+('thirumal', '{bcrypt}$2a$11$5aUxEwMB/jiPK3KOTIZ20./b9hs4L8eS.u3ePdoZEe63KQlAgQYl6', 'read,write,trust', 'password,authorization_code,refresh_token,client_credentials', null, null, 36000, 36000, null, true)]]></appended-sql>
 	<position x="360" y="20"/>
 	<column name="client_id" not-null="true">
 		<type name="varchar" length="256"/>
@@ -77,7 +80,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="oauth_access_token" layer="0" collapse-mode="2" max-obj-count="8">
+<table name="oauth_access_token" layer="0" collapse-mode="2" max-obj-count="9">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="1200" y="20"/>
@@ -102,12 +105,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="refresh_token">
 		<type name="varchar" length="256"/>
 	</column>
+	<column name="row_creation_time" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
 	<constraint name="oauth_access_token_pk" type="pk-constr" table="public.oauth_access_token">
 		<columns names="authentication_id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="oauth_refresh_token" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="oauth_refresh_token" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="960" y="340"/>
@@ -119,6 +125,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="authentication">
 		<type name="bytea" length="0"/>
+	</column>
+	<column name="row_creation_time" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
 	</column>
 </table>
 

@@ -11572,6 +11572,121 @@ CREATE TRIGGER row_update_time_column_trigger
 	EXECUTE PROCEDURE public.row_update_time();
 -- ddl-end --
 
+-- object: public.oauth_client_details | type: TABLE --
+-- DROP TABLE IF EXISTS public.oauth_client_details CASCADE;
+CREATE TABLE public.oauth_client_details (
+	client_id varchar(256) NOT NULL,
+	resource_ids varchar(256),
+	client_secret varchar(256),
+	scope varchar(256),
+	authorized_grant_types varchar(256),
+	web_server_redirect_uri varchar(256),
+	authorities varchar(256),
+	access_token_validity integer,
+	refresh_token_validity integer,
+	additional_information varchar(4096),
+	autoapprove varchar(256),
+	CONSTRAINT oauth_client_details_pk PRIMARY KEY (client_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE public.oauth_client_details OWNER TO postgres;
+-- ddl-end --
+
+-- Appended SQL commands --
+INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types,
+web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity,   additional_information, autoapprove) VALUES
+('thirumal', '{bcrypt}$2a$11$5aUxEwMB/jiPK3KOTIZ20./b9hs4L8eS.u3ePdoZEe63KQlAgQYl6', 'read,write,trust', 'password,authorization_code,refresh_token,client_credentials', null, null, 36000, 36000, null, true)
+-- ddl-end --
+
+-- object: public.oauth_client_token | type: TABLE --
+-- DROP TABLE IF EXISTS public.oauth_client_token CASCADE;
+CREATE TABLE public.oauth_client_token (
+	token_id varchar(256),
+	token bytea,
+	authentication_id varchar(256) NOT NULL,
+	user_name varchar(256),
+	client_id varchar(256),
+	CONSTRAINT oauth_client_token_pk PRIMARY KEY (authentication_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE public.oauth_client_token OWNER TO postgres;
+-- ddl-end --
+
+-- object: public.oauth_access_token | type: TABLE --
+-- DROP TABLE IF EXISTS public.oauth_access_token CASCADE;
+CREATE TABLE public.oauth_access_token (
+	token_id varchar(256),
+	token bytea,
+	authentication_id varchar(256) NOT NULL,
+	user_name varchar(256),
+	client_id varchar(256),
+	authentication bytea,
+	refresh_token varchar(256),
+	row_creation_time timestamptz DEFAULT current_timestamp,
+	CONSTRAINT oauth_access_token_pk PRIMARY KEY (authentication_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE public.oauth_access_token OWNER TO postgres;
+-- ddl-end --
+
+-- object: public.oauth_refresh_token | type: TABLE --
+-- DROP TABLE IF EXISTS public.oauth_refresh_token CASCADE;
+CREATE TABLE public.oauth_refresh_token (
+	token_id varchar(256),
+	token bytea,
+	authentication bytea,
+	row_creation_time timestamptz DEFAULT current_timestamp
+);
+-- ddl-end --
+-- ALTER TABLE public.oauth_refresh_token OWNER TO postgres;
+-- ddl-end --
+
+-- object: public.oauth_code | type: TABLE --
+-- DROP TABLE IF EXISTS public.oauth_code CASCADE;
+CREATE TABLE public.oauth_code (
+	code varchar(256),
+	authentication bytea
+);
+-- ddl-end --
+-- ALTER TABLE public.oauth_code OWNER TO postgres;
+-- ddl-end --
+
+-- object: public.oauth_approvals | type: TABLE --
+-- DROP TABLE IF EXISTS public.oauth_approvals CASCADE;
+CREATE TABLE public.oauth_approvals (
+	"userId" varchar(256),
+	"clientId" varchar(256),
+	scope varchar(256),
+	status varchar(10),
+	"expiresAt" timestamp,
+	"lastModifiedAt" timestamp
+);
+-- ddl-end --
+-- ALTER TABLE public.oauth_approvals OWNER TO postgres;
+-- ddl-end --
+
+-- object: public."ClientDetails" | type: TABLE --
+-- DROP TABLE IF EXISTS public."ClientDetails" CASCADE;
+CREATE TABLE public."ClientDetails" (
+	"appId" varchar(256),
+	"resourceIds" varchar(256),
+	"appSecret" varchar(256),
+	scope varchar(256),
+	"grantTypes" varchar(256),
+	"redirectUrl" varchar(256),
+	authorities varchar(256),
+	access_token_validity integer,
+	refresh_token_validity integer,
+	"additionalInformation" varchar(4096),
+	"autoApproveScopes" varchar(4096)
+);
+-- ddl-end --
+-- ALTER TABLE public."ClientDetails" OWNER TO postgres;
+-- ddl-end --
+
 -- object: generic_cd_fk | type: CONSTRAINT --
 -- ALTER TABLE look_up.generic_cd DROP CONSTRAINT IF EXISTS generic_cd_fk CASCADE;
 ALTER TABLE look_up.generic_cd ADD CONSTRAINT generic_cd_fk FOREIGN KEY (parent_generic_cd)
