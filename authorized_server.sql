@@ -11456,7 +11456,7 @@ CREATE FUNCTION public.row_update_time ()
 	COST 1
 	AS $$
 BEGIN
-		NEW.row_updated_date = now();
+		NEW.row_update_time = now();
 		RETURN NEW; 
 END;
 $$;
@@ -11467,7 +11467,7 @@ $$;
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.locale_cd CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON look_up.locale_cd
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11476,7 +11476,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.generic_locales CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON look_up.generic_locales
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11485,7 +11485,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.generic_cd CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON look_up.generic_cd
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11494,7 +11494,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.party
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11503,7 +11503,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party_type CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.party_type
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11512,7 +11512,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.login_identifier CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.login_identifier
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11521,7 +11521,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.password CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.password
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11530,7 +11530,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.login_question CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.login_question
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11539,7 +11539,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party_name CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.party_name
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11548,7 +11548,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party_picture CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.party_picture
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11557,7 +11557,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.login CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.login
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
@@ -11566,7 +11566,7 @@ CREATE TRIGGER row_update_time_column_trigger
 -- object: row_update_time_column_trigger | type: TRIGGER --
 -- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.party_identifier CASCADE;
 CREATE TRIGGER row_update_time_column_trigger
-	AFTER UPDATE
+	BEFORE UPDATE
 	ON party.party_identifier
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();

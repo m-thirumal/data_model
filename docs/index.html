@@ -225,7 +225,7 @@ td, th, caption, .title {
 
 <h2>Data dictionary index</h2>
 	<ul id="index">
-		<li><strong>Database: </strong>authorized_server</strong>
+		<li><strong>Database: </strong>authorizer</strong>
 		<li><br/><strong>Tables</strong>
 			<ul>
 				<li><a href="#look_up.generic_cd">look_up.generic_cd</a></li>
@@ -332,12 +332,22 @@ td, th, caption, .title {
 		<td><em></em></td>
 	</tr>
 	<tr>
+		<td>row_update_time</td>
+		<td class="data-type">timestamptz</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
+		<td><em></em></td>
+	</tr>
+	<tr>
 		<td>row_update_info</td>
 		<td class="data-type">text</td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="bool-field"></td>
-		<td class="bool-field">&#10003;</td>
+		<td class="bool-field"></td>
 		<td class="value"></td>
 		<td><em></em></td>
 	</tr>
@@ -466,6 +476,16 @@ td, th, caption, .title {
 		<td><em></em></td>
 	</tr>
 	<tr>
+		<td>sequence</td>
+		<td class="data-type">integer</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value"></td>
+		<td><em></em></td>
+	</tr>
+	<tr>
 		<td>row_creation_time</td>
 		<td class="data-type">timestamp with time zone</td>
 		<td class="bool-field"></td>
@@ -493,6 +513,16 @@ td, th, caption, .title {
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
 		<td class="value">'திருமால்'</td>
+		<td><em></em></td>
+	</tr>
+	<tr>
+		<td>row_update_time</td>
+		<td class="data-type">timestamptz</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
 		<td><em></em></td>
 	</tr>
 	<tr>
@@ -647,6 +677,16 @@ td, th, caption, .title {
 		<td><em></em></td>
 	</tr>
 	<tr>
+		<td>row_update_time</td>
+		<td class="data-type">timestamptz</td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field"></td>
+		<td class="bool-field">&#10003;</td>
+		<td class="value">CURRENT_TIMESTAMP</td>
+		<td><em></em></td>
+	</tr>
+	<tr>
 		<td>row_update_info</td>
 		<td class="data-type">text</td>
 		<td class="bool-field"></td>
@@ -774,17 +814,17 @@ td, th, caption, .title {
 					<td colspan="4"><em></em></td>
 				</tr>
 				<tr>
+					<td>uq_login_party_id</td>
+					<td class="value constr-type">UNIQUE</td>
+					<td>party_id</td>
+					<td></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+				<tr>
 					<td>party_fk</td>
 					<td class="value constr-type">FOREIGN KEY</td>
 					<td>party_id</td>
 					<td><a href="#party.party">party.party</a></td>
-					<td colspan="4"><em></em></td>
-				</tr>
-				<tr>
-					<td>login_uq</td>
-					<td class="value constr-type">UNIQUE</td>
-					<td>party_id</td>
-					<td></td>
 					<td colspan="4"><em></em></td>
 				</tr>
 			</table>
@@ -925,6 +965,13 @@ td, th, caption, .title {
 					<td colspan="4"><em></em></td>
 				</tr>
 				<tr>
+					<td>login_identifier_uq</td>
+					<td class="value constr-type">UNIQUE</td>
+					<td>generic_cd</td>
+					<td></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+				<tr>
 					<td>login_fk</td>
 					<td class="value constr-type">FOREIGN KEY</td>
 					<td>login_id</td>
@@ -936,13 +983,6 @@ td, th, caption, .title {
 					<td class="value constr-type">FOREIGN KEY</td>
 					<td>generic_cd</td>
 					<td><a href="#look_up.generic_cd">look_up.generic_cd</a></td>
-					<td colspan="4"><em></em></td>
-				</tr>
-				<tr>
-					<td>login_identifier_uq</td>
-					<td class="value constr-type">UNIQUE</td>
-					<td>generic_cd</td>
-					<td></td>
 					<td colspan="4"><em></em></td>
 				</tr>
 			</table>
@@ -1083,6 +1123,13 @@ td, th, caption, .title {
 					<td colspan="4"><em></em></td>
 				</tr>
 				<tr>
+					<td>login_question_uq</td>
+					<td class="value constr-type">UNIQUE</td>
+					<td>generic_cd</td>
+					<td></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+				<tr>
 					<td>login_fk</td>
 					<td class="value constr-type">FOREIGN KEY</td>
 					<td>login_id</td>
@@ -1094,13 +1141,6 @@ td, th, caption, .title {
 					<td class="value constr-type">FOREIGN KEY</td>
 					<td>generic_cd</td>
 					<td><a href="#look_up.generic_cd">look_up.generic_cd</a></td>
-					<td colspan="4"><em></em></td>
-				</tr>
-				<tr>
-					<td>login_question_uq</td>
-					<td class="value constr-type">UNIQUE</td>
-					<td>generic_cd</td>
-					<td></td>
 					<td colspan="4"><em></em></td>
 				</tr>
 			</table>
@@ -1272,7 +1312,7 @@ td, th, caption, .title {
 		<td class="data-type">bigint</td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="bool-field">&#10003;</td>
+		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
 		<td class="value"></td>
 		<td><em></em></td>
@@ -1371,20 +1411,6 @@ td, th, caption, .title {
 					<td><a href="#look_up.generic_cd">look_up.generic_cd</a></td>
 					<td colspan="4"><em></em></td>
 				</tr>
-				<tr>
-					<td>party_identifier_uq</td>
-					<td class="value constr-type">UNIQUE</td>
-					<td>generic_cd</td>
-					<td></td>
-					<td colspan="4"><em></em></td>
-				</tr>
-				<tr>
-					<td>ex_party_identifier_end_date</td>
-					<td class="value constr-type">EXCLUDE</td>
-					<td></td>
-					<td></td>
-					<td colspan="4"><em></em></td>
-				</tr>
 			</table>
 		</td>
 	</tr>
@@ -1437,7 +1463,7 @@ td, th, caption, .title {
 		<td class="data-type">bigint</td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="bool-field">&#10003;</td>
+		<td class="bool-field"></td>
 		<td class="bool-field"></td>
 		<td class="value"></td>
 		<td><em></em></td>
@@ -1554,13 +1580,6 @@ td, th, caption, .title {
 					<td class="value constr-type">FOREIGN KEY</td>
 					<td>generic_cd</td>
 					<td><a href="#look_up.generic_cd">look_up.generic_cd</a></td>
-					<td colspan="4"><em></em></td>
-				</tr>
-				<tr>
-					<td>party_name_uq</td>
-					<td class="value constr-type">UNIQUE</td>
-					<td>generic_cd</td>
-					<td></td>
 					<td colspan="4"><em></em></td>
 				</tr>
 			</table>
@@ -1743,7 +1762,7 @@ td, th, caption, .title {
 		<td class="data-type">bigint</td>
 		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
-		<td class="bool-field">&#10003;</td>
+		<td class="bool-field"></td>
 		<td class="bool-field">&#10003;</td>
 		<td class="value"></td>
 		<td><em></em></td>
@@ -1830,13 +1849,6 @@ td, th, caption, .title {
 					<td class="value constr-type">FOREIGN KEY</td>
 					<td>generic_cd</td>
 					<td><a href="#look_up.generic_cd">look_up.generic_cd</a></td>
-					<td colspan="4"><em></em></td>
-				</tr>
-				<tr>
-					<td>party_type_uq</td>
-					<td class="value constr-type">UNIQUE</td>
-					<td>generic_cd</td>
-					<td></td>
 					<td colspan="4"><em></em></td>
 				</tr>
 			</table>
@@ -1937,17 +1949,17 @@ td, th, caption, .title {
 					<td colspan="4"><em></em></td>
 				</tr>
 				<tr>
-					<td>login_fk</td>
-					<td class="value constr-type">FOREIGN KEY</td>
-					<td>login_id</td>
-					<td><a href="#party.login">party.login</a></td>
-					<td colspan="4"><em></em></td>
-				</tr>
-				<tr>
 					<td>password_uq</td>
 					<td class="value constr-type">UNIQUE</td>
 					<td>login_id</td>
 					<td></td>
+					<td colspan="4"><em></em></td>
+				</tr>
+				<tr>
+					<td>login_fk</td>
+					<td class="value constr-type">FOREIGN KEY</td>
+					<td>login_id</td>
+					<td><a href="#party.login">party.login</a></td>
 					<td colspan="4"><em></em></td>
 				</tr>
 			</table>
