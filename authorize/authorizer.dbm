@@ -12305,9 +12305,6 @@ values
 	<constraint name="password_pk" type="pk-constr" table="party.password">
 		<columns names="password_id" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="password_uq" type="uq-constr" table="party.password">
-		<columns names="login_id" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <sequence name="login_question_login_question_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
@@ -15547,12 +15544,6 @@ END;]]></definition>
 <trigger name="row_update_time_column_trigger" firing-type="BEFORE" per-line="true" constraint="false"
 	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
 	 table="party.login_identifier">
-		<function signature="public.row_update_time()"/>
-</trigger>
-
-<trigger name="row_update_time_column_trigger" firing-type="BEFORE" per-line="true" constraint="false"
-	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
-	 table="party.password">
 		<function signature="public.row_update_time()"/>
 </trigger>
 
