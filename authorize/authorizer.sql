@@ -8889,8 +8889,7 @@ CREATE TABLE party.password (
 	secret text NOT NULL,
 	start_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	end_time timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT password_pk PRIMARY KEY (password_id),
-	CONSTRAINT password_uq UNIQUE (login_id)
+	CONSTRAINT password_pk PRIMARY KEY (password_id)
 
 );
 -- ddl-end --
@@ -11331,8 +11330,7 @@ CREATE INDEX ix_password_secret ON party.password
 CREATE UNIQUE INDEX ix_uq_password_end_time ON party.password
 	USING btree
 	(
-	  login_id pg_catalog.int8_ops,
-	  secret pg_catalog.text_ops
+	  login_id pg_catalog.int8_ops
 	)
 	WHERE (end_time is null);
 -- ddl-end --
@@ -11513,15 +11511,6 @@ CREATE TRIGGER row_update_time_column_trigger
 CREATE TRIGGER row_update_time_column_trigger
 	BEFORE UPDATE
 	ON party.login_identifier
-	FOR EACH ROW
-	EXECUTE PROCEDURE public.row_update_time();
--- ddl-end --
-
--- object: row_update_time_column_trigger | type: TRIGGER --
--- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON party.password CASCADE;
-CREATE TRIGGER row_update_time_column_trigger
-	BEFORE UPDATE
-	ON party.password
 	FOR EACH ROW
 	EXECUTE PROCEDURE public.row_update_time();
 -- ddl-end --

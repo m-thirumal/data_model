@@ -1987,7 +1987,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<comment><![CDATA[not equal]]></comment>
 	<type name="smallint" length="1" ref-type="left-type"/>
 	<type name="smallint" length="1" ref-type="right-type"/>
-	<operator ref-type="negator-op" signature="pg_catalog.=(smallint,smallint)"/>
+	<operator  signature="pg_catalog.=(smallint,smallint)"/>
 	<function ref-type="operfunc" signature="pg_catalog.int2ne(smallint,smallint)"/>
 	<function ref-type="join" signature="pg_catalog.neqjoinsel(internal,oid,internal,smallint,internal)"/>
 	<function ref-type="restriction" signature="pg_catalog.neqsel(internal,oid,internal,integer)"/>
@@ -2040,7 +2040,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<operator  signature="pg_catalog.&lt;=(smallint,smallint)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="negator-op" signature="pg_catalog.=(smallint,smallint)"/>
+		<operator  signature="pg_catalog.=(smallint,smallint)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(smallint,smallint)"/>
@@ -2475,7 +2475,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<comment><![CDATA[not equal]]></comment>
 	<type name="integer" length="1" ref-type="left-type"/>
 	<type name="integer" length="1" ref-type="right-type"/>
-	<operator ref-type="negator-op" signature="pg_catalog.=(integer,integer)"/>
+	<operator  signature="pg_catalog.=(integer,integer)"/>
 	<function ref-type="operfunc" signature="pg_catalog.int4ne(integer,integer)"/>
 	<function ref-type="join" signature="pg_catalog.neqjoinsel(internal,oid,internal,smallint,internal)"/>
 	<function ref-type="restriction" signature="pg_catalog.neqsel(internal,oid,internal,integer)"/>
@@ -2523,7 +2523,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<operator  signature="pg_catalog.&lt;=(integer,integer)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="negator-op" signature="pg_catalog.=(integer,integer)"/>
+		<operator  signature="pg_catalog.=(integer,integer)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(integer,integer)"/>
@@ -2958,7 +2958,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<comment><![CDATA[not equal]]></comment>
 	<type name="bigint" length="1" ref-type="left-type"/>
 	<type name="bigint" length="1" ref-type="right-type"/>
-	<operator ref-type="negator-op" signature="pg_catalog.=(bigint,bigint)"/>
+	<operator  signature="pg_catalog.=(bigint,bigint)"/>
 	<function ref-type="operfunc" signature="pg_catalog.int8ne(bigint,bigint)"/>
 	<function ref-type="join" signature="pg_catalog.neqjoinsel(internal,oid,internal,smallint,internal)"/>
 	<function ref-type="restriction" signature="pg_catalog.neqsel(internal,oid,internal,integer)"/>
@@ -3006,7 +3006,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<operator  signature="pg_catalog.&lt;=(bigint,bigint)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="negator-op" signature="pg_catalog.=(bigint,bigint)"/>
+		<operator  signature="pg_catalog.=(bigint,bigint)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(bigint,bigint)"/>
@@ -7989,7 +7989,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<comment><![CDATA[not equal]]></comment>
 	<type name="text" length="1" ref-type="left-type"/>
 	<type name="text" length="1" ref-type="right-type"/>
-	<operator ref-type="negator-op" signature="pg_catalog.=(text,text)"/>
+	<operator  signature="pg_catalog.=(text,text)"/>
 	<function ref-type="operfunc" signature="pg_catalog.textne(text,text)"/>
 	<function ref-type="join" signature="pg_catalog.neqjoinsel(internal,oid,internal,smallint,internal)"/>
 	<function ref-type="restriction" signature="pg_catalog.neqsel(internal,oid,internal,integer)"/>
@@ -8034,7 +8034,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<operator  signature="pg_catalog.&lt;=(text,text)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="negator-op" signature="pg_catalog.=(text,text)"/>
+		<operator  signature="pg_catalog.=(text,text)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(text,text)"/>
@@ -13368,7 +13368,7 @@ values
 	<comment><![CDATA[equal]]></comment>
 	<type name="integer" length="1" ref-type="left-type"/>
 	<type name="smallint" length="1" ref-type="right-type"/>
-	<operator ref-type="commutator-op" signature="pg_catalog.=(smallint,integer)"/>
+	<operator  signature="pg_catalog.=(smallint,integer)"/>
 	<function ref-type="operfunc" signature="pg_catalog.int42eq(integer,smallint)"/>
 	<function ref-type="join" signature="pg_catalog.eqjoinsel(internal,oid,internal,smallint,internal)"/>
 	<function ref-type="restriction" signature="pg_catalog.eqsel(internal,oid,internal,integer)"/>
@@ -13729,7 +13729,7 @@ values
 	<comment><![CDATA[equal]]></comment>
 	<type name="bigint" length="1" ref-type="left-type"/>
 	<type name="smallint" length="1" ref-type="right-type"/>
-	<operator ref-type="commutator-op" signature="pg_catalog.=(smallint,bigint)"/>
+	<operator  signature="pg_catalog.=(smallint,bigint)"/>
 	<function ref-type="operfunc" signature="pg_catalog.int82eq(bigint,smallint)"/>
 	<function ref-type="join" signature="pg_catalog.eqjoinsel(internal,oid,internal,smallint,internal)"/>
 	<function ref-type="restriction" signature="pg_catalog.eqsel(internal,oid,internal,integer)"/>
@@ -13910,7 +13910,7 @@ values
 	<comment><![CDATA[equal]]></comment>
 	<type name="bigint" length="1" ref-type="left-type"/>
 	<type name="integer" length="1" ref-type="right-type"/>
-	<operator ref-type="commutator-op" signature="pg_catalog.=(integer,bigint)"/>
+	<operator  signature="pg_catalog.=(integer,bigint)"/>
 	<function ref-type="operfunc" signature="pg_catalog.int84eq(bigint,integer)"/>
 	<function ref-type="join" signature="pg_catalog.eqjoinsel(internal,oid,internal,smallint,internal)"/>
 	<function ref-type="restriction" signature="pg_catalog.eqsel(internal,oid,internal,integer)"/>
@@ -14057,7 +14057,7 @@ values
 		<operator  signature="pg_catalog.&lt;=(smallint,smallint)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="negator-op" signature="pg_catalog.=(smallint,smallint)"/>
+		<operator  signature="pg_catalog.=(smallint,smallint)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(smallint,smallint)"/>
@@ -14072,7 +14072,7 @@ values
 		<operator  signature="pg_catalog.&lt;=(smallint,integer)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="commutator-op" signature="pg_catalog.=(smallint,integer)"/>
+		<operator  signature="pg_catalog.=(smallint,integer)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(smallint,integer)"/>
@@ -14087,7 +14087,7 @@ values
 		<operator  signature="pg_catalog.&lt;=(smallint,bigint)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="commutator-op" signature="pg_catalog.=(smallint,bigint)"/>
+		<operator  signature="pg_catalog.=(smallint,bigint)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(smallint,bigint)"/>
@@ -14102,7 +14102,7 @@ values
 		<operator  signature="pg_catalog.&lt;=(integer,integer)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="negator-op" signature="pg_catalog.=(integer,integer)"/>
+		<operator  signature="pg_catalog.=(integer,integer)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(integer,integer)"/>
@@ -14132,7 +14132,7 @@ values
 		<operator  signature="pg_catalog.&lt;=(integer,bigint)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="commutator-op" signature="pg_catalog.=(integer,bigint)"/>
+		<operator  signature="pg_catalog.=(integer,bigint)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(integer,bigint)"/>
@@ -14147,7 +14147,7 @@ values
 		<operator  signature="pg_catalog.&lt;=(bigint,bigint)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="negator-op" signature="pg_catalog.=(bigint,bigint)"/>
+		<operator  signature="pg_catalog.=(bigint,bigint)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(bigint,bigint)"/>
@@ -15071,7 +15071,7 @@ values
 	<comment><![CDATA[equal]]></comment>
 	<type name="text" length="1" ref-type="left-type"/>
 	<type name="name" length="1" ref-type="right-type"/>
-	<operator ref-type="commutator-op" signature="pg_catalog.=(name,text)"/>
+	<operator  signature="pg_catalog.=(name,text)"/>
 	<function ref-type="operfunc" signature="pg_catalog.texteqname(text,name)"/>
 	<function ref-type="join" signature="pg_catalog.eqjoinsel(internal,oid,internal,smallint,internal)"/>
 	<function ref-type="restriction" signature="pg_catalog.eqsel(internal,oid,internal,integer)"/>
@@ -15178,7 +15178,7 @@ values
 		<operator  signature="pg_catalog.&lt;=(text,text)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="negator-op" signature="pg_catalog.=(text,text)"/>
+		<operator  signature="pg_catalog.=(text,text)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(text,text)"/>
@@ -15208,7 +15208,7 @@ values
 		<operator  signature="pg_catalog.&lt;=(name,text)"/>
 	</element>
 	<element type="operator" stg-number="3">
-		<operator ref-type="commutator-op" signature="pg_catalog.=(name,text)"/>
+		<operator  signature="pg_catalog.=(name,text)"/>
 	</element>
 	<element type="operator" stg-number="4">
 		<operator  signature="pg_catalog.&gt;=(name,text)"/>
@@ -15366,10 +15366,6 @@ values
 		<idxelement use-sorting="false">
 			<column name="login_id"/>
 			<opclass  signature="pg_catalog.int8_ops USING btree"/>
-		</idxelement>
-		<idxelement use-sorting="false">
-			<column name="secret"/>
-			<opclass  signature="pg_catalog.text_ops USING btree"/>
 		</idxelement>
 	<predicate><![CDATA[end_time is null]]></predicate>
 </index>
