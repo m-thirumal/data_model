@@ -8860,8 +8860,7 @@ CREATE TABLE party.login_identifier (
 	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	row_update_info text,
-	CONSTRAINT login_identifier_pk PRIMARY KEY (login_identifier_id),
-	CONSTRAINT login_identifier_uq UNIQUE (generic_cd)
+	CONSTRAINT login_identifier_pk PRIMARY KEY (login_identifier_id)
 
 );
 -- ddl-end --

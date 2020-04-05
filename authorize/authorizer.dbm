@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,493" last-zoom="1" max-obj-count="506"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,175" last-zoom="1" max-obj-count="506"
 	 default-schema="public" default-owner="postgres">
 <database name="authorizer" encoding="UTF8" lc-collate="en_IN" lc-ctype="en_IN" is-template="false" allow-conns="true">
 	<role name="postgres"/>
@@ -12275,9 +12275,6 @@ values
 	</column>
 	<constraint name="login_identifier_pk" type="pk-constr" table="party.login_identifier">
 		<columns names="login_identifier_id" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="login_identifier_uq" type="uq-constr" table="party.login_identifier">
-		<columns names="generic_cd" ref-type="src-columns"/>
 	</constraint>
 </table>
 
