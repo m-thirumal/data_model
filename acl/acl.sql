@@ -34,7 +34,6 @@ COMMENT ON TABLE public.acl_sid IS E'Created by Thirumal';
 CREATE TABLE public.acl_class (
 	id bigserial NOT NULL,
 	class text NOT NULL,
-	class_id_type text NOT NULL,
 	CONSTRAINT unique_uk_2 UNIQUE (class),
 	CONSTRAINT acl_class_pk PRIMARY KEY (id)
 
