@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-alpha1" last-position="0,0" last-zoom="1" max-obj-count="121"
+<dbmodel pgmodeler-ver="0.9.3-alpha1" last-position="182,0" last-zoom="1" max-obj-count="121"
 	 default-schema="public" default-owner="postgres">
 <database name="poll" is-template="false" allow-conns="true">
 </database>
@@ -1068,31 +1068,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="generic_cd" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="12" z-value="0">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<appended-sql><![CDATA[INSERT INTO look_up.generic_cd(generic_cd, code, start_date, parent_generic_cd)
-values
---Table Name (parent is always NULL)
-(1, 'login_identifier', current_date, null),
-(2, 'party_type', current_date, null),
-(3, 'party_name', current_date, null),
-(4, 'login_question', current_date, null),
---
-(500, 'Individual', current_date, 2),
---1st iterate values
---Login_identifier
-(1000, 'Email', current_date, 1),
-(1001, 'Mobile', current_date, 1),
---Party_type
-(1500, 'Male', current_date, 500),
-(1501, 'Female', current_date, 500),
---Party_name
-(2000, 'Legal_Birth', current_date, 3),
---login_question
-(2500, 'color', current_date,  4),
-(2501, 'place', current_date, 4),
-(2502, 'number', current_date, 4),
-(2503, 'first school', current_date, 4),
-(2504, 'first employer', current_date, 4);
---]]></appended-sql>
 	<position x="660" y="80"/>
 	<column name="generic_cd" not-null="true" sequence="look_up.generic_cd_generic_cd_seq">
 		<type name="bigint" length="0"/>
@@ -1127,16 +1102,22 @@ values
 	<constraint name="party_type_pk" type="pk-constr" table="look_up.generic_cd">
 		<columns names="generic_cd" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[generic_cd•code•start_date•end_date•row_creation_time•row_created_by•row_updated_by•row_update_time•row_update_info•parent_generic_cd⸣
+1•election_cd•2020-05-24•••••••⸣
+2•question_cd•2020-05-24•••••••⸣
+1000•Insolvency•2020-05-24•••••••1⸣
+2000•Simple•2020-05-24•••••••2⸣
+2001•Multi Choice•2020-05-24•••••••2⸣
+2002•Ranking•2020-05-24•••••••2⸣
+2003•STV•2020-05-24•••••••2⸣
+2004•Team Election•2020-05-24•••••••2]]>
+	</initial-data>
 </table>
 
 <table name="locale_cd" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="12" z-value="0">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<appended-sql><![CDATA[INSERT INTO look_up.locale_cd (locale_cd, code, description,start_date) values
-(1, 'ta', 'Tamil', current_date),
-(2, 'ta_IN', 'Tamil (India)', current_date),
-(3, 'en_IN', 'English (India)', current_date);
-]]></appended-sql>
 	<position x="1100" y="80"/>
 	<column name="locale_cd" not-null="true" sequence="look_up.locale_cd_locale_cd_seq">
 		<type name="bigint" length="0"/>
@@ -1171,6 +1152,12 @@ values
 	<constraint name="locale_cd_pk" type="pk-constr" table="look_up.locale_cd">
 		<columns names="locale_cd" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[locale_cd•code•description•start_date•end_date•row_creation_time•row_created_by•row_updated_by•row_update_time•row_update_info⸣
+1•ta•Tamil•2020-05-24••••••⸣
+2•ta_IN•Tamil (India)•2020-05-24••••••⸣
+3•en_IN•English (India)•2020-05-24••••••]]>
+	</initial-data>
 </table>
 
 <sequence name="generic_locales_generic_locales_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
@@ -1181,31 +1168,6 @@ values
 <table name="generic_locales" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="14" z-value="0">
 	<schema name="look_up"/>
 	<role name="postgres"/>
-	<appended-sql><![CDATA[INSERT INTO generic_locales(generic_locales, generic_cd, locale_cd, description, start_date, sequence) values
---Table Name (parent is always NULL)
-(1, 1,  3, 'login_identifier', current_date, 1),
-(2, 2, 3, 'party_type', current_date, 2),
-(3, 3, 3, 'party_name', current_date, 3),
-
---
-(500, 500, 3, 'Individual', current_date, 500),
---1st iterate values
---Login_identifier
-(1000, 1000, 3, 'Email', current_date, 1000),
-(1001, 1001, 3, 'Mobile', current_date, 1001),
---Party_type
-(1500, 1500, 3, 'Male', current_date, 1500),
-(1501, 1501, 3, 'Female', current_date, 1501),
---Party_name
-(2000, 2000, 3, 'Legal_Birth', current_date, 2000),
---
---login_question
-(2500, 2500, 3, 'color', current_date, 2500),
-(2501, 2501, 3, 'place', current_date, 2501),
-(2502, 2502, 3, 'number', current_date, 2502),
-(2503, 2503, 3, 'first school', current_date, 2503),
-(2504, 2504, 3, 'first employer', current_date, 2504);
---]]></appended-sql>
 	<position x="1520" y="60"/>
 	<column name="generic_locales" not-null="true" sequence="look_up.generic_locales_generic_locales_seq">
 		<type name="bigint" length="0"/>
@@ -1246,6 +1208,17 @@ values
 	<constraint name="party_type_locales_pk" type="pk-constr" table="look_up.generic_locales">
 		<columns names="generic_locales" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA[generic_locales•generic_cd•locale_cd•description•start_date•end_date•sequence•row_creation_time•row_created_by•row_updated_by•row_update_time•row_update_info⸣
+1•1•3•election_cd•2020-05-24••1•••••⸣
+2•2•3•question_cd•2020-05-24••2•••••⸣
+1000•1000•3•Insolvency•2020-05-24••1000•••••⸣
+2000•2000•3•Simple Poll•2020-05-24••2000•••••⸣
+2001•2001•3•Multi Choice•2020-05-24••2001•••••⸣
+2002•2002•3•Ranking•2020-05-24••2002•••••⸣
+2003•2003•3•STV•2020-05-24••2003•••••⸣
+2004•2004•3•Team Election•2020-05-24••2004•••••]]>
+	</initial-data>
 </table>
 
 <table name="poll" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="20" z-value="0">
@@ -1281,7 +1254,7 @@ values
 	<column name="weighted_voting" not-null="true" default-value="false">
 		<type name="boolean" length="0"/>
 	</column>
-	<column name="Allow_multiple_vote" not-null="true" default-value="false">
+	<column name="allow_multiple_vote" not-null="true" default-value="false">
 		<type name="boolean" length="0"/>
 	</column>
 	<column name="allow_question_skip" not-null="true" default-value="false">
@@ -1305,6 +1278,15 @@ values
 	<constraint name="vote_pk" type="pk-constr" table="public.poll">
 		<columns names="poll_id" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="election_cd" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="generic_cd_fk" index="1"/>
+		<object name="poll_uq" index="2"/>
+	</customidxs>
 </table>
 
 <function name="btint2cmp" sql-disabled="true"
@@ -3984,7 +3966,7 @@ END;]]></definition>
 	 src-required="false" dst-required="false"
 	del-action="NO ACTION"/>
 
-<table name="poll_question" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="7" z-value="0">
+<table name="poll_question" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="40" y="540"/>
@@ -4009,10 +3991,13 @@ END;]]></definition>
 
 	<customidxs object-type="column">
 		<object name="poll_id" index="1"/>
+		<object name="question_cd" index="6"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
+		<object name="generic_cd_fk" index="2"/>
 		<object name="poll_fk" index="1"/>
+		<object name="poll_question_uq" index="3"/>
 	</customidxs>
 </table>
 
@@ -4026,7 +4011,7 @@ END;]]></definition>
 	 src-required="false" dst-required="false"
 	del-action="CASCADE"/>
 
-<table name="options" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="6" z-value="0">
+<table name="options" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="9" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="520" y="480"/>
@@ -4034,6 +4019,16 @@ END;]]></definition>
 		<type name="bigserial" length="0"/>
 	</column>
 	<column name="option" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="option_image">
+		<type name="bytea" length="0"/>
+	</column>
+	<column name="weblink">
+		<type name="text" length="0"/>
+		<comment><![CDATA[External weblink about the option]]></comment>
+	</column>
+	<column name="description">
 		<type name="text" length="0"/>
 	</column>
 	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
@@ -4134,6 +4129,16 @@ END;]]></definition>
 	 src-required="false" dst-required="false"
 	del-action="CASCADE"/>
 
+<relationship name="poll_question_has_one_question_cd" type="rel11" layer="0"
+	 src-col-pattern="question_cd"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ad4e51"
+	 src-table="look_up.generic_cd"
+	 dst-table="public.poll_question"
+	 src-required="false" dst-required="false"
+	del-action="NO ACTION"/>
+
 <constraint name="generic_cd_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="look_up.generic_cd" table="look_up.generic_cd">
 	<columns names="parent_generic_cd" ref-type="src-columns"/>
@@ -4163,14 +4168,14 @@ END;]]></definition>
 	</line>
 </relationship>
 
-<relationship name="rel_generic_locales_generic_cd" type="relfk" layer="0"
-	 src-table="look_up.generic_locales"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
-	 src-required="false" dst-required="true"/>
-
 <relationship name="rel_generic_locales_locale_cd" type="relfk" layer="0"
 	 src-table="look_up.generic_locales"
 	 dst-table="look_up.locale_cd" reference-fk="locale_cd_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_generic_locales_generic_cd" type="relfk" layer="0"
+	 src-table="look_up.generic_locales"
+	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="true"/>
 
 </dbmodel>
