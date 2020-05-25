@@ -1,0 +1,3282 @@
+-- Database generated with pgModeler (PostgreSQL Database Modeler).
+-- pgModeler  version: 0.9.3-alpha1
+-- PostgreSQL version: 12.0
+-- Project Site: pgmodeler.io
+-- Model Author: ---
+
+SET check_function_bodies = false;
+-- ddl-end --
+
+
+-- Database creation must be done outside a multicommand file.
+-- These commands were put in this file only as a convenience.
+-- -- object: poll | type: DATABASE --
+-- -- DROP DATABASE IF EXISTS poll;
+-- CREATE DATABASE poll;
+-- -- ddl-end --
+-- 
+
+-- object: look_up | type: SCHEMA --
+-- DROP SCHEMA IF EXISTS look_up CASCADE;
+CREATE SCHEMA look_up;
+-- ddl-end --
+ALTER SCHEMA look_up OWNER TO postgres;
+-- ddl-end --
+
+SET search_path TO pg_catalog,public,look_up;
+-- ddl-end --
+
+-- object: look_up.locale_cd_locale_cd_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS look_up.locale_cd_locale_cd_seq CASCADE;
+CREATE SEQUENCE look_up.locale_cd_locale_cd_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE look_up.locale_cd_locale_cd_seq OWNER TO postgres;
+-- ddl-end --
+
+-- -- object: pg_catalog.scalarltsel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.scalarltsel(internal,oid,internal,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.scalarltsel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 integer)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- scalarltsel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.scalarltsel(internal,oid,internal,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.scalarltsel(internal,oid,internal,integer) IS E'restriction selectivity of < and related operators on scalar datatypes';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.scalarltjoinsel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.scalarltjoinsel(internal,oid,internal,smallint,internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.scalarltjoinsel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 smallint,  _param5 internal)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- scalarltjoinsel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.scalarltjoinsel(internal,oid,internal,smallint,internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.scalarltjoinsel(internal,oid,internal,smallint,internal) IS E'join selectivity of < and related operators on scalar datatypes';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.scalarlesel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.scalarlesel(internal,oid,internal,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.scalarlesel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 integer)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- scalarlesel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.scalarlesel(internal,oid,internal,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.scalarlesel(internal,oid,internal,integer) IS E'restriction selectivity of <= and related operators on scalar datatypes';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.scalarlejoinsel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.scalarlejoinsel(internal,oid,internal,smallint,internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.scalarlejoinsel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 smallint,  _param5 internal)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- scalarlejoinsel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.scalarlejoinsel(internal,oid,internal,smallint,internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.scalarlejoinsel(internal,oid,internal,smallint,internal) IS E'join selectivity of <= and related operators on scalar datatypes';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.eqsel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.eqsel(internal,oid,internal,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.eqsel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 integer)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- eqsel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.eqsel(internal,oid,internal,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.eqsel(internal,oid,internal,integer) IS E'restriction selectivity of = and related operators';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.eqjoinsel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.eqjoinsel(internal,oid,internal,smallint,internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.eqjoinsel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 smallint,  _param5 internal)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- eqjoinsel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.eqjoinsel(internal,oid,internal,smallint,internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.eqjoinsel(internal,oid,internal,smallint,internal) IS E'join selectivity of = and related operators';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.scalargesel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.scalargesel(internal,oid,internal,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.scalargesel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 integer)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- scalargesel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.scalargesel(internal,oid,internal,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.scalargesel(internal,oid,internal,integer) IS E'restriction selectivity of >= and related operators on scalar datatypes';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.scalargejoinsel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.scalargejoinsel(internal,oid,internal,smallint,internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.scalargejoinsel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 smallint,  _param5 internal)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- scalargejoinsel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.scalargejoinsel(internal,oid,internal,smallint,internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.scalargejoinsel(internal,oid,internal,smallint,internal) IS E'join selectivity of >= and related operators on scalar datatypes';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.scalargtsel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.scalargtsel(internal,oid,internal,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.scalargtsel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 integer)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- scalargtsel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.scalargtsel(internal,oid,internal,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.scalargtsel(internal,oid,internal,integer) IS E'restriction selectivity of > and related operators on scalar datatypes';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.scalargtjoinsel | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.scalargtjoinsel(internal,oid,internal,smallint,internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.scalargtjoinsel ( _param1 internal,  _param2 oid,  _param3 internal,  _param4 smallint,  _param5 internal)
+-- 	RETURNS double precision
+-- 	LANGUAGE internal
+-- 	STABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- scalargtjoinsel
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.scalargtjoinsel(internal,oid,internal,smallint,internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.scalargtjoinsel(internal,oid,internal,smallint,internal) IS E'join selectivity of > and related operators on scalar datatypes';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int2lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int2lt(smallint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int2lt ( _param1 smallint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int2lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int2lt(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int2lt(smallint,smallint) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(smallint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int2lt
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(smallint,smallint) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int2le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int2le(smallint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int2le ( _param1 smallint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int2le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int2le(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int2le(smallint,smallint) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(smallint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int2le
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(smallint,smallint) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int2eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int2eq(smallint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int2eq ( _param1 smallint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int2eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int2eq(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int2eq(smallint,smallint) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(smallint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int2eq
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(smallint,smallint) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int2ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int2ge(smallint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int2ge ( _param1 smallint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int2ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int2ge(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int2ge(smallint,smallint) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(smallint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int2ge
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(smallint,smallint) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int2gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int2gt(smallint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int2gt ( _param1 smallint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int2gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int2gt(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int2gt(smallint,smallint) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(smallint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int2gt
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(smallint,smallint) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.integer_ops | type: OPERATOR FAMILY --
+-- -- DROP OPERATOR FAMILY IF EXISTS pg_catalog.integer_ops USING btree CASCADE;
+-- CREATE OPERATOR FAMILY pg_catalog.integer_ops USING btree;
+-- -- ddl-end --
+-- ALTER OPERATOR FAMILY pg_catalog.integer_ops USING btree OWNER TO postgres;
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int4lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int4lt(integer,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int4lt ( _param1 integer,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int4lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int4lt(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int4lt(integer,integer) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(integer,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int4lt
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(integer,integer) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int4le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int4le(integer,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int4le ( _param1 integer,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int4le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int4le(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int4le(integer,integer) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(integer,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int4le
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(integer,integer) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int4eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int4eq(integer,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int4eq ( _param1 integer,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int4eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int4eq(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int4eq(integer,integer) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(integer,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int4eq
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(integer,integer) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int4ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int4ge(integer,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int4ge ( _param1 integer,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int4ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int4ge(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int4ge(integer,integer) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(integer,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int4ge
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(integer,integer) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int4gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int4gt(integer,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int4gt ( _param1 integer,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int4gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int4gt(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int4gt(integer,integer) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(integer,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int4gt
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(integer,integer) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int8lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int8lt(bigint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int8lt ( _param1 bigint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int8lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int8lt(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int8lt(bigint,bigint) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(bigint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int8lt
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(bigint,bigint) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int8le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int8le(bigint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int8le ( _param1 bigint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int8le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int8le(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int8le(bigint,bigint) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(bigint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int8le
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(bigint,bigint) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int8eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int8eq(bigint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int8eq ( _param1 bigint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int8eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int8eq(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int8eq(bigint,bigint) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(bigint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int8eq
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(bigint,bigint) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int8ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int8ge(bigint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int8ge ( _param1 bigint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int8ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int8ge(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int8ge(bigint,bigint) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(bigint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int8ge
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(bigint,bigint) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int8gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int8gt(bigint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int8gt ( _param1 bigint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int8gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int8gt(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int8gt(bigint,bigint) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(bigint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int8gt
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(bigint,bigint) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.text_lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.text_lt(text,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.text_lt ( _param1 text,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- text_lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.text_lt(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.text_lt(text,text) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(text,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.text_lt
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(text,text) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.text_le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.text_le(text,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.text_le ( _param1 text,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- text_le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.text_le(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.text_le(text,text) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(text,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.text_le
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(text,text) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.texteq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.texteq(text,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.texteq ( _param1 text,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- texteq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.texteq(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.texteq(text,text) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(text,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.texteq
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(text,text) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.text_ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.text_ge(text,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.text_ge ( _param1 text,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- text_ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.text_ge(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.text_ge(text,text) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(text,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.text_ge
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(text,text) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.text_gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.text_gt(text,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.text_gt ( _param1 text,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- text_gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.text_gt(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.text_gt(text,text) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(text,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.text_gt
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(text,text) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- object: look_up.generic_cd_generic_cd_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS look_up.generic_cd_generic_cd_seq CASCADE;
+CREATE SEQUENCE look_up.generic_cd_generic_cd_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE look_up.generic_cd_generic_cd_seq OWNER TO postgres;
+-- ddl-end --
+
+-- object: look_up.generic_cd | type: TABLE --
+-- DROP TABLE IF EXISTS look_up.generic_cd CASCADE;
+CREATE TABLE look_up.generic_cd (
+	generic_cd bigint NOT NULL DEFAULT nextval('look_up.generic_cd_generic_cd_seq'::regclass),
+	code text,
+	start_date date,
+	end_date date,
+	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	row_created_by text NOT NULL DEFAULT 'திருமால்',
+	row_updated_by text NOT NULL DEFAULT 'திருமால்',
+	row_update_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	row_update_info text,
+	parent_generic_cd bigint,
+	CONSTRAINT party_type_pk PRIMARY KEY (generic_cd)
+
+);
+-- ddl-end --
+ALTER TABLE look_up.generic_cd OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO look_up.generic_cd (generic_cd, code, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info, parent_generic_cd) VALUES (E'1', E'election_cd', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_cd (generic_cd, code, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info, parent_generic_cd) VALUES (E'2', E'question_cd', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_cd (generic_cd, code, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info, parent_generic_cd) VALUES (E'1000', E'Insolvency', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, E'1');
+-- ddl-end --
+INSERT INTO look_up.generic_cd (generic_cd, code, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info, parent_generic_cd) VALUES (E'2000', E'Simple', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, E'2');
+-- ddl-end --
+INSERT INTO look_up.generic_cd (generic_cd, code, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info, parent_generic_cd) VALUES (E'2001', E'Multi Choice', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, E'2');
+-- ddl-end --
+INSERT INTO look_up.generic_cd (generic_cd, code, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info, parent_generic_cd) VALUES (E'2002', E'Ranking', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, E'2');
+-- ddl-end --
+INSERT INTO look_up.generic_cd (generic_cd, code, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info, parent_generic_cd) VALUES (E'2003', E'STV', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, E'2');
+-- ddl-end --
+INSERT INTO look_up.generic_cd (generic_cd, code, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info, parent_generic_cd) VALUES (E'2004', E'Team Election', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, E'2');
+-- ddl-end --
+
+-- object: look_up.locale_cd | type: TABLE --
+-- DROP TABLE IF EXISTS look_up.locale_cd CASCADE;
+CREATE TABLE look_up.locale_cd (
+	locale_cd bigint NOT NULL DEFAULT nextval('look_up.locale_cd_locale_cd_seq'::regclass),
+	code text NOT NULL,
+	description text NOT NULL,
+	start_date date NOT NULL,
+	end_date date,
+	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	row_created_by text NOT NULL DEFAULT 'திருமால்',
+	row_updated_by text NOT NULL DEFAULT 'திருமால்',
+	row_update_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	row_update_info text,
+	CONSTRAINT locale_cd_pk PRIMARY KEY (locale_cd)
+
+);
+-- ddl-end --
+ALTER TABLE look_up.locale_cd OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO look_up.locale_cd (locale_cd, code, description, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'1', E'ta', E'Tamil', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.locale_cd (locale_cd, code, description, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'2', E'ta_IN', E'Tamil (India)', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.locale_cd (locale_cd, code, description, start_date, end_date, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'3', E'en_IN', E'English (India)', E'2020-05-24', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+
+-- object: look_up.generic_locales_generic_locales_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS look_up.generic_locales_generic_locales_seq CASCADE;
+CREATE SEQUENCE look_up.generic_locales_generic_locales_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE look_up.generic_locales_generic_locales_seq OWNER TO postgres;
+-- ddl-end --
+
+-- object: look_up.generic_locales | type: TABLE --
+-- DROP TABLE IF EXISTS look_up.generic_locales CASCADE;
+CREATE TABLE look_up.generic_locales (
+	generic_locales bigint NOT NULL DEFAULT nextval('look_up.generic_locales_generic_locales_seq'::regclass),
+	generic_cd bigint NOT NULL,
+	locale_cd bigint NOT NULL,
+	description text NOT NULL,
+	start_date date NOT NULL,
+	end_date date,
+	sequence integer NOT NULL,
+	row_creation_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	row_created_by text NOT NULL DEFAULT 'திருமால்',
+	row_updated_by text NOT NULL DEFAULT 'திருமால்',
+	row_update_time timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	row_update_info text,
+	CONSTRAINT party_type_locales_pk PRIMARY KEY (generic_locales)
+
+);
+-- ddl-end --
+ALTER TABLE look_up.generic_locales OWNER TO postgres;
+-- ddl-end --
+
+INSERT INTO look_up.generic_locales (generic_locales, generic_cd, locale_cd, description, start_date, end_date, sequence, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'1', E'1', E'3', E'election_cd', E'2020-05-24', DEFAULT, E'1', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_locales (generic_locales, generic_cd, locale_cd, description, start_date, end_date, sequence, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'2', E'2', E'3', E'question_cd', E'2020-05-24', DEFAULT, E'2', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_locales (generic_locales, generic_cd, locale_cd, description, start_date, end_date, sequence, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'1000', E'1000', E'3', E'Insolvency', E'2020-05-24', DEFAULT, E'1000', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_locales (generic_locales, generic_cd, locale_cd, description, start_date, end_date, sequence, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'2000', E'2000', E'3', E'Simple Poll', E'2020-05-24', DEFAULT, E'2000', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_locales (generic_locales, generic_cd, locale_cd, description, start_date, end_date, sequence, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'2001', E'2001', E'3', E'Multi Choice', E'2020-05-24', DEFAULT, E'2001', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_locales (generic_locales, generic_cd, locale_cd, description, start_date, end_date, sequence, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'2002', E'2002', E'3', E'Ranking', E'2020-05-24', DEFAULT, E'2002', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_locales (generic_locales, generic_cd, locale_cd, description, start_date, end_date, sequence, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'2003', E'2003', E'3', E'STV', E'2020-05-24', DEFAULT, E'2003', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+INSERT INTO look_up.generic_locales (generic_locales, generic_cd, locale_cd, description, start_date, end_date, sequence, row_creation_time, row_created_by, row_updated_by, row_update_time, row_update_info) VALUES (E'2004', E'2004', E'3', E'Team Election', E'2020-05-24', DEFAULT, E'2004', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+-- ddl-end --
+
+-- object: public.poll | type: TABLE --
+-- DROP TABLE IF EXISTS public.poll CASCADE;
+CREATE TABLE public.poll (
+	poll_id bigserial NOT NULL,
+	election_cd bigint,
+	title text NOT NULL,
+	start_date_time timestamptz NOT NULL,
+	end_date_time timestamptz NOT NULL,
+	secure boolean NOT NULL DEFAULT true,
+	secret_ballot boolean NOT NULL DEFAULT true,
+	allow_vote_change boolean NOT NULL DEFAULT false,
+	show_results_to_voters boolean NOT NULL DEFAULT false,
+	weighted_voting boolean NOT NULL DEFAULT false,
+	allow_multiple_vote boolean NOT NULL DEFAULT false,
+	allow_question_skip boolean NOT NULL DEFAULT false,
+	allow_nomination boolean NOT NULL DEFAULT false,
+	result_post_poll_close boolean NOT NULL DEFAULT false,
+	voter_receipt boolean NOT NULL DEFAULT true,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	CONSTRAINT vote_pk PRIMARY KEY (poll_id)
+
+);
+-- ddl-end --
+COMMENT ON COLUMN public.poll.title IS E'poll title';
+-- ddl-end --
+COMMENT ON COLUMN public.poll.secure IS E'poll type {true- private, false - public}';
+-- ddl-end --
+ALTER TABLE public.poll OWNER TO postgres;
+-- ddl-end --
+
+-- -- object: pg_catalog.btint2cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint2cmp(smallint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint2cmp ( _param1 smallint,  _param2 smallint)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint2cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint2cmp(smallint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint2cmp(smallint,smallint) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint2sortsupport | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint2sortsupport(internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint2sortsupport ( _param1 internal)
+-- 	RETURNS void
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint2sortsupport
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint2sortsupport(internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint2sortsupport(internal) IS E'sort support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint24cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint24cmp(smallint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint24cmp ( _param1 smallint,  _param2 integer)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint24cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint24cmp(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint24cmp(smallint,integer) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint28cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint28cmp(smallint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint28cmp ( _param1 smallint,  _param2 bigint)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint28cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint28cmp(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint28cmp(smallint,bigint) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.in_range | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.in_range(smallint,smallint,bigint,boolean,boolean) CASCADE;
+-- CREATE FUNCTION pg_catalog.in_range ( _param1 smallint,  _param2 smallint,  _param3 bigint,  _param4 boolean,  _param5 boolean)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- in_range_int2_int8
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.in_range(smallint,smallint,bigint,boolean,boolean) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.in_range(smallint,smallint,bigint,boolean,boolean) IS E'window RANGE support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.in_range | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.in_range(smallint,smallint,integer,boolean,boolean) CASCADE;
+-- CREATE FUNCTION pg_catalog.in_range ( _param1 smallint,  _param2 smallint,  _param3 integer,  _param4 boolean,  _param5 boolean)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- in_range_int2_int4
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.in_range(smallint,smallint,integer,boolean,boolean) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.in_range(smallint,smallint,integer,boolean,boolean) IS E'window RANGE support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.in_range | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.in_range(smallint,smallint,smallint,boolean,boolean) CASCADE;
+-- CREATE FUNCTION pg_catalog.in_range ( _param1 smallint,  _param2 smallint,  _param3 smallint,  _param4 boolean,  _param5 boolean)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- in_range_int2_int2
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.in_range(smallint,smallint,smallint,boolean,boolean) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.in_range(smallint,smallint,smallint,boolean,boolean) IS E'window RANGE support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint4cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint4cmp(integer,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint4cmp ( _param1 integer,  _param2 integer)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint4cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint4cmp(integer,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint4cmp(integer,integer) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint4sortsupport | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint4sortsupport(internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint4sortsupport ( _param1 internal)
+-- 	RETURNS void
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint4sortsupport
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint4sortsupport(internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint4sortsupport(internal) IS E'sort support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint48cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint48cmp(integer,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint48cmp ( _param1 integer,  _param2 bigint)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint48cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint48cmp(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint48cmp(integer,bigint) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint42cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint42cmp(integer,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint42cmp ( _param1 integer,  _param2 smallint)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint42cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint42cmp(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint42cmp(integer,smallint) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.in_range | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.in_range(integer,integer,bigint,boolean,boolean) CASCADE;
+-- CREATE FUNCTION pg_catalog.in_range ( _param1 integer,  _param2 integer,  _param3 bigint,  _param4 boolean,  _param5 boolean)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- in_range_int4_int8
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.in_range(integer,integer,bigint,boolean,boolean) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.in_range(integer,integer,bigint,boolean,boolean) IS E'window RANGE support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.in_range | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.in_range(integer,integer,integer,boolean,boolean) CASCADE;
+-- CREATE FUNCTION pg_catalog.in_range ( _param1 integer,  _param2 integer,  _param3 integer,  _param4 boolean,  _param5 boolean)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- in_range_int4_int4
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.in_range(integer,integer,integer,boolean,boolean) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.in_range(integer,integer,integer,boolean,boolean) IS E'window RANGE support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.in_range | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.in_range(integer,integer,smallint,boolean,boolean) CASCADE;
+-- CREATE FUNCTION pg_catalog.in_range ( _param1 integer,  _param2 integer,  _param3 smallint,  _param4 boolean,  _param5 boolean)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- in_range_int4_int2
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.in_range(integer,integer,smallint,boolean,boolean) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.in_range(integer,integer,smallint,boolean,boolean) IS E'window RANGE support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint8cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint8cmp(bigint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint8cmp ( _param1 bigint,  _param2 bigint)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint8cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint8cmp(bigint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint8cmp(bigint,bigint) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint8sortsupport | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint8sortsupport(internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint8sortsupport ( _param1 internal)
+-- 	RETURNS void
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint8sortsupport
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint8sortsupport(internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint8sortsupport(internal) IS E'sort support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint84cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint84cmp(bigint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint84cmp ( _param1 bigint,  _param2 integer)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint84cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint84cmp(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint84cmp(bigint,integer) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btint82cmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btint82cmp(bigint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.btint82cmp ( _param1 bigint,  _param2 smallint)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btint82cmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btint82cmp(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btint82cmp(bigint,smallint) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.in_range | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.in_range(bigint,bigint,bigint,boolean,boolean) CASCADE;
+-- CREATE FUNCTION pg_catalog.in_range ( _param1 bigint,  _param2 bigint,  _param3 bigint,  _param4 boolean,  _param5 boolean)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- in_range_int8_int8
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.in_range(bigint,bigint,bigint,boolean,boolean) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.in_range(bigint,bigint,bigint,boolean,boolean) IS E'window RANGE support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int24lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int24lt(smallint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int24lt ( _param1 smallint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int24lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int24lt(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int24lt(smallint,integer) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(smallint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int24lt
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(smallint,integer) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int24le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int24le(smallint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int24le ( _param1 smallint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int24le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int24le(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int24le(smallint,integer) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(smallint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int24le
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(smallint,integer) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int24eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int24eq(smallint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int24eq ( _param1 smallint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int24eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int24eq(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int24eq(smallint,integer) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(smallint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int24eq
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(smallint,integer) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int24ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int24ge(smallint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int24ge ( _param1 smallint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int24ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int24ge(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int24ge(smallint,integer) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(smallint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int24ge
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(smallint,integer) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int24gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int24gt(smallint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int24gt ( _param1 smallint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int24gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int24gt(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int24gt(smallint,integer) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(smallint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int24gt
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(smallint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(smallint,integer) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int28lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int28lt(smallint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int28lt ( _param1 smallint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int28lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int28lt(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int28lt(smallint,bigint) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(smallint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int28lt
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(smallint,bigint) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int28le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int28le(smallint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int28le ( _param1 smallint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int28le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int28le(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int28le(smallint,bigint) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(smallint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int28le
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(smallint,bigint) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int28eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int28eq(smallint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int28eq ( _param1 smallint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int28eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int28eq(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int28eq(smallint,bigint) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(smallint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int28eq
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(smallint,bigint) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int28ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int28ge(smallint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int28ge ( _param1 smallint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int28ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int28ge(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int28ge(smallint,bigint) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(smallint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int28ge
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(smallint,bigint) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int28gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int28gt(smallint,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int28gt ( _param1 smallint,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int28gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int28gt(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int28gt(smallint,bigint) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(smallint,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int28gt
+-- 	, LEFTARG = smallint
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(smallint,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(smallint,bigint) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int42lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int42lt(integer,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int42lt ( _param1 integer,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int42lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int42lt(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int42lt(integer,smallint) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(integer,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int42lt
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(integer,smallint) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int42le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int42le(integer,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int42le ( _param1 integer,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int42le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int42le(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int42le(integer,smallint) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(integer,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int42le
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(integer,smallint) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int42eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int42eq(integer,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int42eq ( _param1 integer,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int42eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int42eq(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int42eq(integer,smallint) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(integer,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int42eq
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = smallint
+-- 	, COMMUTATOR = OPERATOR(pg_catalog.=)
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(integer,smallint) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int42ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int42ge(integer,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int42ge ( _param1 integer,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int42ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int42ge(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int42ge(integer,smallint) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(integer,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int42ge
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(integer,smallint) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int42gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int42gt(integer,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int42gt ( _param1 integer,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int42gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int42gt(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int42gt(integer,smallint) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(integer,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int42gt
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(integer,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(integer,smallint) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int48lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int48lt(integer,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int48lt ( _param1 integer,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int48lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int48lt(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int48lt(integer,bigint) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(integer,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int48lt
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(integer,bigint) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int48le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int48le(integer,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int48le ( _param1 integer,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int48le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int48le(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int48le(integer,bigint) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(integer,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int48le
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(integer,bigint) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int48eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int48eq(integer,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int48eq ( _param1 integer,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int48eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int48eq(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int48eq(integer,bigint) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(integer,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int48eq
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(integer,bigint) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int48ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int48ge(integer,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int48ge ( _param1 integer,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int48ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int48ge(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int48ge(integer,bigint) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(integer,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int48ge
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(integer,bigint) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int48gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int48gt(integer,bigint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int48gt ( _param1 integer,  _param2 bigint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int48gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int48gt(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int48gt(integer,bigint) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(integer,bigint) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int48gt
+-- 	, LEFTARG = integer
+-- 	, RIGHTARG = bigint
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(integer,bigint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(integer,bigint) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int82lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int82lt(bigint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int82lt ( _param1 bigint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int82lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int82lt(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int82lt(bigint,smallint) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(bigint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int82lt
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(bigint,smallint) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int82le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int82le(bigint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int82le ( _param1 bigint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int82le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int82le(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int82le(bigint,smallint) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(bigint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int82le
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(bigint,smallint) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int82eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int82eq(bigint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int82eq ( _param1 bigint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int82eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int82eq(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int82eq(bigint,smallint) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(bigint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int82eq
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = smallint
+-- 	, COMMUTATOR = OPERATOR(pg_catalog.=)
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(bigint,smallint) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int82ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int82ge(bigint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int82ge ( _param1 bigint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int82ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int82ge(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int82ge(bigint,smallint) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(bigint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int82ge
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(bigint,smallint) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int82gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int82gt(bigint,smallint) CASCADE;
+-- CREATE FUNCTION pg_catalog.int82gt ( _param1 bigint,  _param2 smallint)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int82gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int82gt(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int82gt(bigint,smallint) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(bigint,smallint) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int82gt
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = smallint
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(bigint,smallint) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(bigint,smallint) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int84lt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int84lt(bigint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int84lt ( _param1 bigint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int84lt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int84lt(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int84lt(bigint,integer) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(bigint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.int84lt
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(bigint,integer) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int84le | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int84le(bigint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int84le ( _param1 bigint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int84le
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int84le(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int84le(bigint,integer) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(bigint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.int84le
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(bigint,integer) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int84eq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int84eq(bigint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int84eq ( _param1 bigint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int84eq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int84eq(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int84eq(bigint,integer) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(bigint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.int84eq
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = integer
+-- 	, COMMUTATOR = OPERATOR(pg_catalog.=)
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(bigint,integer) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int84ge | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int84ge(bigint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int84ge ( _param1 bigint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int84ge
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int84ge(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int84ge(bigint,integer) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(bigint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.int84ge
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(bigint,integer) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int84gt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.int84gt(bigint,integer) CASCADE;
+-- CREATE FUNCTION pg_catalog.int84gt ( _param1 bigint,  _param2 integer)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- int84gt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.int84gt(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.int84gt(bigint,integer) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(bigint,integer) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.int84gt
+-- 	, LEFTARG = bigint
+-- 	, RIGHTARG = integer
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(bigint,integer) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(bigint,integer) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.int8_ops | type: OPERATOR CLASS --
+-- -- DROP OPERATOR CLASS IF EXISTS pg_catalog.int8_ops USING btree CASCADE;
+-- CREATE OPERATOR CLASS pg_catalog.int8_ops DEFAULT  FOR TYPE bigint
+--  USING btree FAMILY pg_catalog.integer_ops AS
+-- 	FUNCTION	1	pg_catalog.btint2cmp(smallint,smallint),
+-- 	FUNCTION	2	pg_catalog.btint2sortsupport(internal),
+-- 	FUNCTION	1	pg_catalog.btint24cmp(smallint,integer),
+-- 	FUNCTION	1	pg_catalog.btint28cmp(smallint,bigint),
+-- 	FUNCTION	3	pg_catalog.in_range(smallint,smallint,bigint,boolean,boolean),
+-- 	FUNCTION	3	pg_catalog.in_range(smallint,smallint,integer,boolean,boolean),
+-- 	FUNCTION	3	pg_catalog.in_range(smallint,smallint,smallint,boolean,boolean),
+-- 	FUNCTION	1	pg_catalog.btint4cmp(integer,integer),
+-- 	FUNCTION	2	pg_catalog.btint4sortsupport(internal),
+-- 	FUNCTION	1	pg_catalog.btint48cmp(integer,bigint),
+-- 	FUNCTION	1	pg_catalog.btint42cmp(integer,smallint),
+-- 	FUNCTION	3	pg_catalog.in_range(integer,integer,bigint,boolean,boolean),
+-- 	FUNCTION	3	pg_catalog.in_range(integer,integer,integer,boolean,boolean),
+-- 	FUNCTION	3	pg_catalog.in_range(integer,integer,smallint,boolean,boolean),
+-- 	FUNCTION	1	pg_catalog.btint8cmp(bigint,bigint),
+-- 	FUNCTION	2	pg_catalog.btint8sortsupport(internal),
+-- 	FUNCTION	1	pg_catalog.btint84cmp(bigint,integer),
+-- 	FUNCTION	1	pg_catalog.btint82cmp(bigint,smallint),
+-- 	FUNCTION	3	pg_catalog.in_range(bigint,bigint,bigint,boolean,boolean),
+-- 	OPERATOR	1	pg_catalog.<(smallint,smallint) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(smallint,smallint) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(smallint,smallint) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(smallint,smallint) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(smallint,smallint) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(smallint,integer) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(smallint,integer) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(smallint,integer) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(smallint,integer) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(smallint,integer) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(smallint,bigint) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(smallint,bigint) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(smallint,bigint) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(smallint,bigint) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(smallint,bigint) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(integer,integer) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(integer,integer) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(integer,integer) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(integer,integer) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(integer,integer) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(integer,smallint) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(integer,smallint) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(integer,smallint) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(integer,smallint) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(integer,smallint) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(integer,bigint) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(integer,bigint) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(integer,bigint) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(integer,bigint) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(integer,bigint) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(bigint,bigint) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(bigint,bigint) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(bigint,bigint) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(bigint,bigint) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(bigint,bigint) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(bigint,smallint) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(bigint,smallint) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(bigint,smallint) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(bigint,smallint) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(bigint,smallint) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(bigint,integer) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(bigint,integer) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(bigint,integer) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(bigint,integer) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(bigint,integer) FOR SEARCH ;
+-- -- ddl-end --
+-- ALTER OPERATOR CLASS pg_catalog.int8_ops USING btree OWNER TO postgres;
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.bttextcmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.bttextcmp(text,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.bttextcmp ( _param1 text,  _param2 text)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- bttextcmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.bttextcmp(text,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.bttextcmp(text,text) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.bttextsortsupport | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.bttextsortsupport(internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.bttextsortsupport ( _param1 internal)
+-- 	RETURNS void
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- bttextsortsupport
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.bttextsortsupport(internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.bttextsortsupport(internal) IS E'sort support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btnamecmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btnamecmp(name,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.btnamecmp ( _param1 name,  _param2 name)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btnamecmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btnamecmp(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btnamecmp(name,name) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btnamesortsupport | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btnamesortsupport(internal) CASCADE;
+-- CREATE FUNCTION pg_catalog.btnamesortsupport ( _param1 internal)
+-- 	RETURNS void
+-- 	LANGUAGE internal
+-- 	IMMUTABLE 
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btnamesortsupport
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btnamesortsupport(internal) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btnamesortsupport(internal) IS E'sort support';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.btnametextcmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.btnametextcmp(name,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.btnametextcmp ( _param1 name,  _param2 text)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- btnametextcmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.btnametextcmp(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.btnametextcmp(name,text) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.bttextnamecmp | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.bttextnamecmp(text,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.bttextnamecmp ( _param1 text,  _param2 name)
+-- 	RETURNS integer
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- bttextnamecmp
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.bttextnamecmp(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.bttextnamecmp(text,name) IS E'less-equal-greater';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.namelt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.namelt(name,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.namelt ( _param1 name,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- namelt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.namelt(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.namelt(name,name) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(name,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.namelt
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(name,name) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.namele | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.namele(name,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.namele ( _param1 name,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- namele
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.namele(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.namele(name,name) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(name,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.namele
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(name,name) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.nameeq | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.nameeq(name,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.nameeq ( _param1 name,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- nameeq
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.nameeq(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.nameeq(name,name) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(name,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.nameeq
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(name,name) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.namege | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.namege(name,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.namege ( _param1 name,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- namege
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.namege(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.namege(name,name) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(name,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.namege
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(name,name) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.namegt | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.namegt(name,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.namegt ( _param1 name,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- namegt
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.namegt(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.namegt(name,name) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(name,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.namegt
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(name,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(name,name) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.namelttext | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.namelttext(name,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.namelttext ( _param1 name,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- namelttext
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.namelttext(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.namelttext(name,text) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(name,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.namelttext
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(name,text) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.nameletext | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.nameletext(name,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.nameletext ( _param1 name,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- nameletext
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.nameletext(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.nameletext(name,text) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(name,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.nameletext
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(name,text) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.nameeqtext | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.nameeqtext(name,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.nameeqtext ( _param1 name,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- nameeqtext
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.nameeqtext(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.nameeqtext(name,text) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(name,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.nameeqtext
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(name,text) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.namegetext | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.namegetext(name,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.namegetext ( _param1 name,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- namegetext
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.namegetext(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.namegetext(name,text) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(name,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.namegetext
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(name,text) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.namegttext | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.namegttext(name,text) CASCADE;
+-- CREATE FUNCTION pg_catalog.namegttext ( _param1 name,  _param2 text)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- namegttext
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.namegttext(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.namegttext(name,text) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(name,text) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.namegttext
+-- 	, LEFTARG = name
+-- 	, RIGHTARG = text
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(name,text) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(name,text) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.textltname | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.textltname(text,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.textltname ( _param1 text,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- textltname
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.textltname(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.textltname(text,name) IS E'implementation of < operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.< | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<(text,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.< (
+-- 	PROCEDURE = pg_catalog.textltname
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.scalarltsel
+-- 	, JOIN = pg_catalog.scalarltjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<(text,name) IS E'less than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.textlename | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.textlename(text,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.textlename ( _param1 text,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- textlename
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.textlename(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.textlename(text,name) IS E'implementation of <= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.<= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.<=(text,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.<= (
+-- 	PROCEDURE = pg_catalog.textlename
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.scalarlesel
+-- 	, JOIN = pg_catalog.scalarlejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.<=(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.<=(text,name) IS E'less than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.texteqname | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.texteqname(text,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.texteqname ( _param1 text,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- texteqname
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.texteqname(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.texteqname(text,name) IS E'implementation of = operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.=(text,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.= (
+-- 	PROCEDURE = pg_catalog.texteqname
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = name
+-- 	, COMMUTATOR = OPERATOR(pg_catalog.=)
+-- 	, RESTRICT = pg_catalog.eqsel
+-- 	, JOIN = pg_catalog.eqjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.=(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.=(text,name) IS E'equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.textgename | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.textgename(text,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.textgename ( _param1 text,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- textgename
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.textgename(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.textgename(text,name) IS E'implementation of >= operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.>= | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>=(text,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.>= (
+-- 	PROCEDURE = pg_catalog.textgename
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.scalargesel
+-- 	, JOIN = pg_catalog.scalargejoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>=(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>=(text,name) IS E'greater than or equal';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.textgtname | type: FUNCTION --
+-- -- DROP FUNCTION IF EXISTS pg_catalog.textgtname(text,name) CASCADE;
+-- CREATE FUNCTION pg_catalog.textgtname ( _param1 text,  _param2 name)
+-- 	RETURNS boolean
+-- 	LANGUAGE internal
+-- 	IMMUTABLE LEAKPROOF
+-- 	STRICT
+-- 	SECURITY INVOKER
+-- 	COST 1
+-- 	AS $$
+-- textgtname
+-- $$;
+-- -- ddl-end --
+-- ALTER FUNCTION pg_catalog.textgtname(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON FUNCTION pg_catalog.textgtname(text,name) IS E'implementation of > operator';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.> | type: OPERATOR --
+-- -- DROP OPERATOR IF EXISTS pg_catalog.>(text,name) CASCADE;
+-- CREATE OPERATOR pg_catalog.> (
+-- 	PROCEDURE = pg_catalog.textgtname
+-- 	, LEFTARG = text
+-- 	, RIGHTARG = name
+-- 	, RESTRICT = pg_catalog.scalargtsel
+-- 	, JOIN = pg_catalog.scalargtjoinsel);
+-- -- ddl-end --
+-- ALTER OPERATOR pg_catalog.>(text,name) OWNER TO postgres;
+-- -- ddl-end --
+-- COMMENT ON OPERATOR pg_catalog.>(text,name) IS E'greater than';
+-- -- ddl-end --
+-- 
+-- -- object: pg_catalog.text_ops | type: OPERATOR CLASS --
+-- -- DROP OPERATOR CLASS IF EXISTS pg_catalog.text_ops USING btree CASCADE;
+-- CREATE OPERATOR CLASS pg_catalog.text_ops DEFAULT  FOR TYPE text
+--  USING btree AS
+-- 	FUNCTION	1	pg_catalog.bttextcmp(text,text),
+-- 	FUNCTION	2	pg_catalog.bttextsortsupport(internal),
+-- 	FUNCTION	1	pg_catalog.btnamecmp(name,name),
+-- 	FUNCTION	2	pg_catalog.btnamesortsupport(internal),
+-- 	FUNCTION	1	pg_catalog.btnametextcmp(name,text),
+-- 	FUNCTION	1	pg_catalog.bttextnamecmp(text,name),
+-- 	OPERATOR	1	pg_catalog.<(text,text) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(text,text) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(text,text) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(text,text) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(text,text) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(name,name) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(name,name) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(name,name) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(name,name) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(name,name) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(name,text) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(name,text) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(name,text) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(name,text) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(name,text) FOR SEARCH ,
+-- 	OPERATOR	1	pg_catalog.<(text,name) FOR SEARCH ,
+-- 	OPERATOR	2	pg_catalog.<=(text,name) FOR SEARCH ,
+-- 	OPERATOR	3	pg_catalog.=(text,name) FOR SEARCH ,
+-- 	OPERATOR	4	pg_catalog.>=(text,name) FOR SEARCH ,
+-- 	OPERATOR	5	pg_catalog.>(text,name) FOR SEARCH ;
+-- -- ddl-end --
+-- ALTER OPERATOR CLASS pg_catalog.text_ops USING btree OWNER TO postgres;
+-- -- ddl-end --
+-- 
+-- object: "ix_fk_generic_cd_parent_generic_Cd" | type: INDEX --
+-- DROP INDEX IF EXISTS look_up."ix_fk_generic_cd_parent_generic_Cd" CASCADE;
+CREATE INDEX "ix_fk_generic_cd_parent_generic_Cd" ON look_up.generic_cd
+	USING btree
+	(
+	  parent_generic_cd
+	);
+-- ddl-end --
+
+-- object: ix_generic_cd_code | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_generic_cd_code CASCADE;
+CREATE INDEX ix_generic_cd_code ON look_up.generic_cd
+	USING btree
+	(
+	  code
+	);
+-- ddl-end --
+
+-- object: ix_locale_cd_code | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_locale_cd_code CASCADE;
+CREATE INDEX ix_locale_cd_code ON look_up.locale_cd
+	USING btree
+	(
+	  code pg_catalog.text_ops
+	);
+-- ddl-end --
+
+-- object: ix_locale_cd_end_date | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_locale_cd_end_date CASCADE;
+CREATE INDEX ix_locale_cd_end_date ON look_up.locale_cd
+	USING btree
+	(
+	  end_date
+	)
+	WHERE (end_date is null);
+-- ddl-end --
+
+-- object: ix_fk_generic_locales_generic_cd | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_fk_generic_locales_generic_cd CASCADE;
+CREATE INDEX ix_fk_generic_locales_generic_cd ON look_up.generic_locales
+	USING btree
+	(
+	  generic_cd pg_catalog.int8_ops
+	);
+-- ddl-end --
+
+-- object: ix_fk_generic_locales_locale_cd | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_fk_generic_locales_locale_cd CASCADE;
+CREATE INDEX ix_fk_generic_locales_locale_cd ON look_up.generic_locales
+	USING btree
+	(
+	  locale_cd pg_catalog.int8_ops
+	);
+-- ddl-end --
+
+-- object: ix_generic_locales_end_date | type: INDEX --
+-- DROP INDEX IF EXISTS look_up.ix_generic_locales_end_date CASCADE;
+CREATE INDEX ix_generic_locales_end_date ON look_up.generic_locales
+	USING btree
+	(
+	  end_date
+	)
+	WHERE (end_date is null);
+-- ddl-end --
+
+-- object: public.row_update_time | type: FUNCTION --
+-- DROP FUNCTION IF EXISTS public.row_update_time() CASCADE;
+CREATE FUNCTION public.row_update_time ()
+	RETURNS trigger
+	LANGUAGE plpgsql
+	VOLATILE 
+	CALLED ON NULL INPUT
+	SECURITY INVOKER
+	COST 1
+	AS $$
+BEGIN
+		NEW.row_update_time = now();
+		RETURN NEW; 
+END;
+$$;
+-- ddl-end --
+ALTER FUNCTION public.row_update_time() OWNER TO postgres;
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.locale_cd CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	BEFORE UPDATE
+	ON look_up.locale_cd
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.generic_locales CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	BEFORE UPDATE
+	ON look_up.generic_locales
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: row_update_time_column_trigger | type: TRIGGER --
+-- DROP TRIGGER IF EXISTS row_update_time_column_trigger ON look_up.generic_cd CASCADE;
+CREATE TRIGGER row_update_time_column_trigger
+	BEFORE UPDATE
+	ON look_up.generic_cd
+	FOR EACH ROW
+	EXECUTE PROCEDURE public.row_update_time();
+-- ddl-end --
+
+-- object: generic_cd_fk | type: CONSTRAINT --
+-- ALTER TABLE public.poll DROP CONSTRAINT IF EXISTS generic_cd_fk CASCADE;
+ALTER TABLE public.poll ADD CONSTRAINT generic_cd_fk FOREIGN KEY (election_cd)
+REFERENCES look_up.generic_cd (generic_cd) MATCH FULL
+ON DELETE NO ACTION ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: poll_uq | type: CONSTRAINT --
+-- ALTER TABLE public.poll DROP CONSTRAINT IF EXISTS poll_uq CASCADE;
+ALTER TABLE public.poll ADD CONSTRAINT poll_uq UNIQUE (election_cd);
+-- ddl-end --
+
+-- object: public.poll_question | type: TABLE --
+-- DROP TABLE IF EXISTS public.poll_question CASCADE;
+CREATE TABLE public.poll_question (
+	poll_question_id bigserial NOT NULL,
+	poll_id bigint,
+	question text NOT NULL,
+	weightage float,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	question_cd bigint,
+	CONSTRAINT poll_question_pk PRIMARY KEY (poll_question_id)
+
+);
+-- ddl-end --
+ALTER TABLE public.poll_question OWNER TO postgres;
+-- ddl-end --
+
+-- object: poll_fk | type: CONSTRAINT --
+-- ALTER TABLE public.poll_question DROP CONSTRAINT IF EXISTS poll_fk CASCADE;
+ALTER TABLE public.poll_question ADD CONSTRAINT poll_fk FOREIGN KEY (poll_id)
+REFERENCES public.poll (poll_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: public.options | type: TABLE --
+-- DROP TABLE IF EXISTS public.options CASCADE;
+CREATE TABLE public.options (
+	option_id bigserial NOT NULL,
+	poll_question_id bigint,
+	option text NOT NULL,
+	option_image bytea,
+	weblink text,
+	description text,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	CONSTRAINT options_pk PRIMARY KEY (option_id)
+
+);
+-- ddl-end --
+COMMENT ON COLUMN public.options.weblink IS E'External weblink about the option';
+-- ddl-end --
+ALTER TABLE public.options OWNER TO postgres;
+-- ddl-end --
+
+-- object: poll_question_fk | type: CONSTRAINT --
+-- ALTER TABLE public.options DROP CONSTRAINT IF EXISTS poll_question_fk CASCADE;
+ALTER TABLE public.options ADD CONSTRAINT poll_question_fk FOREIGN KEY (poll_question_id)
+REFERENCES public.poll_question (poll_question_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: public.voter | type: TABLE --
+-- DROP TABLE IF EXISTS public.voter CASCADE;
+CREATE TABLE public.voter (
+	voter_id bigserial NOT NULL,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	CONSTRAINT voter_pk PRIMARY KEY (voter_id)
+
+);
+-- ddl-end --
+ALTER TABLE public.voter OWNER TO postgres;
+-- ddl-end --
+
+-- object: public.cast_vote | type: TABLE --
+-- DROP TABLE IF EXISTS public.cast_vote CASCADE;
+CREATE TABLE public.cast_vote (
+	cast_vote_id bigserial NOT NULL,
+	voter_id bigint,
+	option_id bigint,
+	yes boolean NOT NULL,
+	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp,
+	row_update_time timestamptz NOT NULL DEFAULT current_timestamp,
+	CONSTRAINT cast_vote_pk PRIMARY KEY (cast_vote_id)
+
+);
+-- ddl-end --
+ALTER TABLE public.cast_vote OWNER TO postgres;
+-- ddl-end --
+
+-- object: voter_fk | type: CONSTRAINT --
+-- ALTER TABLE public.cast_vote DROP CONSTRAINT IF EXISTS voter_fk CASCADE;
+ALTER TABLE public.cast_vote ADD CONSTRAINT voter_fk FOREIGN KEY (voter_id)
+REFERENCES public.voter (voter_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: options_fk | type: CONSTRAINT --
+-- ALTER TABLE public.cast_vote DROP CONSTRAINT IF EXISTS options_fk CASCADE;
+ALTER TABLE public.cast_vote ADD CONSTRAINT options_fk FOREIGN KEY (option_id)
+REFERENCES public.options (option_id) MATCH FULL
+ON DELETE CASCADE ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: generic_cd_fk | type: CONSTRAINT --
+-- ALTER TABLE public.poll_question DROP CONSTRAINT IF EXISTS generic_cd_fk CASCADE;
+ALTER TABLE public.poll_question ADD CONSTRAINT generic_cd_fk FOREIGN KEY (question_cd)
+REFERENCES look_up.generic_cd (generic_cd) MATCH FULL
+ON DELETE NO ACTION ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: poll_question_uq | type: CONSTRAINT --
+-- ALTER TABLE public.poll_question DROP CONSTRAINT IF EXISTS poll_question_uq CASCADE;
+ALTER TABLE public.poll_question ADD CONSTRAINT poll_question_uq UNIQUE (question_cd);
+-- ddl-end --
+
+-- object: generic_cd_fk | type: CONSTRAINT --
+-- ALTER TABLE look_up.generic_cd DROP CONSTRAINT IF EXISTS generic_cd_fk CASCADE;
+ALTER TABLE look_up.generic_cd ADD CONSTRAINT generic_cd_fk FOREIGN KEY (parent_generic_cd)
+REFERENCES look_up.generic_cd (generic_cd) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: generic_cd_fk | type: CONSTRAINT --
+-- ALTER TABLE look_up.generic_locales DROP CONSTRAINT IF EXISTS generic_cd_fk CASCADE;
+ALTER TABLE look_up.generic_locales ADD CONSTRAINT generic_cd_fk FOREIGN KEY (generic_cd)
+REFERENCES look_up.generic_cd (generic_cd) MATCH FULL
+ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: locale_cd_fk | type: CONSTRAINT --
+-- ALTER TABLE look_up.generic_locales DROP CONSTRAINT IF EXISTS locale_cd_fk CASCADE;
+ALTER TABLE look_up.generic_locales ADD CONSTRAINT locale_cd_fk FOREIGN KEY (locale_cd)
+REFERENCES look_up.locale_cd (locale_cd) MATCH FULL
+ON DELETE RESTRICT ON UPDATE NO ACTION;
+-- ddl-end --
+
+
