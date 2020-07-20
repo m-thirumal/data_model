@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-alpha1" last-position="182,0" last-zoom="1" max-obj-count="121"
+<dbmodel pgmodeler-ver="0.9.3-beta" use-changelog="false" last-position="0,10" last-zoom="1" max-obj-count="121"
 	 default-schema="public" default-owner="postgres">
 <database name="poll" is-template="false" allow-conns="true">
 </database>
@@ -1221,10 +1221,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</initial-data>
 </table>
 
-<table name="poll" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="20" z-value="0">
+<table name="poll" layer="0" collapse-mode="2" pagination="true" attribs-page="1" ext-attribs-page="0" max-obj-count="20" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="60" y="40"/>
+	<position x="20" y="40"/>
 	<column name="poll_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -1278,15 +1278,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="vote_pk" type="pk-constr" table="public.poll">
 		<columns names="poll_id" ref-type="src-columns"/>
 	</constraint>
-
-	<customidxs object-type="column">
-		<object name="election_cd" index="1"/>
-	</customidxs>
-
-	<customidxs object-type="constraint">
-		<object name="generic_cd_fk" index="1"/>
-		<object name="poll_uq" index="2"/>
-	</customidxs>
 </table>
 
 <function name="btint2cmp" sql-disabled="true"
@@ -3956,16 +3947,6 @@ END;]]></definition>
 		<function signature="public.row_update_time()"/>
 </trigger>
 
-<relationship name="poll_has_one_generic_cd" type="rel11" layer="0"
-	 src-col-pattern="election_cd"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#a5061c"
-	 src-table="look_up.generic_cd"
-	 dst-table="public.poll"
-	 src-required="false" dst-required="false"
-	del-action="NO ACTION"/>
-
 <table name="poll_question" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
@@ -4137,6 +4118,21 @@ END;]]></definition>
 	 src-table="look_up.generic_cd"
 	 dst-table="public.poll_question"
 	 src-required="false" dst-required="false"
+	del-action="NO ACTION">
+	<label ref-type="name-label">
+		<position x="-10.4972" y="-25.801"/>
+	</label>
+</relationship>
+
+<relationship name="generic_cd_has_many_poll" type="rel1n" layer="0"
+	 src-col-pattern="election_cd"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#36c70b"
+	 src-table="look_up.generic_cd"
+	 dst-table="public.poll"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
 	del-action="NO ACTION"/>
 
 <constraint name="generic_cd_fk" type="fk-constr" comparison-type="MATCH FULL"
@@ -4162,20 +4158,15 @@ END;]]></definition>
 	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="1054.05" y="178.417"/>
-	<position x="1054.05" y="57"/>
-	<position x="907.366" y="57"/>
+		<position x="1091.25" y="189.083"/>
+	<position x="1091.25" y="57"/>
+	<position x="932.166" y="57"/>
 	</line>
 </relationship>
 
 <relationship name="rel_generic_locales_locale_cd" type="relfk" layer="0"
 	 src-table="look_up.generic_locales"
 	 dst-table="look_up.locale_cd" reference-fk="locale_cd_fk"
-	 src-required="false" dst-required="true"/>
-
-<relationship name="rel_generic_locales_generic_cd" type="relfk" layer="0"
-	 src-table="look_up.generic_locales"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="true"/>
 
 </dbmodel>
