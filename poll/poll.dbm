@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="0,9" last-zoom="1" max-obj-count="121"
+<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="0,8" last-zoom="1" max-obj-count="121"
 	 default-schema="public" default-owner="postgres">
 <database name="poll" is-template="false" allow-conns="true">
 </database>
@@ -3950,7 +3950,7 @@ END;]]></definition>
 <table name="poll_question" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="40" y="540"/>
+	<position x="40" y="500"/>
 	<column name="poll_question_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -3972,13 +3972,10 @@ END;]]></definition>
 
 	<customidxs object-type="column">
 		<object name="poll_id" index="1"/>
-		<object name="question_cd" index="6"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="generic_cd_fk" index="2"/>
 		<object name="poll_fk" index="1"/>
-		<object name="poll_question_uq" index="3"/>
 	</customidxs>
 </table>
 
@@ -4107,20 +4104,6 @@ END;]]></definition>
 	 src-required="false" dst-required="false"
 	del-action="CASCADE"/>
 
-<relationship name="poll_question_has_one_question_cd" type="rel11" layer="0"
-	 src-col-pattern="question_cd"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#ad4e51"
-	 src-table="look_up.generic_cd"
-	 dst-table="public.poll_question"
-	 src-required="false" dst-required="false"
-	del-action="NO ACTION">
-	<label ref-type="name-label">
-		<position x="-10.4972" y="-25.801"/>
-	</label>
-</relationship>
-
 <relationship name="generic_cd_has_many_poll" type="rel1n" layer="0"
 	 src-col-pattern="election_cd"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
@@ -4131,6 +4114,19 @@ END;]]></definition>
 	 src-required="false" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="NO ACTION"/>
+
+<relationship name="generic_cd_has_many_poll_question" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#08e593"
+	 src-table="look_up.generic_cd"
+	 dst-table="public.poll_question"
+	 src-required="true" dst-required="false">
+	<label ref-type="name-label">
+		<position x="9.5377" y="-3.66776"/>
+	</label>
+</relationship>
 
 <constraint name="generic_cd_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="look_up.generic_cd" table="look_up.generic_cd">
@@ -4155,7 +4151,7 @@ END;]]></definition>
 	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="987.533" y="163.417"/>
+		<position x="987.533" y="162.417"/>
 	<position x="987.533" y="57"/>
 	<position x="863.022" y="57"/>
 	</line>
@@ -4164,11 +4160,6 @@ END;]]></definition>
 <relationship name="rel_generic_locales_locale_cd" type="relfk" layer="0"
 	 src-table="look_up.generic_locales"
 	 dst-table="look_up.locale_cd" reference-fk="locale_cd_fk"
-	 src-required="false" dst-required="true"/>
-
-<relationship name="rel_generic_locales_generic_cd" type="relfk" layer="0"
-	 src-table="look_up.generic_locales"
-	 dst-table="look_up.generic_cd" reference-fk="generic_cd_fk"
 	 src-required="false" dst-required="true"/>
 
 </dbmodel>
