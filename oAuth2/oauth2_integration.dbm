@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="4"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="oauth_integrated_app_details" layer="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="240" y="120"/>
+	<column name="client_id" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="resource_ids">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="client_secret">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="scope">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="authorized_grant_types">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="web_server_redirect_uri">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="authorities">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="access_token_validity">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="refresh_token_validity">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="additional_information">
+		<type name="varchar" length="4096"/>
+	</column>
+	<column name="autoapprove">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="row_creation_time" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="oauth_integrated_app_details_pk" type="pk-constr" table="public.oauth_integrated_app_details">
+		<columns names="client_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="oauth_integrated_app_tokens" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="800" y="180"/>
+	<column name="refresh_token" not-null="true">
+		<type name="varchar" length="256"/>
+	</column>
+	<column name="access_token" not-null="true">
+		<type name="varchar" length="256"/>
+	</column>
+	<column name="row_creation_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="client_id" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="oauth_integrated_app_details_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="oauth_integrated_app_details_has_many_oauth_integrated_app_toke" type="rel1n" layer="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ed9d2f"
+	 src-table="public.oauth_integrated_app_details"
+	 dst-table="public.oauth_integrated_app_tokens"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
