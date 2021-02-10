@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="4"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" author="Thirumal" last-position="0,0" last-zoom="1" max-obj-count="4"
 	 default-schema="public" default-owner="postgres">
 <database name="new_database" is-template="false" allow-conns="true">
 </database>
@@ -86,6 +86,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#ed9d2f"
 	 src-table="public.oauth_integrated_app_details"
 	 dst-table="public.oauth_integrated_app_tokens"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
 
 </dbmodel>

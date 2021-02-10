@@ -4,12 +4,12 @@
 -- Project Site: pgmodeler.io
 -- Model Author: Thirumal
 
--- Database creation must be performed outside a multi lined SQL file.
+-- Database creation must be performed outside a multi lined SQL file. 
 -- These commands were put in this file only as a convenience.
---
+-- 
 -- object: new_database | type: DATABASE --
 -- DROP DATABASE IF EXISTS new_database;
---CREATE DATABASE new_database;
+CREATE DATABASE new_database;
 -- ddl-end --
 
 
@@ -51,5 +51,7 @@ ALTER TABLE public.oauth_integrated_app_tokens OWNER TO postgres;
 -- ALTER TABLE public.oauth_integrated_app_tokens DROP CONSTRAINT IF EXISTS oauth_integrated_app_details_fk CASCADE;
 ALTER TABLE public.oauth_integrated_app_tokens ADD CONSTRAINT oauth_integrated_app_details_fk FOREIGN KEY (client_id)
 REFERENCES public.oauth_integrated_app_details (client_id) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
+ON DELETE CASCADE ON UPDATE NO ACTION;
 -- ddl-end --
+
+
