@@ -16,7 +16,8 @@ CREATE DATABASE new_database;
 -- object: public.oauth_integrated_app_details | type: TABLE --
 -- DROP TABLE IF EXISTS public.oauth_integrated_app_details CASCADE;
 CREATE TABLE public.oauth_integrated_app_details (
-	client_id varchar(255) NOT NULL,
+	oauth_integrated_app_details_id serial NOT NULL,
+	client_id varchar(255),
 	resource_ids varchar(255),
 	client_secret varchar(255),
 	scope varchar(255),
@@ -28,7 +29,7 @@ CREATE TABLE public.oauth_integrated_app_details (
 	additional_information varchar(4096),
 	autoapprove varchar(255),
 	row_creation_time timestamptz DEFAULT current_timestamp,
-	CONSTRAINT oauth_integrated_app_details_pk PRIMARY KEY (client_id)
+	CONSTRAINT oauth_integrated_app_details_pk PRIMARY KEY (oauth_integrated_app_details_id)
 
 );
 -- ddl-end --
@@ -38,7 +39,7 @@ ALTER TABLE public.oauth_integrated_app_details OWNER TO postgres;
 -- object: public.oauth_integrated_app_tokens | type: TABLE --
 -- DROP TABLE IF EXISTS public.oauth_integrated_app_tokens CASCADE;
 CREATE TABLE public.oauth_integrated_app_tokens (
-	client_id varchar(255),
+	oauth_integrated_app_details_id integer,
 	refresh_token varchar(256) NOT NULL,
 	access_token varchar(256) NOT NULL,
 	row_creation_time timestamptz NOT NULL DEFAULT current_timestamp
@@ -49,8 +50,8 @@ ALTER TABLE public.oauth_integrated_app_tokens OWNER TO postgres;
 
 -- object: oauth_integrated_app_details_fk | type: CONSTRAINT --
 -- ALTER TABLE public.oauth_integrated_app_tokens DROP CONSTRAINT IF EXISTS oauth_integrated_app_details_fk CASCADE;
-ALTER TABLE public.oauth_integrated_app_tokens ADD CONSTRAINT oauth_integrated_app_details_fk FOREIGN KEY (client_id)
-REFERENCES public.oauth_integrated_app_details (client_id) MATCH FULL
+ALTER TABLE public.oauth_integrated_app_tokens ADD CONSTRAINT oauth_integrated_app_details_fk FOREIGN KEY (oauth_integrated_app_details_id)
+REFERENCES public.oauth_integrated_app_details (oauth_integrated_app_details_id) MATCH FULL
 ON DELETE CASCADE ON UPDATE NO ACTION;
 -- ddl-end --
 

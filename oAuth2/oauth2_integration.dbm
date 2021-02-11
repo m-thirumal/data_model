@@ -11,11 +11,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<table name="oauth_integrated_app_details" layer="0" collapse-mode="2" max-obj-count="14" z-value="0">
+<table name="oauth_integrated_app_details" layer="0" collapse-mode="2" max-obj-count="15" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="240" y="120"/>
-	<column name="client_id" not-null="true">
+	<column name="oauth_integrated_app_details_id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="client_id">
 		<type name="varchar" length="255"/>
 	</column>
 	<column name="resource_ids">
@@ -52,14 +55,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="timestamptz" length="0"/>
 	</column>
 	<constraint name="oauth_integrated_app_details_pk" type="pk-constr" table="public.oauth_integrated_app_details">
-		<columns names="client_id" ref-type="src-columns"/>
+		<columns names="oauth_integrated_app_details_id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
 <table name="oauth_integrated_app_tokens" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="800" y="180"/>
+	<position x="740" y="180"/>
 	<column name="refresh_token" not-null="true">
 		<type name="varchar" length="256"/>
 	</column>
@@ -71,7 +74,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 
 	<customidxs object-type="column">
-		<object name="client_id" index="0"/>
+		<object name="oauth_integrated_app_details_id" index="0"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
