@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.2.0-alpha" use-changelog="false" author="Thirumal" max-obj-count="4"
+	 last-position="0,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="spring-boot-transaction" is-template="false" allow-conns="true">
+	<comment> <![CDATA[Spring boot Transaction Example database]]> </comment>
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<table name="transaction_a" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="320" y="160"/>
+	<column name="transaction_a_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="data">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="row_created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="transaction_a_pk" type="pk-constr" table="public.transaction_a">
+		<columns names="transaction_a_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="transaction_b" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="680" y="240"/>
+	<column name="transaction_b_id" not-null="true">
+		<type name="smallserial" length="0"/>
+	</column>
+	<column name="data">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="row_created_on" not-null="true" default-value="current_Timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="transaction_b_pk" type="pk-constr" table="public.transaction_b">
+		<columns names="transaction_b_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+</dbmodel>
