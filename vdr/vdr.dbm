@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.2.0-alpha" use-changelog="false" author="Thirumal" max-obj-count="4"
+	 last-position="0,3" last-zoom="1"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="vdr" is-template="false" allow-conns="true">
+	<comment> <![CDATA[Virtual data room]]> </comment>
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<table name="project" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="400" y="220"/>
+	<column name="project_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="project_uuid" not-null="true" default-value="uuid_generate_v1()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="row_created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="project_pk" type="pk-constr" table="public.project">
+		<columns names="project_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<extension name="uuid-ossp">
+	<schema name="public"/>
+</extension>
+
+<extension name="btree_gist">
+	<schema name="public"/>
+</extension>
+
+<table name="project_info" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="760" y="500"/>
+	<column name="project_info_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="project_name" not-null="true">
+		<type name="varchar" length="250"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="text" length="0"/>
+		<comment> <![CDATA[Project description]]> </comment>
+	</column>
+	<column name="row_created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="project_info_pk" type="pk-constr" table="public.project_info">
+		<columns names="project_info_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="project_id" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="project_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="project_has_many_project_info" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#0b9993"
+	 src-table="public.project"
+	 dst-table="public.project_info"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+</dbmodel>

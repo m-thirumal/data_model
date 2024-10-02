@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.2.0-alpha" use-changelog="false" author="Thirumal" max-obj-count="20"
+	 last-position="782,-41" last-zoom="1" scene-rect="-140,-321,2355.9,1410.52"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="mail" is-template="false" allow-conns="true">
+	<comment> <![CDATA[Bulk Mail Service]]> </comment>
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<schema name="lookup" layers="0" rect-visible="true" fill-color="#9de74d" name-color="#eff0f1">
+	<role name="postgres"/>
+</schema>
+
+<table name="project" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1300" y="60"/>
+	<column name="project_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="row_created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="project_pk" type="pk-constr" table="public.project">
+		<columns names="project_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="project_info" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1820" y="160"/>
+	<column name="project_info_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="250"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="row_created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="from_mail_id">
+		<type name="varchar" length="250"/>
+	</column>
+	<constraint name="project_info_pk" type="pk-constr" table="public.project_info">
+		<columns names="project_info_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="project_id" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="project_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="project_has_many_project_info" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#642da8"
+	 src-table="public.project"
+	 dst-table="public.project_info"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="party" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="40" y="280"/>
+	<column name="party_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<constraint name="party_pk" type="pk-constr" table="public.party">
+		<columns names="party_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="relationship" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1820" y="940"/>
+	<column name="relationship_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<constraint name="relationship_pk" type="pk-constr" table="public.relationship">
+		<columns names="relationship_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="parent_relationship_id" index="1"/>
+		<object name="project_id" index="2"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="project_fk" index="1"/>
+		<object name="relationship_fk" index="2"/>
+	</customidxs></table>
+
+<relationship name="project_has_many_relationship" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d07d26"
+	 src-table="public.project"
+	 dst-table="public.relationship"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="contact" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="540" y="-140"/>
+	<column name="contact_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<constraint name="contact_pk" type="pk-constr" table="public.contact">
+		<columns names="contact_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="party_contact" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="40" y="-120"/>
+	<column name="party_contact_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="party_contact_pk" type="pk-constr" table="public.party_contact">
+		<columns names="party_contact_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="contact_id" index="2"/>
+		<object name="party_id" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="contact_fk" index="2"/>
+		<object name="party_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="party_has_many_party_contact" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b04cea"
+	 src-table="public.party"
+	 dst-table="public.party_contact"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="contact_has_many_party_contact" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#687b9e"
+	 src-table="public.contact"
+	 dst-table="public.party_contact"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="party_name" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="-120" y="460"/>
+	<column name="party_name_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="500"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="party_name_pk" type="pk-constr" table="public.party_name">
+		<columns names="party_name_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="party_id" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="party_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="party_has_many_party_name" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#79ddf7"
+	 src-table="public.party"
+	 dst-table="public.party_name"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="relationship_has_many_relationship" type="rel1n" layers="0"
+	 src-col-pattern="parent_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#24cafb"
+	 src-table="public.relationship"
+	 dst-table="public.relationship"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE">
+	<line>
+		<position x="2103.1" y="983.175"/>
+	<position x="2103.1" y="907"/>
+	<position x="1986.74" y="907"/>
+	</line>
+</relationship>
+
+<table name="project_group" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="920" y="240"/>
+	<column name="project_group_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="250"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="row_created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="project_group_pk" type="pk-constr" table="public.project_group">
+		<columns names="project_group_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="project_id" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="project_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="project_has_many_project_group" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#487824"
+	 src-table="public.project"
+	 dst-table="public.project_group"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="group_member" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="380" y="180"/>
+	<column name="group_member_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="group_member_pk" type="pk-constr" table="public.group_member">
+		<columns names="group_member_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="contact_id" index="3"/>
+		<object name="party_id" index="1"/>
+		<object name="project_group_id" index="2"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="contact_fk" index="3"/>
+		<object name="party_fk" index="1"/>
+		<object name="project_group_fk" index="2"/>
+	</customidxs></table>
+
+<relationship name="party_has_many_group_member" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#15c575"
+	 src-table="public.party"
+	 dst-table="public.group_member"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="project_group_has_many_group_member" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6d3d3e"
+	 src-table="public.project_group"
+	 dst-table="public.group_member"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="mail" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1140" y="840"/>
+	<column name="mail_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="subject" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="body" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="mail_pk" type="pk-constr" table="public.mail">
+		<columns names="mail_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="project_id" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="project_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="project_has_many_mail" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#320955"
+	 src-table="public.project"
+	 dst-table="public.mail"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="mail_to" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="560" y="680"/>
+	<column name="mail_to_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<constraint name="mail_to_pk" type="pk-constr" table="public.mail_to">
+		<columns names="mail_to_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="mail_cd" index="4"/>
+		<object name="mail_id" index="1"/>
+		<object name="party_id" index="3"/>
+		<object name="project_group_id" index="2"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="mail_cd_fk" index="4"/>
+		<object name="mail_fk" index="1"/>
+		<object name="party_fk" index="3"/>
+		<object name="project_group_fk" index="2"/>
+	</customidxs></table>
+
+<relationship name="mail_has_many_mail_to" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#025afb"
+	 src-table="public.mail"
+	 dst-table="public.mail_to"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="project_group_has_many_mail_to" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#94bc57"
+	 src-table="public.project_group"
+	 dst-table="public.mail_to"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="party_has_many_mail_to" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#863d5e"
+	 src-table="public.party"
+	 dst-table="public.mail_to"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="contact_has_many_group_member" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#0b9e15"
+	 src-table="public.contact"
+	 dst-table="public.group_member"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="mail_cd" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="860" y="-280"/>
+	<column name="mail_cd" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="mail_cd_pk" type="pk-constr" table="lookup.mail_cd">
+		<columns names="mail_cd" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="mail_cd_has_many_mail_to" type="rel1n" layers="0" alias="To_Cc_Bcc"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#2e8e25"
+	 src-table="lookup.mail_cd"
+	 dst-table="public.mail_to"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="locale_cd" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="1440" y="-260"/>
+	<column name="locale_cd" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="locale_cd_pk" type="pk-constr" table="lookup.locale_cd">
+		<columns names="locale_cd" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="mail_locale" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="1180" y="-240"/>
+</table>
+
+<relationship name="mail_cd_has_many_mail_locale" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#130c45"
+	 src-table="lookup.mail_cd"
+	 dst-table="lookup.mail_locale"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="locale_cd_has_many_mail_locale" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b094b3"
+	 src-table="lookup.locale_cd"
+	 dst-table="lookup.mail_locale"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+</dbmodel>
