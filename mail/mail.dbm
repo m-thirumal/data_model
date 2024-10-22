@@ -3,8 +3,8 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.2.0-alpha" use-changelog="false" author="Thirumal" max-obj-count="22"
-	 last-position="843,358" last-zoom="1" scene-rect="-140,-321,2364.5,1410.52"
+<dbmodel pgmodeler-ver="1.2.0-alpha" use-changelog="false" author="Thirumal" max-obj-count="26"
+	 last-position="-140,-208" last-zoom="1" scene-rect="-140,-781,2364.5,1870.52"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -84,10 +84,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
-<table name="party" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+<table name="party" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="40" y="240"/>
+	<position x="-120" y="220"/>
 	<column name="party_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -98,13 +98,26 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="timestamptz" length="0"/>
 		<comment> <![CDATA[date of birth/incorporation]]> </comment>
 	</column>
+	<column name="dod_doc">
+		<type name="timestamptz" length="0"/>
+		<comment> <![CDATA[Date of death/Date of cessation]]> </comment>
+	</column>
+	<column name="user_allowed_to_modify" not-null="true" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
 	<column name="row_created_on" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
 	<constraint name="party_pk" type="pk-constr" table="public.party">
 		<columns names="party_id" ref-type="src-columns"/>
 	</constraint>
-</table>
+
+	<customidxs object-type="column">
+		<object name="party_cd" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="party_cd_fk" index="1"/>
+	</customidxs></table>
 
 <table name="relationship" layers="0" collapse-mode="2" max-obj-count="12" z-value="0">
 	<schema name="public"/>
@@ -177,7 +190,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party_contact" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="40" y="-120"/>
+	<position x="100" y="-140"/>
 	<column name="party_contact_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -222,15 +235,18 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
-<table name="party_name" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+<table name="party_name" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="-120" y="460"/>
+	<position x="100" y="600"/>
 	<column name="party_name_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
 	<column name="name" not-null="true">
 		<type name="varchar" length="500"/>
+	</column>
+	<column name="rest_of_name">
+		<type name="varchar" length="100"/>
 	</column>
 	<column name="created_on" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
@@ -477,10 +493,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
-<table name="mail_cd" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+<table name="mail_cd" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="860" y="-280"/>
+	<position x="700" y="-720"/>
 	<column name="mail_cd" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -493,9 +509,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
 	<constraint name="mail_cd_pk" type="pk-constr" table="lookup.mail_cd">
 		<columns names="mail_cd" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA["mail_cd";"code";"created_on";"deleted_on";"created_by";"updated_by"
+"1";"to";"";"";"";""
+"2";"cc";"";"";"";""
+"3";"bcc";"";"";"";""
+]]>
+	</initial-data>
 </table>
 
 <relationship name="mail_cd_has_many_mail_to" type="rel1n" layers="0" alias="To_Cc_Bcc"
@@ -512,7 +541,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="locale_cd" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="1440" y="-260"/>
+	<position x="1020" y="-460"/>
 	<column name="locale_cd" not-null="true">
 		<type name="serial" length="0"/>
 	</column>
@@ -530,11 +559,34 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="mail_locale" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="mail_locale" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="1180" y="-240"/>
-</table>
+	<position x="1120" y="-740"/>
+	<column name="description" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="locale_cd" index="1"/>
+		<object name="mail_cd" index="0"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="locale_cd_fk" index="1"/>
+		<object name="mail_cd_fk" index="0"/>
+	</customidxs></table>
 
 <relationship name="mail_cd_has_many_mail_locale" type="rel1n" layers="0"
 	 src-col-pattern="{sc}"
@@ -577,6 +629,98 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-table="public.party"
 	 dst-table="public.relationship"
 	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="party_cd" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="-60" y="-640"/>
+	<column name="party_cd" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="display_order_id" not-null="true" default-value="0">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="party_cd_pk" type="pk-constr" table="lookup.party_cd">
+		<columns names="party_cd" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="party_locale" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="340" y="-620"/>
+	<column name="description" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="50"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="locale_cd" index="1"/>
+		<object name="party_cd" index="0"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="locale_cd_fk" index="1"/>
+		<object name="party_cd_fk" index="0"/>
+	</customidxs></table>
+
+<relationship name="party_cd_has_many_party_locale" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e79580"
+	 src-table="lookup.party_cd"
+	 dst-table="lookup.party_locale"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="locale_cd_has_many_party_locale" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#7abf5e"
+	 src-table="lookup.locale_cd"
+	 dst-table="lookup.party_locale"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="party_cd_has_many_party" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0d13"
+	 src-table="lookup.party_cd"
+	 dst-table="public.party"
+	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
