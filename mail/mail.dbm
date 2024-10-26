@@ -3,9 +3,9 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.2.0-alpha" use-changelog="false" author="Thirumal" max-obj-count="33"
-	 last-position="887,312" last-zoom="1" scene-rect="-580,-781,2804.5,2039.72"
-	 default-schema="public" default-owner="postgres"
+<dbmodel pgmodeler-ver="1.2.0-alpha" use-changelog="false" max-obj-count="37"
+	 last-position="-580,-298" last-zoom="1" scene-rect="-580,-981,2655.53,1991.12"
+	 default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
 	 layer-name-colors="#000000"
@@ -119,62 +119,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<object name="party_cd_fk" index="1"/>
 	</customidxs></table>
 
-<table name="relationship" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1660" y="700"/>
-	<column name="relationship_id" not-null="true">
-		<type name="bigserial" length="0"/>
-	</column>
-	<column name="contemporaneous" not-null="true" default-value="''::hstore">
-		<type name="public.hstore" length="0"/>
-	</column>
-	<column name="start_time">
-		<type name="timestamptz" length="0"/>
-	</column>
-	<column name="end_time">
-		<type name="timestamptz" length="0"/>
-	</column>
-	<column name="description">
-		<type name="varchar" length="200"/>
-	</column>
-	<column name="created_on" not-null="true" default-value="current_timestamp">
-		<type name="timestamptz" length="0"/>
-	</column>
-	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
-		<type name="timestamptz" length="0"/>
-	</column>
-	<column name="row_update_info">
-		<type name="text" length="0"/>
-	</column>
-	<constraint name="relationship_pk" type="pk-constr" table="public.relationship">
-		<columns names="relationship_id" ref-type="src-columns"/>
-	</constraint>
-
-	<customidxs object-type="column">
-		<object name="l_party_id" index="3"/>
-		<object name="parent_relationship_id" index="1"/>
-		<object name="project_id" index="2"/>
-		<object name="r_party_id" index="4"/>
-	</customidxs>
-	<customidxs object-type="constraint">
-		<object name="l_party_fk" index="4"/>
-		<object name="project_fk" index="1"/>
-		<object name="r_party_fk" index="3"/>
-		<object name="relationship_fk" index="2"/>
-	</customidxs></table>
-
-<relationship name="project_has_many_relationship" type="rel1n" layers="0"
-	 src-col-pattern="{sc}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#d07d26"
-	 src-table="public.project"
-	 dst-table="public.relationship"
-	 src-required="false" dst-required="false"
-	upd-action="NO ACTION"
-	del-action="CASCADE"/>
-
 <table name="contact" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
@@ -193,10 +137,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="party_contact" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+<table name="party_contact" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="120" y="-260"/>
+	<position x="100" y="-180"/>
 	<column name="party_contact_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -212,10 +156,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 	<customidxs object-type="column">
 		<object name="contact_id" index="2"/>
+		<object name="party_contact_cd" index="3"/>
 		<object name="party_id" index="1"/>
 	</customidxs>
 	<customidxs object-type="constraint">
 		<object name="contact_fk" index="2"/>
+		<object name="party_contact_cd_fk" index="3"/>
 		<object name="party_fk" index="1"/>
 	</customidxs></table>
 
@@ -281,23 +227,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
-
-<relationship name="relationship_has_many_relationship" type="rel1n" layers="0"
-	 src-col-pattern="parent_{sc}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#24cafb"
-	 src-table="public.relationship"
-	 dst-table="public.relationship"
-	 src-required="false" dst-required="false"
-	upd-action="NO ACTION"
-	del-action="CASCADE">
-	<line>
-		<position x="1961.56" y="796.708"/>
-	<position x="1961.56" y="667"/>
-	<position x="1839.04" y="667"/>
-	</line>
-</relationship>
 
 <table name="project_group" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
@@ -616,32 +545,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
-<relationship name="party_has_many_l_party_relationship" type="rel1n" layers="0"
-	 src-col-pattern="l_{sc}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="l_{st}_fk"
-	 custom-color="#4bb07d"
-	 src-table="public.party"
-	 dst-table="public.relationship"
-	 src-required="true" dst-required="false"
-	upd-action="NO ACTION"
-	del-action="CASCADE"/>
-
-<relationship name="party_has_many_r_party_relationship" type="rel1n" layers="0"
-	 src-col-pattern="r_{sc}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="r_{st}_fk"
-	 custom-color="#881685"
-	 src-table="public.party"
-	 dst-table="public.relationship"
-	 src-required="false" dst-required="false"
-	upd-action="NO ACTION"
-	del-action="CASCADE"/>
-
 <table name="party_cd" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="-60" y="-640"/>
+	<position x="-240" y="-940"/>
 	<column name="party_cd" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -671,7 +578,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party_locale" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="340" y="-620"/>
+	<position x="340" y="-860"/>
 	<column name="description" not-null="true">
 		<type name="varchar" length="100"/>
 	</column>
@@ -907,8 +814,192 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="public"/>
 </extension>
 
+<table name="relationship" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1660" y="700"/>
+	<column name="relationship_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="contemporaneous" not-null="true" default-value="''::hstore">
+		<type name="public.hstore" length="0"/>
+	</column>
+	<column name="start_time">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="end_time">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="row_update_info">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="relationship_pk" type="pk-constr" table="public.relationship">
+		<columns names="relationship_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="l_party_id" index="3"/>
+		<object name="parent_relationship_id" index="1"/>
+		<object name="project_id" index="2"/>
+		<object name="r_party_id" index="4"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="l_party_fk" index="4"/>
+		<object name="project_fk" index="1"/>
+		<object name="r_party_fk" index="3"/>
+		<object name="relationship_fk" index="2"/>
+	</customidxs></table>
+
+<relationship name="project_has_many_relationship" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d07d26"
+	 src-table="public.project"
+	 dst-table="public.relationship"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="relationship_has_many_relationship" type="rel1n" layers="0"
+	 src-col-pattern="parent_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#24cafb"
+	 src-table="public.relationship"
+	 dst-table="public.relationship"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE">
+	<line>
+		<position x="1961.56" y="796.708"/>
+	<position x="1961.56" y="667"/>
+	<position x="1839.04" y="667"/>
+	</line>
+</relationship>
+
+<relationship name="party_has_many_l_party_relationship" type="rel1n" layers="0"
+	 src-col-pattern="l_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="l_{st}_fk"
+	 custom-color="#4bb07d"
+	 src-table="public.party"
+	 dst-table="public.relationship"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="party_has_many_r_party_relationship" type="rel1n" layers="0"
+	 src-col-pattern="r_{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="r_{st}_fk"
+	 custom-color="#881685"
+	 src-table="public.party"
+	 dst-table="public.relationship"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
 <extension name="btree_gist">
 	<schema name="public"/>
 </extension>
+
+<table name="party_contact_cd" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="-60" y="-660"/>
+	<column name="party_contact_cd" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="party_contact_cd_pk" type="pk-constr" table="lookup.party_contact_cd">
+		<columns names="party_contact_cd" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="party_contact_locale" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="340" y="-620"/>
+	<column name="description" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="locale_cd" index="1"/>
+		<object name="party_contact_cd" index="0"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="locale_cd_fk" index="1"/>
+		<object name="party_contact_cd_fk" index="0"/>
+	</customidxs></table>
+
+<relationship name="party_contact_cd_has_many_party_contact_locale" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#04a80f"
+	 src-table="lookup.party_contact_cd"
+	 dst-table="lookup.party_contact_locale"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="locale_cd_has_many_party_contact_locale" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#9aff2c"
+	 src-table="lookup.locale_cd"
+	 dst-table="lookup.party_contact_locale"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="party_contact_cd_has_many_party_contact" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#7c0e94"
+	 src-table="lookup.party_contact_cd"
+	 dst-table="public.party_contact"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
 
 </dbmodel>
