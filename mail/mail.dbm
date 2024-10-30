@@ -3,8 +3,8 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.2.0-alpha" use-changelog="false" max-obj-count="37"
-	 last-position="-580,-298" last-zoom="1" scene-rect="-580,-981,2655.53,1991.12"
+<dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="38"
+	 last-position="738,278" last-zoom="1" scene-rect="-580,-981,2655.53,1991.12"
 	 default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -814,7 +814,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="public"/>
 </extension>
 
-<table name="relationship" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+<table name="relationship" layers="0" collapse-mode="2" max-obj-count="15" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="1660" y="700"/>
@@ -851,11 +851,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<object name="parent_relationship_id" index="1"/>
 		<object name="project_id" index="2"/>
 		<object name="r_party_id" index="4"/>
+		<object name="relationship_cd" index="5"/>
 	</customidxs>
 	<customidxs object-type="constraint">
 		<object name="l_party_fk" index="4"/>
 		<object name="project_fk" index="1"/>
 		<object name="r_party_fk" index="3"/>
+		<object name="relationship_cd_fk" index="5"/>
 		<object name="relationship_fk" index="2"/>
 	</customidxs></table>
 
@@ -881,7 +883,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE">
 	<line>
-		<position x="1961.56" y="796.708"/>
+		<position x="1961.56" y="806.441"/>
 	<position x="1961.56" y="667"/>
 	<position x="1839.04" y="667"/>
 	</line>
@@ -998,6 +1000,44 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#7c0e94"
 	 src-table="lookup.party_contact_cd"
 	 dst-table="public.party_contact"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="relationship_cd" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="806" y="-899"/>
+	<column name="relationship_cd" not-null="true">
+		<type name="smallserial" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="relationship_cd_pk" type="pk-constr" table="lookup.relationship_cd">
+		<columns names="relationship_cd" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="relationship_cd_has_many_relationship" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#70bb4c"
+	 src-table="lookup.relationship_cd"
+	 dst-table="public.relationship"
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
