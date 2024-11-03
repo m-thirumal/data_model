@@ -3,8 +3,8 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="38"
-	 last-position="738,278" last-zoom="1" scene-rect="-580,-981,2655.53,1991.12"
+<dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="44"
+	 last-position="738,-314" last-zoom="1" scene-rect="-580,-981,2669.59,2020.32"
 	 default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -231,7 +231,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project_group" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="920" y="240"/>
+	<position x="1100" y="480"/>
 	<column name="project_group_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -272,7 +272,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="group_member" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="580" y="-120"/>
+	<position x="680" y="220"/>
 	<column name="group_member_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -1007,7 +1007,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="relationship_cd" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="806" y="-899"/>
+	<position x="800" y="-900"/>
 	<column name="relationship_cd" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -1041,5 +1041,183 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
+
+<extension name="postgis">
+	<schema name="public"/>
+	<comment> <![CDATA[PostGIS geometry, geography, and raster spatial types and functions]]> </comment>
+</extension>
+
+<table name="party_address" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="900" y="-140"/>
+	<column name="party_address_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="250"/>
+	</column>
+	<column name="created_on" not-null="true">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="party_address_pk" type="pk-constr" table="public.party_address">
+		<columns names="party_address_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="address_id" index="1"/>
+		<object name="party_id" index="2"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="address_fk" index="1"/>
+		<object name="party_fk" index="2"/>
+	</customidxs></table>
+
+<table name="address" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1640" y="-140"/>
+	<column name="address_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="location">
+		<type name="varchar" length="500"/>
+	</column>
+	<column name="coordinate">
+		<type name="geometry" length="0" spatial-type="POINT" variation="0" srid="3857"/>
+	</column>
+	<column name="area">
+		<type name="geometry" length="0" spatial-type="MULTIPOLYGON" variation="0" srid="3857"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="address_pk" type="pk-constr" table="public.address">
+		<columns names="address_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="parent_address" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="address_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="party_has_many_party_address" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#515527"
+	 src-table="public.party"
+	 dst-table="public.party_address"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="address_cd" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="1480" y="-860"/>
+	<column name="address_cd" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="varchar" length="500"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="address_cd_pk" type="pk-constr" table="lookup.address_cd">
+		<columns names="address_cd" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="address_locale" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="lookup"/>
+	<role name="postgres"/>
+	<position x="1460" y="-560"/>
+	<column name="description" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="updated_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="address_cd" index="1"/>
+		<object name="locale_cd" index="2"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="address_cd_fk" index="0"/>
+		<object name="locale_cd_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="address_cd_has_many_address_locale" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3f2086"
+	 src-table="lookup.address_cd"
+	 dst-table="lookup.address_locale"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="locale_cd_has_many_address_locale" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e50708"
+	 src-table="lookup.locale_cd"
+	 dst-table="lookup.address_locale"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="address_has_many_party_address" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#eef825"
+	 src-table="public.address"
+	 dst-table="public.party_address"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<relationship name="address_has_many_address" type="rel1n" layers="0"
+	 src-col-pattern="parent_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#2ed87f"
+	 src-table="public.address"
+	 dst-table="public.address"
+	 src-required="false" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE">
+	<line>
+		<position x="1995.79" y="-87.092"/>
+	<position x="1995.79" y="-173"/>
+	<position x="1855.2" y="-173"/>
+	</line>
+</relationship>
 
 </dbmodel>
