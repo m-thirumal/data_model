@@ -3,8 +3,8 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="44"
-	 last-position="738,-314" last-zoom="1" scene-rect="-580,-981,2669.59,2020.32"
+<dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="45"
+	 last-position="752,-731" last-zoom="1" scene-rect="-580,-981,2669.59,2020.32"
 	 default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -155,13 +155,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
+		<object name="contact_cd" index="3"/>
 		<object name="contact_id" index="2"/>
-		<object name="party_contact_cd" index="3"/>
 		<object name="party_id" index="1"/>
 	</customidxs>
 	<customidxs object-type="constraint">
+		<object name="contact_cd_fk" index="3"/>
 		<object name="contact_fk" index="2"/>
-		<object name="party_contact_cd_fk" index="3"/>
 		<object name="party_fk" index="1"/>
 	</customidxs></table>
 
@@ -473,26 +473,35 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
-<table name="locale_cd" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
-	<schema name="lookup"/>
+<table name="address" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1020" y="-460"/>
-	<column name="locale_cd" not-null="true">
-		<type name="serial" length="0"/>
+	<position x="1640" y="-140"/>
+	<column name="address_id" not-null="true">
+		<type name="bigserial" length="0"/>
 	</column>
-	<column name="code" not-null="true">
-		<type name="varchar" length="50"/>
+	<column name="location">
+		<type name="varchar" length="500"/>
+	</column>
+	<column name="coordinate">
+		<type name="geometry" length="0" spatial-type="POINT" variation="0" srid="3857"/>
+	</column>
+	<column name="area">
+		<type name="geometry" length="0" spatial-type="MULTIPOLYGON" variation="0" srid="3857"/>
 	</column>
 	<column name="created_on" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
-	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
-		<type name="timestamptz" length="0"/>
-	</column>
-	<constraint name="locale_cd_pk" type="pk-constr" table="lookup.locale_cd">
-		<columns names="locale_cd" ref-type="src-columns"/>
+	<constraint name="address_pk" type="pk-constr" table="public.address">
+		<columns names="address_id" ref-type="src-columns"/>
 	</constraint>
-</table>
+
+	<customidxs object-type="column">
+		<object name="parent_address_id" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="address_fk" index="1"/>
+	</customidxs></table>
 
 <table name="mail_locale" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="lookup"/>
@@ -545,11 +554,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
-<table name="party_cd" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+<table name="identification_cd" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="-240" y="-940"/>
-	<column name="party_cd" not-null="true">
+	<position x="-540" y="-740"/>
+	<column name="identification_cd" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="code" not-null="true">
@@ -561,18 +570,33 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="created_on" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
-	<column name="created_by" not-null="true" default-value="'Thirumal'">
-		<type name="varchar" length="50"/>
-	</column>
 	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
 		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true" default-value="'Thirumal'">
+		<type name="varchar" length="50"/>
 	</column>
 	<column name="updated_by" not-null="true" default-value="'Thirumal'">
 		<type name="varchar" length="50"/>
 	</column>
-	<constraint name="party_cd_pk" type="pk-constr" table="lookup.party_cd">
-		<columns names="party_cd" ref-type="src-columns"/>
+	<constraint name="identification_cd_pk" type="pk-constr" table="lookup.identification_cd">
+		<columns names="identification_cd" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="party_cd" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="party_cd_fk" index="1"/>
+	</customidxs>	<initial-data>
+<![CDATA["identification_cd";"party_cd";"code";"display_order_id";"created_on";"deleted_on";"created_by";"updated_by"
+"0";"0";"Other/Not Specified";"";"";"";"";""
+"1";"1";"PAN";"";"";"";"";""
+"2";"1";"GSTIN";"";"";"";"";""
+"3";"2";"PAN";"";"";"";"";""
+"4";"2";"GSTIN";"";"";"";"";""
+]]>
+	</initial-data>
 </table>
 
 <table name="party_locale" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
@@ -696,11 +720,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
 
-<table name="identification_cd" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+<table name="party_cd" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="-540" y="-740"/>
-	<column name="identification_cd" not-null="true">
+	<position x="-240" y="-940"/>
+	<column name="party_cd" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="code" not-null="true">
@@ -712,25 +736,26 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="created_on" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
-	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
-		<type name="timestamptz" length="0"/>
-	</column>
 	<column name="created_by" not-null="true" default-value="'Thirumal'">
 		<type name="varchar" length="50"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
 	</column>
 	<column name="updated_by" not-null="true" default-value="'Thirumal'">
 		<type name="varchar" length="50"/>
 	</column>
-	<constraint name="identification_cd_pk" type="pk-constr" table="lookup.identification_cd">
-		<columns names="identification_cd" ref-type="src-columns"/>
+	<constraint name="party_cd_pk" type="pk-constr" table="lookup.party_cd">
+		<columns names="party_cd" ref-type="src-columns"/>
 	</constraint>
-
-	<customidxs object-type="column">
-		<object name="party_cd" index="1"/>
-	</customidxs>
-	<customidxs object-type="constraint">
-		<object name="party_cd_fk" index="1"/>
-	</customidxs></table>
+	<initial-data>
+<![CDATA["party_cd";"code";"display_order_id";"created_on";"created_by";"deleted_on";"updated_by"
+"0";"Not specified";"";"";"";"";""
+"1";"Individual";"";"";"";"";""
+"2";"Institution";"";"";"";"";""
+]]>
+	</initial-data>
+</table>
 
 <relationship name="party_cd_has_many_identification_cd" type="rel1n" layers="0"
 	 src-col-pattern="{sc}"
@@ -915,11 +940,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="public"/>
 </extension>
 
-<table name="party_contact_cd" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+<table name="contact_cd" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
 	<position x="-60" y="-660"/>
-	<column name="party_contact_cd" not-null="true">
+	<column name="contact_cd" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="code" not-null="true">
@@ -937,12 +962,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="updated_by" not-null="true" default-value="'Thirumal'">
 		<type name="varchar" length="50"/>
 	</column>
-	<constraint name="party_contact_cd_pk" type="pk-constr" table="lookup.party_contact_cd">
-		<columns names="party_contact_cd" ref-type="src-columns"/>
+	<constraint name="contact_cd_pk" type="pk-constr" table="lookup.contact_cd">
+		<columns names="contact_cd" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA["contact_cd";"code";"created_on";"deleted_on";"created_by";"updated_by"
+"0";"Not Specified";"";"";"";""
+"1";"Registered Contact";"";"";"";""
+"2";"Login Id";"";"";"";""
+"3";"Primary/Principal Contact";"";"";"";""
+"4";"Billing Contact";"";"";"";""
+"5";"Correspondance Contact";"";"";"";""
+]]>
+	</initial-data>
 </table>
 
-<table name="party_contact_locale" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+<table name="contact_locale" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="lookup"/>
 	<role name="postgres"/>
 	<position x="340" y="-620"/>
@@ -963,21 +998,31 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 
 	<customidxs object-type="column">
+		<object name="contact_cd" index="0"/>
 		<object name="locale_cd" index="1"/>
-		<object name="party_contact_cd" index="0"/>
 	</customidxs>
 	<customidxs object-type="constraint">
+		<object name="contact_cd_fk" index="0"/>
 		<object name="locale_cd_fk" index="1"/>
-		<object name="party_contact_cd_fk" index="0"/>
-	</customidxs></table>
+	</customidxs>	<initial-data>
+<![CDATA["contact_cd";"locale_cd";"description";"created_on";"created_by";"deleted_on";"updated_by"
+"0";"1";"Not Specified";"";"";"";""
+"1";"1";"Registered Contact";"";"";"";""
+"2";"1";"Login Id";"";"";"";""
+"3";"1";"Primary/Principal Contact";"";"";"";""
+"4";"1";"Billing Contact";"";"";"";""
+"5";"1";"Correspondance Contact";"";"";"";""
+]]>
+	</initial-data>
+</table>
 
 <relationship name="party_contact_cd_has_many_party_contact_locale" type="rel1n" layers="0"
 	 src-col-pattern="{sc}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#04a80f"
-	 src-table="lookup.party_contact_cd"
-	 dst-table="lookup.party_contact_locale"
+	 src-table="lookup.contact_cd"
+	 dst-table="lookup.contact_locale"
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
@@ -988,7 +1033,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#9aff2c"
 	 src-table="lookup.locale_cd"
-	 dst-table="lookup.party_contact_locale"
+	 dst-table="lookup.contact_locale"
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
@@ -998,7 +1043,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#7c0e94"
-	 src-table="lookup.party_contact_cd"
+	 src-table="lookup.contact_cd"
 	 dst-table="public.party_contact"
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
@@ -1047,7 +1092,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<comment> <![CDATA[PostGIS geometry, geography, and raster spatial types and functions]]> </comment>
 </extension>
 
-<table name="party_address" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+<table name="party_address" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="900" y="-140"/>
@@ -1068,43 +1113,41 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
+		<object name="address_cd" index="3"/>
 		<object name="address_id" index="1"/>
 		<object name="party_id" index="2"/>
 	</customidxs>
 	<customidxs object-type="constraint">
+		<object name="address_cd_fk" index="3"/>
 		<object name="address_fk" index="1"/>
 		<object name="party_fk" index="2"/>
 	</customidxs></table>
 
-<table name="address" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
-	<schema name="public"/>
+<table name="locale_cd" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="lookup"/>
 	<role name="postgres"/>
-	<position x="1640" y="-140"/>
-	<column name="address_id" not-null="true">
-		<type name="bigserial" length="0"/>
+	<position x="1020" y="-460"/>
+	<column name="locale_cd" not-null="true">
+		<type name="serial" length="0"/>
 	</column>
-	<column name="location">
-		<type name="varchar" length="500"/>
-	</column>
-	<column name="coordinate">
-		<type name="geometry" length="0" spatial-type="POINT" variation="0" srid="3857"/>
-	</column>
-	<column name="area">
-		<type name="geometry" length="0" spatial-type="MULTIPOLYGON" variation="0" srid="3857"/>
+	<column name="code" not-null="true">
+		<type name="varchar" length="50"/>
 	</column>
 	<column name="created_on" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
-	<constraint name="address_pk" type="pk-constr" table="public.address">
-		<columns names="address_id" ref-type="src-columns"/>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="locale_cd_pk" type="pk-constr" table="lookup.locale_cd">
+		<columns names="locale_cd" ref-type="src-columns"/>
 	</constraint>
-
-	<customidxs object-type="column">
-		<object name="parent_address" index="1"/>
-	</customidxs>
-	<customidxs object-type="constraint">
-		<object name="address_fk" index="1"/>
-	</customidxs></table>
+	<initial-data>
+<![CDATA["locale_cd";"code";"created_on";"deleted_on"
+"1";"en_IN";"";""
+]]>
+	</initial-data>
+</table>
 
 <relationship name="party_has_many_party_address" type="rel1n" layers="0"
 	 src-col-pattern="{sc}"
@@ -1142,6 +1185,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="address_cd_pk" type="pk-constr" table="lookup.address_cd">
 		<columns names="address_cd" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA["address_cd";"code";"created_on";"deleted_on";"created_by";"updated_by"
+"0";"Other/Not Specified";"";"";"";""
+"1";"Registered Address";"";"";"";""
+"2";"Primary/Principal Address";"";"";"";""
+"3";"Billing Address";"";"";"";""
+"4";"Correspondence Address";"";"";"";""
+]]>
+	</initial-data>
 </table>
 
 <table name="address_locale" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
@@ -1162,13 +1214,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 
 	<customidxs object-type="column">
-		<object name="address_cd" index="1"/>
-		<object name="locale_cd" index="2"/>
+		<object name="address_cd" index="0"/>
+		<object name="locale_cd" index="1"/>
 	</customidxs>
 	<customidxs object-type="constraint">
 		<object name="address_cd_fk" index="0"/>
 		<object name="locale_cd_fk" index="1"/>
-	</customidxs></table>
+	</customidxs>	<initial-data>
+<![CDATA["address_cd";"locale_cd";"description";"created_on";"created_by";"updated_by"
+"0";"1";"Other/Not Specified";"";"";""
+"1";"1";"Registered Address";"";"";""
+"2";"1";"Primary/Principal Address";"";"";""
+"3";"1";"Billing Address";"";"";""
+"4";"1";"Correspondence Address";"";"";""
+]]>
+	</initial-data>
+</table>
 
 <relationship name="address_cd_has_many_address_locale" type="rel1n" layers="0"
 	 src-col-pattern="{sc}"
@@ -1204,20 +1265,31 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	del-action="CASCADE"/>
 
 <relationship name="address_has_many_address" type="rel1n" layers="0"
-	 src-col-pattern="parent_{st}"
+	 src-col-pattern="parent_{sc}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
-	 custom-color="#2ed87f"
+	 custom-color="#7db9a2"
 	 src-table="public.address"
 	 dst-table="public.address"
 	 src-required="false" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE">
 	<line>
-		<position x="1995.79" y="-87.092"/>
-	<position x="1995.79" y="-173"/>
-	<position x="1855.2" y="-173"/>
+		<position x="2010.76" y="-87.092"/>
+	<position x="2010.76" y="-173"/>
+	<position x="1865.17" y="-173"/>
 	</line>
 </relationship>
+
+<relationship name="address_cd_has_many_party_address" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#70d79d"
+	 src-table="lookup.address_cd"
+	 dst-table="public.party_address"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
 
 </dbmodel>
