@@ -4,7 +4,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
 <dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="46"
-	 last-position="317,-902" last-zoom="1" scene-rect="-640,-981,2915.53,2220.32"
+	 last-position="-640,114" last-zoom="1" scene-rect="-640,-981,2915.53,2220.32"
 	 default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -574,7 +574,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<object name="party_cd_fk" index="0"/>
 	</customidxs></table>
 
-<table name="identification" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+<table name="identification" layers="0" collapse-mode="2" max-obj-count="13" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="-560" y="220"/>
@@ -585,6 +585,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="varchar" length="75"/>
 	</column>
 	<column name="verified_on">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="start_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="end_time" not-null="true" default-value="'infinity'::timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
 	<column name="created_on" not-null="true" default-value="current_timestamp">
