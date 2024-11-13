@@ -4,7 +4,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
 <dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="46"
-	 last-position="-640,114" last-zoom="1" scene-rect="-640,-981,2915.53,2220.32"
+	 last-position="-640,-329" last-zoom="1" scene-rect="-640,-981,2915.53,2220.32"
 	 default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -116,12 +116,18 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="party_contact" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+<table name="party_contact" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="100" y="-180"/>
 	<column name="party_contact_id" not-null="true">
 		<type name="bigserial" length="0"/>
+	</column>
+	<column name="start_time" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="end_time" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
 	</column>
 	<column name="created_on" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
