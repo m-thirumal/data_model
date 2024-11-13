@@ -3,8 +3,8 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="45"
-	 last-position="848,-648" last-zoom="1" scene-rect="-580,-981,2684.56,2020.32"
+<dbmodel pgmodeler-ver="1.2.0-alpha1" use-changelog="false" max-obj-count="46"
+	 last-position="317,-902" last-zoom="1" scene-rect="-640,-981,2915.53,2220.32"
 	 default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -30,7 +30,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project_info" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1820" y="160"/>
+	<position x="2020" y="400"/>
 	<column name="project_info_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -84,7 +84,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="user_allowed_to_modify" not-null="true" default-value="true">
 		<type name="boolean" length="0"/>
 	</column>
-	<column name="row_created_on" not-null="true" default-value="current_timestamp">
+	<column name="created_on" not-null="true" default-value="current_timestamp">
 		<type name="timestamptz" length="0"/>
 	</column>
 	<constraint name="party_pk" type="pk-constr" table="public.party">
@@ -169,7 +169,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="party_name" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="-300" y="600"/>
+	<position x="-620" y="600"/>
 	<column name="party_name_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -210,7 +210,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project_group" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1100" y="480"/>
+	<position x="1480" y="120"/>
 	<column name="project_group_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -293,7 +293,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="mail" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1140" y="840"/>
+	<position x="1760" y="860"/>
 	<column name="mail_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -320,7 +320,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="mail_to" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="560" y="680"/>
+	<position x="1180" y="520"/>
 	<column name="mail_to_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -766,7 +766,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="relationship" layers="0" collapse-mode="2" max-obj-count="15" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1660" y="700"/>
+	<position x="840" y="880"/>
 	<column name="relationship_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -813,7 +813,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1300" y="60"/>
+	<position x="1620" y="420"/>
 	<column name="project_id" not-null="true">
 		<type name="bigserial" length="0"/>
 	</column>
@@ -836,9 +836,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	upd-action="NO ACTION"
 	del-action="CASCADE">
 	<line>
-		<position x="1961.56" y="806.441"/>
-	<position x="1961.56" y="667"/>
-	<position x="1839.04" y="667"/>
+		<position x="1141.56" y="986.441"/>
+	<position x="1141.56" y="847"/>
+	<position x="1019.04" y="847"/>
 	</line>
 </relationship>
 
@@ -991,6 +991,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="relationship_cd_pk" type="pk-constr" table="lookup.relationship_cd">
 		<columns names="relationship_cd" ref-type="src-columns"/>
 	</constraint>
+	<initial-data>
+<![CDATA["relationship_cd";"code";"created_on";"deleted_on";"created_by";"updated_by"
+"1";"PROJECT_OWNER-NULL";"";"";"";""
+"2";"PROJECT_OWNER-MANAGER";"";"";"";""
+]]>
+	</initial-data>
 </table>
 
 <relationship name="relationship_cd_has_many_relationship" type="rel1n" layers="0"
@@ -1288,6 +1294,44 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#320955"
 	 src-table="public.project"
 	 dst-table="public.mail"
+	 src-required="true" dst-required="false"
+	upd-action="NO ACTION"
+	del-action="CASCADE"/>
+
+<table name="credit" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="-140" y="660"/>
+	<column name="credit_id" not-null="true">
+		<type name="bigserial" length="0"/>
+	</column>
+	<column name="credit" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="current_timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="deleted_on" not-null="true" default-value="'infinity'::timestamp">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="credit_pk" type="pk-constr" table="public.credit">
+		<columns names="credit_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="party_id" index="1"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="party_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="party_has_many_credit" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#afcfa6"
+	 src-table="public.party"
+	 dst-table="public.credit"
 	 src-required="true" dst-required="false"
 	upd-action="NO ACTION"
 	del-action="CASCADE"/>
